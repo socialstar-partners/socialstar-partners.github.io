@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Connect - Student Job Board</title>
+    <title>Summer Gigs - Online Opportunities for Students</title>
     <style>
         * {
             margin: 0;
@@ -371,6 +371,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2 style="margin-bottom: 20px; color: #333;">Apply for Position</h2>
+            <div class="form-content">
             <form id="applicationForm" action="https://formspree.io/f/xdkzdorq" method="POST">
                 <div class="form-group">
                     <label for="jobTitle">Position:</label>
@@ -401,11 +402,12 @@
                               placeholder="Tell us about any relevant experience, skills, or why you're interested in this position..."></textarea>
                 </div>
                 
-                <button type="submit" class="submit-btn">Submit Application</button>
-                
                 <div id="successMessage" class="success-message">
                     Thank you for your application! We'll reach out via Instagram DM soon.
                 </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Application</button>
             </form>
         </div>
     </div>
