@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Student Job Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .job-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-active {
+            background: #e8f5e8;
+            color: #2d7d32;
+        }
+
+        .status-completed {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .job-company {
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .job-description {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .job-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .apply-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .apply-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .success-message {
+            background: #e8f5e8;
+            color: #2d7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .job-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☀️ Summer Gigs</h1>
+            <p class="subtitle">Online opportunities for students this summer break</p>
+        </header>
+
+        <div class="job-grid">
+            <!-- Active Job Posting -->
+            <div class="job-card">
+                <span class="job-status status-active">🟢 HIRING NOW</span>
+                <h3 class="job-title">Social Media Content Creator</h3>
+                <p class="job-company">Local Business Partnership</p>
+                <p class="job-description">
+                    Looking for a creative student to help manage social media accounts and create engaging content over the summer. 
+                    Perfect for marketing, communications, or digital media students. Work completely online from anywhere - beach, home, or anywhere with WiFi!
+                </p>
+                <div class="job-details">
+                    <span class="detail-item">💰 $15-20/hour</span>
+                    <span class="detail-item">⏰ 10-15 hours/week</span>
+                    <span class="detail-item">🌐 100% Remote</span>
+                </div>
+                <button class="apply-btn" onclick="openModal('Social Media Content Creator')">Apply Now</button>
+            </div>
+
+            <!-- Completed Jobs -->
+            <div class="job-card">
+                <span class="job-status status-completed">✅ COMPLETED</span>
+                <h3 class="job-title">Summer Course Content Creation</h3>
+                <p class="job-company">Online Education Platform</p>
+                <p class="job-description">
+                    Created study guides and course materials for online summer courses. 
+                    Perfect summer project for education or subject matter experts.
+                </p>
+                <div class="job-details">
+                    <span class="detail-item">💰 $18/hour</span>
+                    <span class="detail-item">⏰ Project-based</span>
+                    <span class="detail-item">🌐 100% Remote</span>
+                </div>
+                <button class="apply-btn" disabled>Position Filled</button>
+            </div>
+
+            <div class="job-card">
+                <span class="job-status status-completed">✅ COMPLETED</span>
+                <h3 class="job-title">Virtual Event Assistant</h3>
+                <p class="job-company">Digital Marketing Agency</p>
+                <p class="job-description">
+                    Helped coordinate and manage virtual events and webinars throughout the summer. 
+                    Great experience for students interested in event planning and digital marketing.
+                </p>
+                <div class="job-details">
+                    <span class="detail-item">💰 $16/hour</span>
+                    <span class="detail-item">⏰ 12 hours/week</span>
+                    <span class="detail-item">🌐 100% Remote</span>
+                </div>
+                <button class="apply-btn" disabled>Position Filled</button>
+            </div>
+
+            <div class="job-card">
+                <span class="job-status status-completed">✅ COMPLETED</span>
+                <h3 class="job-title">Online Tutoring Coordinator</h3>
+                <p class="job-company">EdTech Startup</p>
+                <p class="job-description">
+                    Matched students with online tutors and managed virtual tutoring sessions. 
+                    Perfect summer gig for organized students who love helping others learn.
+                </p>
+                <div class="job-details">
+                    <span class="detail-item">💰 $17/hour</span>
+                    <span class="detail-item">⏰ 15 hours/week</span>
+                    <span class="detail-item">🌐 100% Remote</span>
+                </div>
+                <button class="apply-btn" disabled>Position Filled</button>
+            </div>
+
+            <div class="job-card">
+                <span class="job-status status-completed">✅ COMPLETED</span>
+                <h3 class="job-title">Content Research & Writing</h3>
+                <p class="job-company">Digital Content Agency</p>
+                <p class="job-description">
+                    Researched and wrote blog posts and articles on various topics. 
+                    Great summer opportunity for English, journalism, or communications majors.
+                </p>
+                <div class="job-details">
+                    <span class="detail-item">💰 $15/hour</span>
+                    <span class="detail-item">⏰ 10-20 hours/week</span>
+                    <span class="detail-item">🌐 100% Remote</span>
+                </div>
+                <button class="apply-btn" disabled>Position Filled</button>
+            </div>
+
+            <div class="job-card">
+                <span class="job-status status-completed">✅ COMPLETED</span>
+                <h3 class="job-title">Website Testing & UX Feedback</h3>
+                <p class="job-company">Tech Startup</p>
+                <p class="job-description">
+                    Tested websites and mobile apps, providing detailed user experience feedback. 
+                    Perfect summer project for tech-savvy students interested in UX/UI.
+                </p>
+                <div class="job-details">
+                    <span class="detail-item">💰 $20/hour</span>
+                    <span class="detail-item">⏰ Project-based</span>
+                    <span class="detail-item">🌐 100% Remote</span>
+                </div>
+                <button class="apply-btn" disabled>Position Filled</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 20px; color: #333;">Apply for Position</h2>
+            <form id="applicationForm" action="https://formspree.io/f/xdkzdorq" method="POST">
+                <div class="form-group">
+                    <label for="jobTitle">Position:</label>
+                    <input type="text" id="jobTitle" name="jobTitle" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="instagram">Instagram Handle:</label>
+                    <input type="text" id="instagram" name="instagram" placeholder="@yourusername" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="Backup contact method" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year">Year in School:</label>
+                    <input type="text" id="year" name="year" placeholder="e.g., Sophomore, Junior" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="major">Major/Field of Study:</label>
+                    <input type="text" id="major" name="major" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Relevant Experience/Skills:</label>
+                    <textarea id="experience" name="experience" rows="4" 
+                              placeholder="Tell us about any relevant experience, skills, or why you're interested in this position..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="availability">Availability:</label>
+                    <textarea id="availability" name="availability" rows="3" 
+                              placeholder="When are you available to work? Any scheduling constraints?"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Application</button>
+                
+                <div id="successMessage" class="success-message">
+                    Thank you for your application! We'll reach out via Instagram DM soon.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let applications = [];
+
+        function openModal(jobTitle) {
+            document.getElementById('jobTitle').value = jobTitle;
+            document.getElementById('applicationModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('applicationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('applicationForm').reset();
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('applicationModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            // Let the form submit normally to Formspree
+            // Show success message after a brief delay
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'block';
+                // Reset form after showing success
+                setTimeout(() => {
+                    closeModal();
+                }, 2000);
+            }, 500);
+        });
+
+        // Function to view all applications (for admin use)
+        function viewApplications() {
+            console.log('All Applications:', applications);
+            return applications;
+        }
+
+        // Add some visual enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Add loading animation to apply buttons
+            const applyButtons = document.querySelectorAll('.apply-btn:not([disabled])');
+            applyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
