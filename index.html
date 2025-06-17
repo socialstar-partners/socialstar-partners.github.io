@@ -171,6 +171,8 @@
             max-width: 500px;
             position: relative;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .close {
@@ -268,16 +270,15 @@
             <!-- Active Job Posting -->
             <div class="job-card">
                 <span class="job-status status-active">🟢 HIRING NOW</span>
-                <h3 class="job-title">Social Media Content Creator</h3>
-                <p class="job-company">Local Business Partnership</p>
+                <h3 class="job-title">App Promotion</h3>
+                <p class="job-company">SocialStar App Launch</p>
                 <p class="job-description">
-                    Looking for a creative student to help manage social media accounts and create engaging content over the summer. 
-                    Perfect for marketing, communications, or digital media students. Work completely online from anywhere - beach, home, or anywhere with WiFi!
+                    Help us launch our new app SocialStar by sharing it with your friends! We need enthusiastic students to introduce SocialStar to their social circles. Perfect quick gig - just share with 5 friends and earn money!
                 </p>
                 <div class="job-details">
-                    <span class="detail-item">💰 $15-20/hour</span>
-                    <span class="detail-item">⏰ 10-15 hours/week</span>
-                    <span class="detail-item">🌐 100% Remote</span>
+                    <span class="detail-item">💰 $50 total</span>
+                    <span class="detail-item">⏰ 1-2 days</span>
+                    <span class="detail-item">🌐 Share with friends</span>
                 </div>
                 <button class="apply-btn" onclick="openModal('Social Media Content Creator')">Apply Now</button>
             </div>
@@ -292,8 +293,8 @@
                     Perfect summer project for education or subject matter experts.
                 </p>
                 <div class="job-details">
-                    <span class="detail-item">💰 $18/hour</span>
-                    <span class="detail-item">⏰ Project-based</span>
+                    <span class="detail-item">💰 $450 total</span>
+                    <span class="detail-item">⏰ 3 week project</span>
                     <span class="detail-item">🌐 100% Remote</span>
                 </div>
                 <button class="apply-btn" disabled>Position Filled</button>
@@ -308,8 +309,8 @@
                     Great experience for students interested in event planning and digital marketing.
                 </p>
                 <div class="job-details">
-                    <span class="detail-item">💰 $16/hour</span>
-                    <span class="detail-item">⏰ 12 hours/week</span>
+                    <span class="detail-item">💰 $200 total</span>
+                    <span class="detail-item">⏰ 1 week project</span>
                     <span class="detail-item">🌐 100% Remote</span>
                 </div>
                 <button class="apply-btn" disabled>Position Filled</button>
@@ -324,8 +325,8 @@
                     Perfect summer gig for organized students who love helping others learn.
                 </p>
                 <div class="job-details">
-                    <span class="detail-item">💰 $17/hour</span>
-                    <span class="detail-item">⏰ 15 hours/week</span>
+                    <span class="detail-item">💰 $380 total</span>
+                    <span class="detail-item">⏰ 2 week project</span>
                     <span class="detail-item">🌐 100% Remote</span>
                 </div>
                 <button class="apply-btn" disabled>Position Filled</button>
@@ -340,8 +341,8 @@
                     Great summer opportunity for English, journalism, or communications majors.
                 </p>
                 <div class="job-details">
-                    <span class="detail-item">💰 $15/hour</span>
-                    <span class="detail-item">⏰ 10-20 hours/week</span>
+                    <span class="detail-item">💰 $250 total</span>
+                    <span class="detail-item">⏰ 10 day project</span>
                     <span class="detail-item">🌐 100% Remote</span>
                 </div>
                 <button class="apply-btn" disabled>Position Filled</button>
@@ -356,8 +357,8 @@
                     Perfect summer project for tech-savvy students interested in UX/UI.
                 </p>
                 <div class="job-details">
-                    <span class="detail-item">💰 $20/hour</span>
-                    <span class="detail-item">⏰ Project-based</span>
+                    <span class="detail-item">💰 $320 total</span>
+                    <span class="detail-item">⏰ 2 week project</span>
                     <span class="detail-item">🌐 100% Remote</span>
                 </div>
                 <button class="apply-btn" disabled>Position Filled</button>
@@ -384,11 +385,9 @@
                 <div class="form-group">
                     <label for="instagram">Instagram Handle:</label>
                     <input type="text" id="instagram" name="instagram" placeholder="@yourusername" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" placeholder="Backup contact method" required>
+                    <small style="color: #666; font-size: 0.9rem; margin-top: 5px; display: block;">
+                        📱 This is how we'll contact you about the position
+                    </small>
                 </div>
                 
                 <div class="form-group">
@@ -397,20 +396,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="major">Major/Field of Study:</label>
-                    <input type="text" id="major" name="major" required>
-                </div>
-                
-                <div class="form-group">
                     <label for="experience">Relevant Experience/Skills:</label>
                     <textarea id="experience" name="experience" rows="4" 
                               placeholder="Tell us about any relevant experience, skills, or why you're interested in this position..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="availability">Availability:</label>
-                    <textarea id="availability" name="availability" rows="3" 
-                              placeholder="When are you available to work? Any scheduling constraints?"></textarea>
                 </div>
                 
                 <button type="submit" class="submit-btn">Submit Application</button>
