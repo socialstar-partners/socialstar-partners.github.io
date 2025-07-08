@@ -121,6 +121,7 @@
             z-index: 20;
             transition: none;
             will-change: transform;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
         }
 
         .sheet-handle {
@@ -145,6 +146,21 @@
             max-height: calc(100vh - 200px);
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.2) transparent;
+        }
+        
+        .sheet-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sheet-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .sheet-content::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
         }
 
         .ratings-header {
@@ -339,7 +355,7 @@
             <div class="handle-bar"></div>
         </div>
         <div class="sheet-content">
-            <div class="ratings-header">Ratings (<span id="ratingCount">4</span>)</div>
+            <div class="ratings-header">Ratings (<span id="ratingCount">6</span>)</div>
             <div id="ratingsList">
                 <!-- Initial ratings -->
                 <div class="rating-item">
@@ -385,6 +401,31 @@
                     </div>
                     <div class="rating-badge">
                         <span>3</span>
+                        <svg class="star" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Add more ratings to show scrolling -->
+                <div class="rating-item">
+                    <div class="rating-user-info">
+                        <img class="rating-profile-pic" src="https://i.pravatar.cc/150?img=9" alt="Lisa">
+                        <span class="rating-username">Lisa Martinez</span>
+                    </div>
+                    <div class="rating-badge">
+                        <span>4</span>
+                        <svg class="star" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="rating-item">
+                    <div class="rating-user-info">
+                        <img class="rating-profile-pic" src="https://i.pravatar.cc/150?img=11" alt="John">
+                        <span class="rating-username">John Smith</span>
+                    </div>
+                    <div class="rating-badge">
+                        <span>5</span>
                         <svg class="star" viewBox="0 0 24 24" fill="white">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                         </svg>
@@ -446,11 +487,23 @@
         // Set initial position
         setSheetPosition(midHeight);
         
+        // Add visual indicator for drag state
+        function updateDragVisual(isDragging) {
+            if (isDragging) {
+                bottomSheet.style.boxShadow = '0 -5px 30px rgba(0,0,0,0.5)';
+                sheetHandle.style.cursor = 'grabbing';
+            } else {
+                bottomSheet.style.boxShadow = '0 -5px 20px rgba(0,0,0,0.3)';
+                sheetHandle.style.cursor = 'grab';
+            }
+        }
+        
         // Touch/Mouse event handlers for bottom sheet
         function handleStart(e) {
             isDragging = true;
             startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
             bottomSheet.style.transition = 'none';
+            updateDragVisual(true);
         }
         
         function handleMove(e) {
@@ -477,6 +530,7 @@
             if (!isDragging) return;
             
             isDragging = false;
+            updateDragVisual(false);
             bottomSheet.style.transition = 'transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             
             const endY = e.type.includes('mouse') ? e.clientY : e.changedTouches[0].clientY;
