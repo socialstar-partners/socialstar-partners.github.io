@@ -2,491 +2,657 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summer Gigs - Online Opportunities for Students</title>
-    
-    <!-- Primary Meta Tags -->
-    <meta name="description" content="Find paid summer gigs and online opportunities for college students. Quick tasks, flexible projects, and easy money.">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://summer-gigs.github.io/">
-    <meta property="og:title" content="Summer Gigs - Online Opportunities for Students">
-    <meta property="og:description" content="Find paid summer gigs and online opportunities for college students. Quick tasks, flexible projects, and easy money.">
-    <meta property="og:image" content="https://summer-gigs.github.io/preview.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://summer-gigs.github.io/">
-    <meta property="twitter:title" content="Summer Gigs - Online Opportunities for Students">
-    <meta property="twitter:description" content="Find paid summer gigs and online opportunities for college students. Quick tasks, flexible projects, and easy money.">
-    <meta property="twitter:image" content="https://summer-gigs.github.io/preview.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Photo Rating Demo</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #10183C;
             color: white;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .job-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .job-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
+            height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
-        .job-card::before {
-            content: '';
+        /* Main Photo Container */
+        .photo-container {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            bottom: 0;
+            background: #10183C;
         }
 
-        .job-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .job-status {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .status-active {
-            background: #e8f5e8;
-            color: #2d7d32;
-        }
-
-        .status-completed {
-            background: #f3e5f5;
-            color: #7b1fa2;
-        }
-
-        .job-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .job-company {
-            color: #666;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .job-description {
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        .job-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .apply-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .apply-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .apply-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        .photo-image {
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .close:hover {
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
+            object-fit: cover;
             display: block;
-            margin-bottom: 8px;
+        }
+
+        .photo-overlay-text {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Navigation Bar */
+        .navigation-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+            z-index: 10;
+        }
+
+        .nav-button {
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 250px;
+        }
+
+        .profile-picture {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #DAA520;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 20px;
+            font-weight: bold;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        }
+
+        .theme-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
             font-weight: 600;
-            color: #333;
+            backdrop-filter: blur(10px);
         }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+        /* Bottom Sheet */
+        .bottom-sheet {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1A2245;
+            border-radius: 20px 20px 0 0;
+            z-index: 20;
+            transition: none;
+            will-change: transform;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
+        .sheet-handle {
+            padding: 15px;
+            cursor: grab;
         }
 
-        .submit-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+        .sheet-handle:active {
+            cursor: grabbing;
+        }
+
+        .handle-bar {
+            width: 40px;
+            height: 5px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 100px;
+            margin: 0 auto;
+        }
+
+        .sheet-content {
+            padding: 0 20px 20px;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .ratings-header {
+            font-size: 16px;
+            font-weight: bold;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+        }
+
+        /* Rating Items */
+        .rating-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .rating-item:last-child {
+            border-bottom: none;
+        }
+
+        .rating-user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .rating-profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #4A5568;
+            object-fit: cover;
+        }
+
+        .rating-username {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .rating-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #DAA520;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .rating-badge .star {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Star Rating Footer */
+        .star-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #10183C;
+            padding: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 30;
+            height: 100px;
+        }
+
+        .star-footer.voted {
+            background: #A9A9A9;
+        }
+
+        .star-button {
+            background: none;
+            border: none;
+            font-size: 34px;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .star-button.filled {
+            color: #FFD700;
+        }
+
+        .star-button.voted {
+            color: #c2c2c2;
+            cursor: not-allowed;
+        }
+
+        .star-button.animate {
+            transform: scale(1.3);
+        }
+
+        /* Download Prompt */
+        .download-prompt {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1A2245;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 90%;
+            width: 350px;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .download-prompt h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .download-prompt p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .download-button {
+            background: #DAA520;
             color: white;
             border: none;
             padding: 15px 30px;
-            border-radius: 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
             width: 100%;
-            transition: all 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .dismiss-button {
+            background: none;
+            color: rgba(255,255,255,0.5);
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
         }
 
-        .success-message {
-            background: #e8f5e8;
-            color: #2d7d32;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-align: center;
+        .overlay {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 99;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+        /* Responsive adjustments */
+        @media (max-height: 700px) {
+            .star-footer {
+                padding: 20px 0;
+                height: 80px;
             }
-            
-            .job-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                margin: 10% auto;
-                width: 95%;
+            .star-button {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>☀️ Summer Gigs</h1>
-            <p class="subtitle">Online opportunities for students this summer break</p>
-        </header>
+    <!-- Main Photo -->
+    <div class="photo-container">
+        <img class="photo-image" src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=800&h=1200&fit=crop" alt="Mountain landscape">
+        <div class="photo-overlay-text" style="top: 30%;">Epic mountain views! 🏔️</div>
+    </div>
 
-        <div class="job-grid">
-            <!-- Active Job Posting -->
-            <div class="job-card">
-                <span class="job-status status-active">🟢 HIRING NOW</span>
-                <h3 class="job-title">Brand Ambassador</h3>
-                <p class="job-company">Tech Startup</p>
-                <p class="job-description">
-                    Looking for students to test and provide feedback on a new photo-sharing app. Perfect for socially active students!
-                </p>
-                <div class="job-details">
-                    <span class="detail-item">💰 $50 total</span>
-                    <span class="detail-item">⚡ Quick task</span>
-                    <span class="detail-item">💳 Paid via Venmo or PayPal</span>
-                </div>
-                <button class="apply-btn" onclick="openModal('Brand Ambassador')">Apply Now</button>
-            </div>
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <button class="nav-button" onclick="goBack()">←</button>
+        <div class="user-info">
+            <img class="profile-picture" src="https://i.pravatar.cc/150?img=8" alt="Profile">
+            <span class="username">Alex Chen</span>
+            <span class="theme-badge">Nature</span>
+        </div>
+        <button class="nav-button">💬</button>
+    </nav>
 
-            <!-- Completed Jobs -->
-            <div class="job-card">
-                <span class="job-status status-completed">✅ COMPLETED</span>
-                <h3 class="job-title">Beauty Product Review Writing</h3>
-                <p class="job-company">Online Beauty Retailer</p>
-                <p class="job-description">
-                    Looking for students to test and write honest reviews for makeup and skincare products. 
-                    Perfect for students who love beauty products and sharing detailed opinions online.
-                </p>
-                <div class="job-details">
-                    <span class="detail-item">💰 $280 total</span>
-                    <span class="detail-item">📝 Medium project</span>
-                    <span class="detail-item">💳 Paid via Venmo or PayPal</span>
+    <!-- Bottom Sheet -->
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="sheet-handle" id="sheetHandle">
+            <div class="handle-bar"></div>
+        </div>
+        <div class="sheet-content">
+            <div class="ratings-header">Ratings (<span id="ratingCount">4</span>)</div>
+            <div id="ratingsList">
+                <!-- Initial ratings -->
+                <div class="rating-item">
+                    <div class="rating-user-info">
+                        <img class="rating-profile-pic" src="https://i.pravatar.cc/150?img=1" alt="Sarah">
+                        <span class="rating-username">Sarah Johnson</span>
+                    </div>
+                    <div class="rating-badge">
+                        <span>5</span>
+                        <svg class="star" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
                 </div>
-                <button class="apply-btn" disabled>Position Filled</button>
-            </div>
-
-            <div class="job-card">
-                <span class="job-status status-completed">✅ COMPLETED</span>
-                <h3 class="job-title">Instagram Content Creation</h3>
-                <p class="job-company">Local Restaurant</p>
-                <p class="job-description">
-                    Need a student to create Instagram posts and stories for a local restaurant's promotion campaign. 
-                    Great experience for students interested in social media marketing.
-                </p>
-                <div class="job-details">
-                    <span class="detail-item">💰 $200 total</span>
-                    <span class="detail-item">📱 Short-term project</span>
-                    <span class="detail-item">💳 Paid via Venmo or PayPal</span>
+                <div class="rating-item">
+                    <div class="rating-user-info">
+                        <img class="rating-profile-pic" src="https://i.pravatar.cc/150?img=3" alt="Mike">
+                        <span class="rating-username">Mike Thompson</span>
+                    </div>
+                    <div class="rating-badge">
+                        <span>4</span>
+                        <svg class="star" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
                 </div>
-                <button class="apply-btn" disabled>Position Filled</button>
-            </div>
-
-            <div class="job-card">
-                <span class="job-status status-completed">✅ COMPLETED</span>
-                <h3 class="job-title">Online Tutoring Coordinator</h3>
-                <p class="job-company">EdTech Startup</p>
-                <p class="job-description">
-                    Seeking a student to match students with online tutors and manage virtual tutoring sessions. 
-                    Perfect summer gig for organized students who love helping others learn.
-                </p>
-                <div class="job-details">
-                    <span class="detail-item">💰 $380 total</span>
-                    <span class="detail-item">🎯 Medium project</span>
-                    <span class="detail-item">💳 Paid via Venmo or PayPal</span>
+                <div class="rating-item">
+                    <div class="rating-user-info">
+                        <img class="rating-profile-pic" src="https://i.pravatar.cc/150?img=5" alt="Emma">
+                        <span class="rating-username">Emma Wilson</span>
+                    </div>
+                    <div class="rating-badge">
+                        <span>5</span>
+                        <svg class="star" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
                 </div>
-                <button class="apply-btn" disabled>Position Filled</button>
-            </div>
-
-            <div class="job-card">
-                <span class="job-status status-completed">✅ COMPLETED</span>
-                <h3 class="job-title">Content Research & Writing</h3>
-                <p class="job-company">Digital Content Agency</p>
-                <p class="job-description">
-                    Looking for a student to research and write blog posts and articles on various topics. 
-                    Great summer opportunity for English, journalism, or communications majors.
-                </p>
-                <div class="job-details">
-                    <span class="detail-item">💰 $250 total</span>
-                    <span class="detail-item">✍️ Short-term project</span>
-                    <span class="detail-item">💳 Paid via Venmo or PayPal</span>
+                <div class="rating-item">
+                    <div class="rating-user-info">
+                        <img class="rating-profile-pic" src="https://i.pravatar.cc/150?img=7" alt="David">
+                        <span class="rating-username">David Lee</span>
+                    </div>
+                    <div class="rating-badge">
+                        <span>3</span>
+                        <svg class="star" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
                 </div>
-                <button class="apply-btn" disabled>Position Filled</button>
-            </div>
-
-            <div class="job-card">
-                <span class="job-status status-completed">✅ COMPLETED</span>
-                <h3 class="job-title">Website Testing & UX Feedback</h3>
-                <p class="job-company">Tech Startup</p>
-                <p class="job-description">
-                    Need a student to test websites and mobile apps, providing detailed user experience feedback. 
-                    Perfect summer project for tech-savvy students interested in UX/UI.
-                </p>
-                <div class="job-details">
-                    <span class="detail-item">💰 $320 total</span>
-                    <span class="detail-item">💻 Medium project</span>
-                    <span class="detail-item">💳 Paid via Venmo or PayPal</span>
-                </div>
-                <button class="apply-btn" disabled>Position Filled</button>
             </div>
         </div>
     </div>
 
-    <!-- Application Modal -->
-    <div id="applicationModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 style="margin-bottom: 20px; color: #333;">Apply for Position</h2>
-            <div class="form-content">
-            <form id="applicationForm" action="https://formspree.io/f/xdkzdorq" method="POST">
-                <div class="form-group">
-                    <label for="jobTitle">Position:</label>
-                    <input type="text" id="jobTitle" name="jobTitle" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="fullName">Full Name:</label>
-                    <input type="text" id="fullName" name="fullName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="instagram">Instagram Handle:</label>
-                    <input type="text" id="instagram" name="instagram" placeholder="@yourusername" required>
-                    <small style="color: #666; font-size: 0.9rem; margin-top: 5px; display: block;">
-                        📱 This is how we'll contact you about the position
-                    </small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="year">Year in School:</label>
-                    <input type="text" id="year" name="year" placeholder="e.g., Sophomore, Junior" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="experience">Relevant Experience/Skills:</label>
-                    <textarea id="experience" name="experience" rows="4" 
-                              placeholder="Tell us about any relevant experience, skills, or why you're interested in this position..."></textarea>
-                </div>
-                
-                <div id="successMessage" class="success-message">
-                    Thank you for your application! We'll reach out via Instagram DM soon.
-                </div>
-            </div>
-            
-            <button type="submit" class="submit-btn">Submit Application</button>
-            </form>
-        </div>
+    <!-- Star Rating Footer -->
+    <div class="star-footer" id="starFooter">
+        <button class="star-button" data-rating="1">★</button>
+        <button class="star-button" data-rating="2">★</button>
+        <button class="star-button" data-rating="3">★</button>
+        <button class="star-button" data-rating="4">★</button>
+        <button class="star-button" data-rating="5">★</button>
+    </div>
+
+    <!-- Download Prompt -->
+    <div class="overlay" id="overlay"></div>
+    <div class="download-prompt" id="downloadPrompt">
+        <h2>🎉 Nice Rating!</h2>
+        <p>Love this experience? Download our app to rate photos with your friends and compete in daily challenges!</p>
+        <button class="download-button" onclick="downloadApp()">Download App</button>
+        <button class="dismiss-button" onclick="dismissPrompt()">Maybe Later</button>
     </div>
 
     <script>
-        let applications = [];
-
-        function openModal(jobTitle) {
-            document.getElementById('jobTitle').value = jobTitle;
-            document.getElementById('applicationModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
+        // State management
+        let currentRating = 0;
+        let hasVoted = false;
+        let isDragging = false;
+        let startY = 0;
+        let currentY = 0;
+        let sheetY = 0;
+        
+        // Sheet positions
+        const minHeight = 80;
+        const midHeight = window.innerHeight * 0.25;
+        const maxHeight = window.innerHeight - 180;
+        let currentDetent = 'mid';
+        
+        // Elements
+        const bottomSheet = document.getElementById('bottomSheet');
+        const sheetHandle = document.getElementById('sheetHandle');
+        const starFooter = document.getElementById('starFooter');
+        const starButtons = document.querySelectorAll('.star-button');
+        const ratingsList = document.getElementById('ratingsList');
+        const ratingCount = document.getElementById('ratingCount');
+        const downloadPrompt = document.getElementById('downloadPrompt');
+        const overlay = document.getElementById('overlay');
+        
+        // Initialize sheet position
+        function setSheetPosition(height) {
+            bottomSheet.style.transform = `translateY(${window.innerHeight - height - 100}px)`;
+            sheetY = window.innerHeight - height - 100;
         }
-
-        function closeModal() {
-            document.getElementById('applicationModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            document.getElementById('applicationForm').reset();
-            document.getElementById('successMessage').style.display = 'none';
+        
+        // Set initial position
+        setSheetPosition(midHeight);
+        
+        // Touch/Mouse event handlers for bottom sheet
+        function handleStart(e) {
+            isDragging = true;
+            startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            bottomSheet.style.transition = 'none';
         }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('applicationModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        document.getElementById('applicationForm').addEventListener('submit', function(e) {
-            // Let the form submit normally to Formspree
-            // Show success message after a brief delay
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'block';
-                // Reset form after showing success
-                setTimeout(() => {
-                    closeModal();
-                }, 2000);
-            }, 500);
-        });
-
-        // Function to view all applications (for admin use)
-        function viewApplications() {
-            console.log('All Applications:', applications);
-            return applications;
-        }
-
-        // Add some visual enhancements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add smooth scrolling
-            document.documentElement.style.scrollBehavior = 'smooth';
+        
+        function handleMove(e) {
+            if (!isDragging) return;
             
-            // Add loading animation to apply buttons
-            const applyButtons = document.querySelectorAll('.apply-btn:not([disabled])');
-            applyButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
+            e.preventDefault();
+            currentY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            const deltaY = currentY - startY;
+            
+            let newY = sheetY + deltaY;
+            const currentHeight = window.innerHeight - newY - 100;
+            
+            // Constrain movement
+            if (currentHeight < minHeight) {
+                newY = window.innerHeight - minHeight - 100;
+            } else if (currentHeight > maxHeight) {
+                newY = window.innerHeight - maxHeight - 100;
+            }
+            
+            bottomSheet.style.transform = `translateY(${newY}px)`;
+        }
+        
+        function handleEnd(e) {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            bottomSheet.style.transition = 'transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            
+            const endY = e.type.includes('mouse') ? e.clientY : e.changedTouches[0].clientY;
+            const deltaY = endY - startY;
+            const velocity = deltaY;
+            
+            const currentHeight = window.innerHeight - sheetY - 100;
+            
+            // Determine new position based on gesture
+            let targetHeight;
+            
+            if (currentDetent === 'min') {
+                if (deltaY < -50 || velocity < -100) {
+                    targetHeight = midHeight;
+                    currentDetent = 'mid';
+                } else {
+                    targetHeight = minHeight;
+                }
+            } else if (currentDetent === 'mid') {
+                if (deltaY < -50 || velocity < -100) {
+                    targetHeight = maxHeight;
+                    currentDetent = 'max';
+                } else if (deltaY > 50 || velocity > 100) {
+                    targetHeight = minHeight;
+                    currentDetent = 'min';
+                } else {
+                    targetHeight = midHeight;
+                }
+            } else {
+                if (deltaY > 50 || velocity > 100) {
+                    targetHeight = midHeight;
+                    currentDetent = 'mid';
+                } else {
+                    targetHeight = maxHeight;
+                }
+            }
+            
+            setSheetPosition(targetHeight);
+        }
+        
+        // Add event listeners for dragging
+        sheetHandle.addEventListener('mousedown', handleStart);
+        sheetHandle.addEventListener('touchstart', handleStart, { passive: false });
+        
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('touchmove', handleMove, { passive: false });
+        
+        document.addEventListener('mouseup', handleEnd);
+        document.addEventListener('touchend', handleEnd);
+        
+        // Star rating functionality
+        starButtons.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                if (hasVoted) return;
+                
+                const rating = parseInt(button.dataset.rating);
+                currentRating = rating;
+                
+                // Update star colors
+                starButtons.forEach((btn, i) => {
+                    if (i < rating) {
+                        btn.classList.add('filled');
+                        btn.classList.add('animate');
+                        setTimeout(() => btn.classList.remove('animate'), 300);
+                    } else {
+                        btn.classList.remove('filled');
+                    }
                 });
+                
+                // Haptic feedback simulation (vibration if supported)
+                if (navigator.vibrate) {
+                    navigator.vibrate([50, 100, 50]);
+                }
+                
+                // Submit rating after animation
+                setTimeout(() => {
+                    submitRating(rating);
+                }, 500);
             });
         });
+        
+        function submitRating(rating) {
+            hasVoted = true;
+            
+            // Update UI to show voted state
+            starFooter.classList.add('voted');
+            starButtons.forEach(btn => btn.classList.add('voted'));
+            
+            // Add new rating to list with animation
+            const newRating = createRatingItem('You', rating, 'https://i.pravatar.cc/150?img=12');
+            newRating.style.opacity = '0';
+            newRating.style.transform = 'translateY(20px)';
+            ratingsList.insertBefore(newRating, ratingsList.firstChild);
+            
+            // Animate in
+            setTimeout(() => {
+                newRating.style.transition = 'all 0.3s ease';
+                newRating.style.opacity = '1';
+                newRating.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Update count
+            const currentCount = parseInt(ratingCount.textContent);
+            ratingCount.textContent = currentCount + 1;
+            
+            // Show download prompt after delay
+            setTimeout(() => {
+                overlay.style.display = 'block';
+                downloadPrompt.style.display = 'block';
+                
+                // Animate in
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                    downloadPrompt.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 10);
+            }, 1500);
+        }
+        
+        function createRatingItem(username, rating, avatarUrl) {
+            const item = document.createElement('div');
+            item.className = 'rating-item';
+            item.innerHTML = `
+                <div class="rating-user-info">
+                    <img class="rating-profile-pic" src="${avatarUrl}" alt="${username}">
+                    <span class="rating-username">${username}</span>
+                </div>
+                <div class="rating-badge">
+                    <span>${rating}</span>
+                    <svg class="star" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                </div>
+            `;
+            return item;
+        }
+        
+        function goBack() {
+            // Simulate back navigation
+            alert('Back navigation - in the app this would return to the previous screen');
+        }
+        
+        function downloadApp() {
+            // Simulate app download
+            window.open('https://apps.apple.com', '_blank');
+        }
+        
+        function dismissPrompt() {
+            overlay.style.opacity = '0';
+            downloadPrompt.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                downloadPrompt.style.display = 'none';
+            }, 300);
+        }
+        
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            .overlay {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .download-prompt {
+                transform: translate(-50%, -50%) scale(0.9);
+                transition: transform 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Prevent scrolling on mobile
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.closest('.sheet-content')) return;
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html>
