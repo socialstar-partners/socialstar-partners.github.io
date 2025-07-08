@@ -119,6 +119,11 @@
             transition: none;
             will-change: transform;
             height: 100vh;
+            cursor: grab;
+        }
+
+        .bottom-sheet.dragging {
+            cursor: grabbing;
         }
 
         .sheet-handle {
@@ -458,11 +463,13 @@
         let currentY = 0;
         let sheetY = 0;
         
-        // Sheet positions
-        const minHeight = 180; // Show above star footer
+        // Sheet positions - updated to allow dragging below default height
+        const starFooterHeight = 100; // Height of star footer
+        const minHeight = starFooterHeight + 50; // Minimum height above star footer
+        const defaultHeight = 220; // Default height (slightly higher than original minimum)
         const midHeight = window.innerHeight * 0.35;
         const maxHeight = window.innerHeight - 120;
-        let currentDetent = 'min';
+        let currentDetent = 'default';
         
         // Elements
         const bottomSheet = document.getElementById('bottomSheet');
@@ -481,20 +488,33 @@
             sheetY = translateY;
         }
         
-        // Set initial position
-        setSheetPosition(minHeight);
+        // Set initial position to default height
+        setSheetPosition(defaultHeight);
         
         // Add visual indicator for drag state
         function updateDragVisual(isDragging) {
             if (isDragging) {
-                sheetHandle.style.cursor = 'grabbing';
+                bottomSheet.classList.add('dragging');
             } else {
-                sheetHandle.style.cursor = 'grab';
+                bottomSheet.classList.remove('dragging');
             }
+        }
+        
+        // Check if touch/click is on scrollable content
+        function isScrollableContent(target) {
+            return target.closest('.sheet-content') && !target.closest('.sheet-handle');
         }
         
         // Touch/Mouse event handlers for bottom sheet
         function handleStart(e) {
+            // Don't start dragging if touching scrollable content (unless it's the handle)
+            if (isScrollableContent(e.target)) {
+                const sheetContent = e.target.closest('.sheet-content');
+                if (sheetContent.scrollTop > 0) {
+                    return; // Allow scrolling if content is scrolled
+                }
+            }
+            
             isDragging = true;
             startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
             bottomSheet.style.transition = 'none';
@@ -511,7 +531,7 @@
             let newY = sheetY + deltaY;
             const currentHeight = window.innerHeight - newY;
             
-            // Constrain movement
+            // Constrain movement - allow dragging down to minimum height
             if (currentHeight < minHeight) {
                 newY = window.innerHeight - minHeight;
             } else if (currentHeight > maxHeight) {
@@ -534,25 +554,31 @@
             
             const currentHeight = window.innerHeight - sheetY;
             
-            // Determine new position based on gesture
+            // Determine new position based on current position and gesture
             let targetHeight;
             
-            if (currentDetent === 'min') {
+            // Updated logic to handle the new default height
+            if (currentHeight <= defaultHeight) {
                 if (deltaY < -50 || velocity < -100) {
                     targetHeight = midHeight;
                     currentDetent = 'mid';
-                } else {
+                } else if (deltaY > 30 || velocity > 50) {
                     targetHeight = minHeight;
+                    currentDetent = 'min';
+                } else {
+                    targetHeight = defaultHeight;
+                    currentDetent = 'default';
                 }
-            } else if (currentDetent === 'mid') {
+            } else if (currentHeight <= midHeight) {
                 if (deltaY < -50 || velocity < -100) {
                     targetHeight = maxHeight;
                     currentDetent = 'max';
                 } else if (deltaY > 50 || velocity > 100) {
-                    targetHeight = minHeight;
-                    currentDetent = 'min';
+                    targetHeight = defaultHeight;
+                    currentDetent = 'default';
                 } else {
                     targetHeight = midHeight;
+                    currentDetent = 'mid';
                 }
             } else {
                 if (deltaY > 50 || velocity > 100) {
@@ -560,15 +586,16 @@
                     currentDetent = 'mid';
                 } else {
                     targetHeight = maxHeight;
+                    currentDetent = 'max';
                 }
             }
             
             setSheetPosition(targetHeight);
         }
         
-        // Add event listeners for dragging
-        sheetHandle.addEventListener('mousedown', handleStart);
-        sheetHandle.addEventListener('touchstart', handleStart, { passive: false });
+        // Add event listeners for dragging - now on entire sheet
+        bottomSheet.addEventListener('mousedown', handleStart);
+        bottomSheet.addEventListener('touchstart', handleStart, { passive: false });
         
         document.addEventListener('mousemove', handleMove);
         document.addEventListener('touchmove', handleMove, { passive: false });
@@ -697,8 +724,12 @@
         `;
         document.head.appendChild(style);
         
-        // Prevent scrolling on mobile
+        // Prevent scrolling on mobile when dragging
         document.addEventListener('touchmove', function(e) {
+            if (isDragging) {
+                e.preventDefault();
+                return;
+            }
             if (e.target.closest('.sheet-content')) return;
             e.preventDefault();
         }, { passive: false });
