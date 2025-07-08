@@ -59,23 +59,10 @@
             right: 0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 20px;
             background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
             z-index: 10;
-        }
-
-        .nav-button {
-            width: 40px;
-            height: 40px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .user-info {
@@ -341,13 +328,11 @@
 
     <!-- Navigation Bar -->
     <nav class="navigation-bar">
-        <button class="nav-button" onclick="goBack()">←</button>
         <div class="user-info">
             <img class="profile-picture" src="https://i.pravatar.cc/150?img=8" alt="Profile">
             <span class="username">Alex Chen</span>
             <span class="theme-badge">Nature</span>
         </div>
-        <button class="nav-button">💬</button>
     </nav>
 
     <!-- Bottom Sheet -->
@@ -687,11 +672,6 @@
                 </div>
             `;
             return item;
-        }
-        
-        function goBack() {
-            // Simulate back navigation
-            alert('Back navigation - in the app this would return to the previous screen');
         }
         
         function downloadApp() {
