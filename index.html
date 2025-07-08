@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Photo Rating Demo</title>
     <style>
         * {
@@ -19,6 +19,7 @@
             background: #10183C;
             color: white;
             height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for mobile */
             overflow: hidden;
             position: relative;
         }
@@ -55,6 +56,7 @@
         .navigation-bar {
             position: absolute;
             top: 0;
+            top: env(safe-area-inset-top, 0);
             left: 0;
             right: 0;
             display: flex;
@@ -105,7 +107,10 @@
             transition: none;
             will-change: transform;
             height: 100vh;
+            height: 100dvh;
             cursor: grab;
+            /* Add safe area padding for notched devices */
+            padding-bottom: env(safe-area-inset-bottom, 0);
         }
 
         .bottom-sheet.dragging {
@@ -132,10 +137,13 @@
         .sheet-content {
             padding: 0 20px 20px;
             height: calc(100vh - 80px);
+            height: calc(100dvh - 80px);
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: rgba(255,255,255,0.2) transparent;
+            /* Account for star footer and safe area */
+            padding-bottom: calc(120px + env(safe-area-inset-bottom, 0));
         }
         
         .sheet-content::-webkit-scrollbar {
@@ -217,6 +225,8 @@
             gap: 12px;
             z-index: 30;
             height: 100px;
+            /* Add safe area padding for home indicator */
+            padding-bottom: calc(25px + env(safe-area-inset-bottom, 0));
         }
 
         .star-footer.voted {
@@ -306,14 +316,44 @@
             z-index: 99;
         }
 
+        /* Additional safe area support for older devices */
+        @supports not (padding: env(safe-area-inset-bottom)) {
+            .star-footer {
+                padding-bottom: 35px; /* Extra padding for older devices */
+            }
+            
+            .sheet-content {
+                padding-bottom: 140px; /* Extra padding for older devices */
+            }
+        }
+
         /* Responsive adjustments */
         @media (max-height: 700px) {
             .star-footer {
                 padding: 20px 0;
                 height: 80px;
+                padding-bottom: calc(20px + env(safe-area-inset-bottom, 0));
             }
             .star-button {
                 font-size: 28px;
+            }
+            .sheet-content {
+                padding-bottom: calc(100px + env(safe-area-inset-bottom, 0));
+            }
+        }
+
+        /* Specific adjustments for in-app browsers */
+        @media (max-height: 600px) {
+            .star-footer {
+                padding: 15px 0;
+                height: 70px;
+                padding-bottom: calc(15px + env(safe-area-inset-bottom, 20px));
+            }
+            .star-button {
+                font-size: 24px;
+            }
+            .sheet-content {
+                padding-bottom: calc(90px + env(safe-area-inset-bottom, 20px));
             }
         }
     </style>
@@ -446,10 +486,14 @@
         let currentY = 0;
         let sheetY = 0;
         
-        // Sheet positions - updated to allow dragging below default height
-        const starFooterHeight = 100; // Height of star footer
+        // Get safe area inset for dynamic calculations
+        const safeAreaBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0;
+        
+        // Sheet positions - updated to account for safe areas
+        const basePadding = 20; // Base padding from safe area
+        const starFooterHeight = 100 + safeAreaBottom; // Height of star footer + safe area
         const minHeight = starFooterHeight + 50; // Minimum height above star footer
-        const defaultHeight = 220; // Default height (slightly higher than original minimum)
+        const defaultHeight = 220 + safeAreaBottom; // Default height (adjusted for safe area)
         const midHeight = window.innerHeight * 0.35;
         const maxHeight = window.innerHeight - 120;
         let currentDetent = 'default';
