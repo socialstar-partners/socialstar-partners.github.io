@@ -564,7 +564,7 @@
         const bannerHeight = 60; // Height of download banner
         const minHeight = starFooterHeight + 50; // Minimum height above star footer
         const defaultHeight = 290 + safeAreaBottom; // Default height (adjusted to show 2 rating rows)
-        const midHeight = window.innerHeight * 0.35;
+        const midHeight = Math.max(window.innerHeight * 0.45, defaultHeight + 80); // Ensure midHeight > defaultHeight
         const maxHeight = window.innerHeight - 120;
         let currentDetent = 'default';
         
