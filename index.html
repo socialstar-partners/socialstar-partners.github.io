@@ -142,8 +142,8 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: rgba(255,255,255,0.2) transparent;
-            /* Account for star footer and safe area */
-            padding-bottom: calc(120px + env(safe-area-inset-bottom, 0));
+            /* Account for star footer, banner, and safe area */
+            padding-bottom: calc(180px + env(safe-area-inset-bottom, 0));
         }
         
         .sheet-content::-webkit-scrollbar {
@@ -216,6 +216,95 @@
             font-weight: bold;
         }
 
+        /* Download Banner */
+        .download-banner {
+            position: fixed;
+            bottom: 100px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+            padding: 12px 20px;
+            z-index: 30;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            /* Add safe area padding for home indicator */
+            margin-bottom: env(safe-area-inset-bottom, 0);
+        }
+
+        .download-banner.visible {
+            transform: translateY(0);
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .banner-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .banner-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .banner-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .banner-subtitle {
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.3;
+        }
+
+        .banner-button {
+            background: white;
+            color: #DAA520;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .banner-button:hover {
+            transform: scale(1.05);
+        }
+
+        .banner-button:active {
+            transform: scale(0.95);
+        }
+
+        .banner-close {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+            flex-shrink: 0;
+            transition: color 0.2s ease;
+        }
+
+        .banner-close:hover {
+            color: white;
+        }
+
         /* Star Rating Footer */
         .star-footer {
             position: fixed;
@@ -260,66 +349,6 @@
             transform: scale(1.3);
         }
 
-        /* Download Prompt */
-        .download-prompt {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #1A2245;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 90%;
-            width: 350px;
-            z-index: 100;
-        }
-
-        .download-prompt h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .download-prompt p {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .download-button {
-            background: #DAA520;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        .dismiss-button {
-            background: none;
-            color: rgba(255,255,255,0.5);
-            border: none;
-            padding: 10px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 99;
-        }
-
         /* Additional safe area support for older devices */
         @supports not (padding: env(safe-area-inset-bottom)) {
             .star-footer {
@@ -327,7 +356,11 @@
             }
             
             .sheet-content {
-                padding-bottom: 140px; /* Extra padding for older devices */
+                padding-bottom: 200px; /* Extra padding for older devices */
+            }
+            
+            .download-banner {
+                margin-bottom: 20px;
             }
         }
 
@@ -342,7 +375,17 @@
                 font-size: 32px;
             }
             .sheet-content {
-                padding-bottom: calc(100px + env(safe-area-inset-bottom, 0));
+                padding-bottom: calc(160px + env(safe-area-inset-bottom, 0));
+            }
+            .download-banner {
+                bottom: 80px;
+                padding: 10px 20px;
+            }
+            .banner-title {
+                font-size: 13px;
+            }
+            .banner-subtitle {
+                font-size: 11px;
             }
         }
 
@@ -357,7 +400,17 @@
                 font-size: 28px;
             }
             .sheet-content {
-                padding-bottom: calc(90px + env(safe-area-inset-bottom, 20px));
+                padding-bottom: calc(150px + env(safe-area-inset-bottom, 20px));
+            }
+            .download-banner {
+                bottom: 70px;
+                padding: 8px 16px;
+            }
+            .banner-title {
+                font-size: 12px;
+            }
+            .banner-subtitle {
+                font-size: 10px;
             }
         }
     </style>
@@ -366,7 +419,7 @@
         posthog.init('phc_3sfiHFKqVbrCmXIKdwWx0RPsTwKPd6US1fvKFjhziZm', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-05-24',
-            person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+            person_profiles: 'always', // Track anonymous users for conversion funnel analysis
         })
     </script>
 </head>
@@ -471,6 +524,19 @@
         </div>
     </div>
 
+    <!-- Download Banner -->
+    <div class="download-banner" id="downloadBanner">
+        <div class="banner-content">
+            <div class="banner-icon">🎉</div>
+            <div class="banner-text">
+                <div class="banner-title">Nice rating!</div>
+                <div class="banner-subtitle">Get the app to rate with friends</div>
+            </div>
+        </div>
+        <button class="banner-button" onclick="downloadApp()">Download</button>
+        <button class="banner-close" onclick="dismissBanner()">×</button>
+    </div>
+
     <!-- Star Rating Footer -->
     <div class="star-footer" id="starFooter">
         <button class="star-button" data-rating="1">★</button>
@@ -478,15 +544,6 @@
         <button class="star-button" data-rating="3">★</button>
         <button class="star-button" data-rating="4">★</button>
         <button class="star-button" data-rating="5">★</button>
-    </div>
-
-    <!-- Download Prompt -->
-    <div class="overlay" id="overlay"></div>
-    <div class="download-prompt" id="downloadPrompt">
-        <h2>🎉 Nice Rating!</h2>
-        <p>Love this experience? Download our app to rate photos with your friends and compete in daily challenges!</p>
-        <button class="download-button" onclick="downloadApp()">Download SocialStar</button>
-        <button class="dismiss-button" onclick="dismissPrompt()">Maybe Later</button>
     </div>
 
     <script>
@@ -501,9 +558,10 @@
         // Get safe area inset for dynamic calculations
         const safeAreaBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0;
         
-        // Sheet positions - updated to account for safe areas
+        // Sheet positions - updated to account for safe areas and banner
         const basePadding = 20; // Base padding from safe area
         const starFooterHeight = 100 + safeAreaBottom; // Height of star footer + safe area
+        const bannerHeight = 60; // Height of download banner
         const minHeight = starFooterHeight + 50; // Minimum height above star footer
         const defaultHeight = 220 + safeAreaBottom; // Default height (adjusted for safe area)
         const midHeight = window.innerHeight * 0.35;
@@ -517,8 +575,7 @@
         const starButtons = document.querySelectorAll('.star-button');
         const ratingsList = document.getElementById('ratingsList');
         const ratingCount = document.getElementById('ratingCount');
-        const downloadPrompt = document.getElementById('downloadPrompt');
-        const overlay = document.getElementById('overlay');
+        const downloadBanner = document.getElementById('downloadBanner');
         
         // Initialize sheet position
         function setSheetPosition(height) {
@@ -697,17 +754,10 @@
             const currentCount = parseInt(ratingCount.textContent);
             ratingCount.textContent = currentCount + 1;
             
-            // Show download prompt after delay
+            // Show download banner after delay
             setTimeout(() => {
-                overlay.style.display = 'block';
-                downloadPrompt.style.display = 'block';
-                
-                // Animate in
-                setTimeout(() => {
-                    overlay.style.opacity = '1';
-                    downloadPrompt.style.transform = 'translate(-50%, -50%) scale(1)';
-                }, 10);
-            }, 1500);
+                downloadBanner.classList.add('visible');
+            }, 1000);
         }
         
         function createRatingItem(username, rating, avatarUrl) {
@@ -733,30 +783,9 @@
             window.open('https://apps.apple.com/app/socialstar-app/id6473705189', '_blank');
         }
         
-        function dismissPrompt() {
-            overlay.style.opacity = '0';
-            downloadPrompt.style.transform = 'translate(-50%, -50%) scale(0.9)';
-            
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                downloadPrompt.style.display = 'none';
-            }, 300);
+        function dismissBanner() {
+            downloadBanner.classList.remove('visible');
         }
-        
-        // Add CSS for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            .overlay {
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-            
-            .download-prompt {
-                transform: translate(-50%, -50%) scale(0.9);
-                transition: transform 0.3s ease;
-            }
-        `;
-        document.head.appendChild(style);
         
         // Prevent scrolling on mobile when dragging
         document.addEventListener('touchmove', function(e) {
