@@ -434,7 +434,7 @@
     <nav class="navigation-bar">
         <div class="user-info">
             <img class="profile-picture" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2FIMG_3441.JPG?alt=media&token=f6ccc3ab-6400-4206-9821-1783d4beb3f0" alt="Profile">
-            <span class="username">Elsa</span>
+            <span class="username">Ava</span>
         </div>
     </nav>
 
@@ -462,7 +462,7 @@
                 <div class="rating-item">
                     <div class="rating-user-info">
                         <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F76f9566b1a6c667929d300af2bd1686f.jpg?alt=media&token=11621632-5a38-4dc3-9f10-ff8e1776c603" alt="Mike">
-                        <span class="rating-username">Astrid</span>
+                        <span class="rating-username">Madison</span>
                     </div>
                     <div class="rating-badge">
                         <span>4</span>
@@ -499,7 +499,7 @@
                 <div class="rating-item">
                     <div class="rating-user-info">
                         <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F52c1d2168c708e20d41fa8538fde2307.jpg?alt=media&token=588c51d3-1b05-4ffb-9295-dd7c79433324" alt="Lisa">
-                        <span class="rating-username">Luna</span>
+                        <span class="rating-username">Chloe</span>
                     </div>
                     <div class="rating-badge">
                         <span>4</span>
@@ -511,7 +511,7 @@
                 <div class="rating-item">
                     <div class="rating-user-info">
                         <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F17b9d70ab76bd8e2daabb99b8e77ad31.jpg?alt=media&token=bd3ea9d3-210c-420f-bf5d-029771faaade" alt="John">
-                        <span class="rating-username">Frida</span>
+                        <span class="rating-username">Zoe</span>
                     </div>
                     <div class="rating-badge">
                         <span>5</span>
@@ -653,9 +653,9 @@
             // Determine new position based on current position and gesture
             let targetHeight;
             
-            // Updated logic to handle the new default height
-            if (currentHeight <= defaultHeight) {
-                if (deltaY < -50 || velocity < -100) {
+            // More responsive drag thresholds
+            if (currentHeight <= defaultHeight + 20) { // Small buffer around default
+                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
                     targetHeight = midHeight;
                     currentDetent = 'mid';
                 } else if (deltaY > 30 || velocity > 50) {
@@ -665,11 +665,11 @@
                     targetHeight = defaultHeight;
                     currentDetent = 'default';
                 }
-            } else if (currentHeight <= midHeight) {
-                if (deltaY < -50 || velocity < -100) {
+            } else if (currentHeight <= midHeight + 20) { // Small buffer around mid
+                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
                     targetHeight = maxHeight;
                     currentDetent = 'max';
-                } else if (deltaY > 50 || velocity > 100) {
+                } else if (deltaY > 40 || velocity > 60) {
                     targetHeight = defaultHeight;
                     currentDetent = 'default';
                 } else {
@@ -677,7 +677,7 @@
                     currentDetent = 'mid';
                 }
             } else {
-                if (deltaY > 50 || velocity > 100) {
+                if (deltaY > 40 || velocity > 60) {
                     targetHeight = midHeight;
                     currentDetent = 'mid';
                 } else {
