@@ -271,7 +271,7 @@
 
         .banner-button {
             background: white;
-            color: #DAA520;
+            color: black;
             border: none;
             padding: 8px 16px;
             border-radius: 20px;
@@ -737,7 +737,7 @@
             starButtons.forEach(btn => btn.classList.add('voted'));
             
             // Add new rating to list with animation
-            const newRating = createRatingItem('You', rating, 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png');
+            const newRating = createRatingItem('You', rating, 'https://static.vecteezy.com/system/resources/previews/013/360/247/non_2x/default-avatar-photo-icon-social-media-profile-sign-symbol-vector.jpg');
             newRating.style.opacity = '0';
             newRating.style.transform = 'translateY(20px)';
             ratingsList.insertBefore(newRating, ratingsList.firstChild);
