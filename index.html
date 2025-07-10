@@ -219,7 +219,7 @@
         /* Download Banner */
         .download-banner {
             position: fixed;
-            bottom: 100px;
+            bottom: 100px; /* Default position above star footer */
             left: 0;
             right: 0;
             background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
@@ -229,8 +229,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            /* Add safe area padding for home indicator */
-            margin-bottom: env(safe-area-inset-bottom, 0);
         }
 
         .download-banner.visible {
@@ -388,7 +386,7 @@
                 padding-bottom: calc(160px + env(safe-area-inset-bottom, 0));
             }
             .download-banner {
-                bottom: 80px;
+                bottom: 80px; /* Match reduced star footer height */
                 padding: 10px 20px;
             }
             .banner-title {
@@ -413,7 +411,7 @@
                 padding-bottom: calc(150px + env(safe-area-inset-bottom, 20px));
             }
             .download-banner {
-                bottom: 70px;
+                bottom: 70px; /* Match reduced star footer height */
                 padding: 8px 16px;
             }
             .banner-title {
@@ -586,11 +584,24 @@
         const ratingCount = document.getElementById('ratingCount');
         const downloadBanner = document.getElementById('downloadBanner');
         
-        // Ensure banner is hidden on page load
+        // Ensure banner is hidden on page load and calculate proper positioning
         document.addEventListener('DOMContentLoaded', function() {
             // Force hide banner on load
             downloadBanner.style.display = 'none';
             downloadBanner.classList.remove('visible');
+            
+            // Calculate and set proper banner position based on star footer
+            function updateBannerPosition() {
+                const starFooterRect = starFooter.getBoundingClientRect();
+                const starFooterHeight = starFooterRect.height;
+                downloadBanner.style.bottom = starFooterHeight + 'px';
+            }
+            
+            // Set initial position
+            updateBannerPosition();
+            
+            // Update position on resize (for orientation changes)
+            window.addEventListener('resize', updateBannerPosition);
         });
         
         // Initialize sheet position
