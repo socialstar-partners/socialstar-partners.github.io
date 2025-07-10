@@ -593,8 +593,9 @@
             // Calculate and set proper banner position based on star footer
             function updateBannerPosition() {
                 const starFooterRect = starFooter.getBoundingClientRect();
-                const starFooterHeight = starFooterRect.height;
-                downloadBanner.style.bottom = starFooterHeight + 'px';
+                const viewportHeight = window.innerHeight;
+                const distanceFromBottom = viewportHeight - starFooterRect.top;
+                downloadBanner.style.bottom = distanceFromBottom + 'px';
             }
             
             // Set initial position
@@ -602,6 +603,9 @@
             
             // Update position on resize (for orientation changes)
             window.addEventListener('resize', updateBannerPosition);
+            
+            // Also update when the page is fully loaded (in case elements shift)
+            window.addEventListener('load', updateBannerPosition);
         });
         
         // Initialize sheet position
@@ -783,6 +787,12 @@
             
             // Show download banner after delay
             setTimeout(() => {
+                // Update banner position right before showing it
+                const starFooterRect = starFooter.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                const distanceFromBottom = viewportHeight - starFooterRect.top;
+                downloadBanner.style.bottom = distanceFromBottom + 'px';
+                
                 downloadBanner.style.display = 'flex';
                 // Force reflow to ensure display change is applied
                 downloadBanner.offsetHeight;
