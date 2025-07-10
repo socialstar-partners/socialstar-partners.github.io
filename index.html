@@ -143,7 +143,7 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(255,255,255,0.2) transparent;
             /* Account for star footer, banner, and safe area */
-            padding-bottom: calc(180px + env(safe-area-inset-bottom, 0));
+            padding-bottom: calc(180px + 60px + env(safe-area-inset-bottom, 0));
         }
         
         .sheet-content::-webkit-scrollbar {
@@ -216,35 +216,21 @@
             font-weight: bold;
         }
 
-        /* Download Banner */
+        /* Download Banner - Modified for persistent display */
         .download-banner {
             position: fixed;
-            bottom: 100px; /* Default position above star footer */
+            bottom: 100px; /* Positioned above star footer */
             left: 0;
             right: 0;
             background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
             padding: 12px 20px;
             z-index: 30;
-            display: none; /* Changed from transform to display:none for better compatibility */
+            display: flex; /* Always visible */
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-        }
-
-        .download-banner.visible {
-            display: flex; /* Show with display:flex instead of transform */
-            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            transform: none !important;
+            opacity: 1 !important;
         }
 
         .banner-content {
@@ -364,11 +350,7 @@
             }
             
             .sheet-content {
-                padding-bottom: 200px; /* Extra padding for older devices */
-            }
-            
-            .download-banner {
-                margin-bottom: 20px;
+                padding-bottom: 240px; /* Extra padding for older devices (180 + 60) */
             }
         }
 
@@ -383,7 +365,7 @@
                 font-size: 32px;
             }
             .sheet-content {
-                padding-bottom: calc(160px + env(safe-area-inset-bottom, 0));
+                padding-bottom: calc(160px + 50px + env(safe-area-inset-bottom, 0));
             }
             .download-banner {
                 bottom: 80px; /* Match reduced star footer height */
@@ -408,7 +390,7 @@
                 font-size: 28px;
             }
             .sheet-content {
-                padding-bottom: calc(150px + env(safe-area-inset-bottom, 20px));
+                padding-bottom: calc(150px + 40px + env(safe-area-inset-bottom, 20px));
             }
             .download-banner {
                 bottom: 70px; /* Match reduced star footer height */
@@ -532,7 +514,7 @@
         </div>
     </div>
 
-    <!-- Download Banner -->
+    <!-- Download Banner - Now always visible -->
     <div class="download-banner" id="downloadBanner">
         <div class="banner-content">
             <div class="banner-icon">🎉</div>
@@ -569,7 +551,7 @@
         const basePadding = 20; // Base padding from safe area
         const starFooterHeight = 100 + safeAreaBottom; // Height of star footer + safe area
         const bannerHeight = 60; // Height of download banner
-        const minHeight = starFooterHeight + 50; // Minimum height above star footer
+        const minHeight = starFooterHeight + bannerHeight + 50; // Minimum height above star footer + banner
         const defaultHeight = 290 + safeAreaBottom; // Default height (adjusted to show 2 rating rows)
         const midHeight = Math.max(window.innerHeight * 0.45, defaultHeight + 80); // Ensure midHeight > defaultHeight
         const maxHeight = window.innerHeight - 120;
@@ -584,11 +566,10 @@
         const ratingCount = document.getElementById('ratingCount');
         const downloadBanner = document.getElementById('downloadBanner');
         
-        // Ensure banner is hidden on page load and calculate proper positioning
+        // Initialize banner position on load
         document.addEventListener('DOMContentLoaded', function() {
-            // Force hide banner on load
-            downloadBanner.style.display = 'none';
-            downloadBanner.classList.remove('visible');
+            // Show banner immediately
+            downloadBanner.style.display = 'flex';
             
             // Calculate and set proper banner position based on star footer
             function updateBannerPosition() {
@@ -603,9 +584,6 @@
             
             // Update position on resize (for orientation changes)
             window.addEventListener('resize', updateBannerPosition);
-            
-            // Also update when the page is fully loaded (in case elements shift)
-            window.addEventListener('load', updateBannerPosition);
         });
         
         // Initialize sheet position
@@ -803,20 +781,6 @@
             // Update count
             const currentCount = parseInt(ratingCount.textContent);
             ratingCount.textContent = currentCount + 1;
-            
-            // Show download banner after delay
-            setTimeout(() => {
-                // Update banner position right before showing it
-                const starFooterRect = starFooter.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                const distanceFromBottom = viewportHeight - starFooterRect.top;
-                downloadBanner.style.bottom = distanceFromBottom + 'px';
-                
-                downloadBanner.style.display = 'flex';
-                // Force reflow to ensure display change is applied
-                downloadBanner.offsetHeight;
-                downloadBanner.classList.add('visible');
-            }, 1000);
         }
         
         function createRatingItem(username, rating, avatarUrl) {
@@ -843,10 +807,7 @@
         }
         
         function dismissBanner() {
-            downloadBanner.classList.remove('visible');
-            setTimeout(() => {
-                downloadBanner.style.display = 'none';
-            }, 400); // Wait for animation to complete
+            downloadBanner.style.display = 'none';
         }
         
         // Prevent scrolling on mobile when dragging
