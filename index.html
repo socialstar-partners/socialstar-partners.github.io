@@ -590,11 +590,14 @@
         // Get safe area inset for dynamic calculations
         const safeAreaBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0;
         
-        // Sheet positions - updated to account for safe areas and banner
+        // Sheet positions - Updated for more flexible minimum height
         const basePadding = 20; // Base padding from safe area
         const starFooterHeight = 100 + safeAreaBottom; // Height of star footer + safe area
-        const bannerHeight = 60; // Height of download banner
-        const minHeight = starFooterHeight + bannerHeight + 50; // Minimum height above star footer + banner
+        const bannerHeight = 0; // Banner height (now using top banner, so 0 for bottom)
+        
+        // More flexible minimum height - allows sheet to go lower while staying above rating bar
+        const absoluteMinHeight = starFooterHeight + 40; // Just 40px above star footer
+        const minHeight = starFooterHeight + 80; // Comfortable minimum with some spacing
         const defaultHeight = 290 + safeAreaBottom; // Default height (adjusted to show 2 rating rows)
         const midHeight = Math.max(window.innerHeight * 0.45, defaultHeight + 80); // Ensure midHeight > defaultHeight
         const maxHeight = window.innerHeight - 120;
@@ -683,9 +686,9 @@
             let newY = sheetY + deltaY;
             const currentHeight = window.innerHeight - newY;
             
-            // Constrain movement - allow dragging down to minimum height
-            if (currentHeight < minHeight) {
-                newY = window.innerHeight - minHeight;
+            // Updated constraint - allow dragging down to absolute minimum (closer to star footer)
+            if (currentHeight < absoluteMinHeight) {
+                newY = window.innerHeight - absoluteMinHeight;
             } else if (currentHeight > maxHeight) {
                 newY = window.innerHeight - maxHeight;
             }
@@ -717,11 +720,24 @@
             const downwardThreshold = 40;
             const strongVelocityThreshold = 60;
             
-            if (currentHeight <= minHeight + 30) {
-                // Near minimum height
+            // Updated logic to include the new lower position
+            if (currentHeight <= absoluteMinHeight + 20) {
+                // Very close to absolute minimum
+                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
+                    targetHeight = minHeight;
+                    currentDetent = 'min';
+                } else {
+                    targetHeight = absoluteMinHeight;
+                    currentDetent = 'absolute-min';
+                }
+            } else if (currentHeight <= minHeight + 30) {
+                // Near comfortable minimum height
                 if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
                     targetHeight = defaultHeight;
                     currentDetent = 'default';
+                } else if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
+                    targetHeight = absoluteMinHeight;
+                    currentDetent = 'absolute-min';
                 } else {
                     targetHeight = minHeight;
                     currentDetent = 'min';
