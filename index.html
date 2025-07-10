@@ -19,7 +19,7 @@
             background: #10183C;
             color: white;
             height: 100vh;
-            height: 100dvh;
+            height: 100dvh; /* Dynamic viewport height for mobile */
             overflow: hidden;
             position: relative;
         }
@@ -109,7 +109,8 @@
             height: 100vh;
             height: 100dvh;
             cursor: grab;
-            padding-bottom: 20px;
+            /* Add safe area padding for notched devices */
+            padding-bottom: env(safe-area-inset-bottom, 0);
         }
 
         .bottom-sheet.dragging {
@@ -141,7 +142,8 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: rgba(255,255,255,0.2) transparent;
-            padding-bottom: 200px;
+            /* Account for star footer, banner, and safe area */
+            padding-bottom: calc(180px + env(safe-area-inset-bottom, 0));
         }
         
         .sheet-content::-webkit-scrollbar {
@@ -214,31 +216,27 @@
             font-weight: bold;
         }
 
-        /* Download Banner - Fixed for in-app browsers */
+        /* Download Banner */
         .download-banner {
             position: fixed;
+            bottom: 100px;
             left: 0;
             right: 0;
             background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
             padding: 12px 20px;
             z-index: 30;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            /* Initially hidden - more reliable than transform */
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* Dynamic positioning based on star footer */
-            bottom: 100px;
+            /* Add safe area padding for home indicator */
+            margin-bottom: env(safe-area-inset-bottom, 0);
         }
 
         .download-banner.visible {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
+            transform: translateY(0);
         }
 
         .banner-content {
@@ -307,7 +305,7 @@
             color: white;
         }
 
-        /* Star Rating Footer - Fixed positioning */
+        /* Star Rating Footer */
         .star-footer {
             position: fixed;
             bottom: 0;
@@ -320,8 +318,8 @@
             gap: 10px;
             z-index: 30;
             height: 100px;
-            /* Safe area padding - more conservative approach */
-            padding-bottom: 35px;
+            /* Add safe area padding for home indicator */
+            padding-bottom: calc(18px + env(safe-area-inset-bottom, 0));
         }
 
         .star-footer.voted {
@@ -351,67 +349,68 @@
             transform: scale(1.3);
         }
 
-        /* Responsive adjustments for in-app browsers */
+        /* Additional safe area support for older devices */
+        @supports not (padding: env(safe-area-inset-bottom)) {
+            .star-footer {
+                padding-bottom: 35px; /* Extra padding for older devices */
+            }
+            
+            .sheet-content {
+                padding-bottom: 200px; /* Extra padding for older devices */
+            }
+            
+            .download-banner {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Responsive adjustments */
         @media (max-height: 700px) {
             .star-footer {
-                padding: 15px 0;
+                padding: 20px 0;
                 height: 80px;
-                padding-bottom: 25px;
+                padding-bottom: calc(15px + env(safe-area-inset-bottom, 0));
             }
             .star-button {
                 font-size: 32px;
             }
             .sheet-content {
-                padding-bottom: 160px;
+                padding-bottom: calc(160px + env(safe-area-inset-bottom, 0));
             }
             .download-banner {
                 bottom: 80px;
                 padding: 10px 20px;
             }
             .banner-title {
-                font-size: 14px;
+                font-size: 13px;
             }
             .banner-subtitle {
                 font-size: 11px;
             }
         }
 
+        /* Specific adjustments for in-app browsers */
         @media (max-height: 600px) {
             .star-footer {
-                padding: 12px 0;
+                padding: 15px 0;
                 height: 70px;
-                padding-bottom: 20px;
+                padding-bottom: calc(10px + env(safe-area-inset-bottom, 20px));
             }
             .star-button {
                 font-size: 28px;
             }
             .sheet-content {
-                padding-bottom: 150px;
+                padding-bottom: calc(150px + env(safe-area-inset-bottom, 20px));
             }
             .download-banner {
                 bottom: 70px;
                 padding: 8px 16px;
             }
             .banner-title {
-                font-size: 13px;
+                font-size: 12px;
             }
             .banner-subtitle {
                 font-size: 10px;
-            }
-        }
-
-        /* Specific fixes for TikTok and other in-app browsers */
-        @media screen and (max-width: 768px) {
-            .download-banner {
-                /* Force recalculation of position */
-                transform: translateZ(0);
-                -webkit-transform: translateZ(0);
-            }
-            
-            .star-footer {
-                /* Force recalculation of position */
-                transform: translateZ(0);
-                -webkit-transform: translateZ(0);
             }
         }
     </style>
@@ -420,7 +419,7 @@
         posthog.init('phc_3sfiHFKqVbrCmXIKdwWx0RPsTwKPd6US1fvKFjhziZm', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-05-24',
-            person_profiles: 'always',
+            person_profiles: 'always', // Track anonymous users for conversion funnel analysis
         })
     </script>
 </head>
@@ -496,6 +495,7 @@
                         </svg>
                     </div>
                 </div>
+                <!-- Add more ratings to show scrolling -->
                 <div class="rating-item">
                     <div class="rating-user-info">
                         <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F52c1d2168c708e20d41fa8538fde2307.jpg?alt=media&token=588c51d3-1b05-4ffb-9295-dd7c79433324" alt="Lisa">
@@ -554,6 +554,19 @@
         let currentY = 0;
         let sheetY = 0;
         
+        // Get safe area inset for dynamic calculations
+        const safeAreaBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0;
+        
+        // Sheet positions - updated to account for safe areas and banner
+        const basePadding = 20; // Base padding from safe area
+        const starFooterHeight = 100 + safeAreaBottom; // Height of star footer + safe area
+        const bannerHeight = 60; // Height of download banner
+        const minHeight = starFooterHeight + 50; // Minimum height above star footer
+        const defaultHeight = 290 + safeAreaBottom; // Default height (adjusted to show 2 rating rows)
+        const midHeight = Math.max(window.innerHeight * 0.45, defaultHeight + 80); // Ensure midHeight > defaultHeight
+        const maxHeight = window.innerHeight - 120;
+        let currentDetent = 'default';
+        
         // Elements
         const bottomSheet = document.getElementById('bottomSheet');
         const sheetHandle = document.getElementById('sheetHandle');
@@ -563,61 +576,15 @@
         const ratingCount = document.getElementById('ratingCount');
         const downloadBanner = document.getElementById('downloadBanner');
         
-        // Dynamic positioning system for in-app browsers
-        function calculatePositions() {
-            const viewportHeight = window.innerHeight;
-            const starFooterHeight = starFooter.offsetHeight || 100;
-            
-            // Update banner position dynamically
-            const bannerBottomPosition = starFooterHeight + 10;
-            downloadBanner.style.bottom = `${bannerBottomPosition}px`;
-            
-            return {
-                minHeight: starFooterHeight + 50,
-                defaultHeight: Math.min(290, viewportHeight * 0.4),
-                midHeight: Math.min(viewportHeight * 0.6, viewportHeight - 120),
-                maxHeight: viewportHeight - 120
-            };
-        }
-        
-        // Initialize positions
-        let positions = calculatePositions();
-        let currentDetent = 'default';
-        
-        // Set sheet position
+        // Initialize sheet position
         function setSheetPosition(height) {
             const translateY = window.innerHeight - height;
             bottomSheet.style.transform = `translateY(${translateY}px)`;
             sheetY = translateY;
         }
         
-        // Initialize sheet
-        function initializeSheet() {
-            // Wait for DOM to be fully loaded
-            setTimeout(() => {
-                positions = calculatePositions();
-                setSheetPosition(positions.defaultHeight);
-                
-                // Ensure banner is hidden initially
-                downloadBanner.style.opacity = '0';
-                downloadBanner.style.visibility = 'hidden';
-                downloadBanner.style.pointerEvents = 'none';
-            }, 100);
-        }
-        
-        // Handle viewport changes (orientation, keyboard, etc.)
-        function handleViewportChange() {
-            setTimeout(() => {
-                positions = calculatePositions();
-                if (currentDetent === 'default') {
-                    setSheetPosition(positions.defaultHeight);
-                } else if (currentDetent === 'mid') {
-                    setSheetPosition(positions.midHeight);
-                } else if (currentDetent === 'max') {
-                    setSheetPosition(positions.maxHeight);
-                }
-            }, 100);
-        }
+        // Set initial position to default height
+        setSheetPosition(defaultHeight);
         
         // Add visual indicator for drag state
         function updateDragVisual(isDragging) {
@@ -635,10 +602,11 @@
         
         // Touch/Mouse event handlers for bottom sheet
         function handleStart(e) {
+            // Don't start dragging if touching scrollable content (unless it's the handle)
             if (isScrollableContent(e.target)) {
                 const sheetContent = e.target.closest('.sheet-content');
                 if (sheetContent.scrollTop > 0) {
-                    return;
+                    return; // Allow scrolling if content is scrolled
                 }
             }
             
@@ -658,10 +626,11 @@
             let newY = sheetY + deltaY;
             const currentHeight = window.innerHeight - newY;
             
-            if (currentHeight < positions.minHeight) {
-                newY = window.innerHeight - positions.minHeight;
-            } else if (currentHeight > positions.maxHeight) {
-                newY = window.innerHeight - positions.maxHeight;
+            // Constrain movement - allow dragging down to minimum height
+            if (currentHeight < minHeight) {
+                newY = window.innerHeight - minHeight;
+            } else if (currentHeight > maxHeight) {
+                newY = window.innerHeight - maxHeight;
             }
             
             bottomSheet.style.transform = `translateY(${newY}px)`;
@@ -680,36 +649,38 @@
             
             const currentHeight = window.innerHeight - sheetY;
             
+            // Determine new position based on current position and gesture
             let targetHeight;
             
-            if (currentHeight <= positions.defaultHeight + 20) {
-                if (deltaY < -30 || velocity < -50) {
-                    targetHeight = positions.midHeight;
+            // More responsive drag thresholds
+            if (currentHeight <= defaultHeight + 20) { // Small buffer around default
+                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
+                    targetHeight = midHeight;
                     currentDetent = 'mid';
                 } else if (deltaY > 30 || velocity > 50) {
-                    targetHeight = positions.minHeight;
+                    targetHeight = minHeight;
                     currentDetent = 'min';
                 } else {
-                    targetHeight = positions.defaultHeight;
+                    targetHeight = defaultHeight;
                     currentDetent = 'default';
                 }
-            } else if (currentHeight <= positions.midHeight + 20) {
-                if (deltaY < -30 || velocity < -50) {
-                    targetHeight = positions.maxHeight;
+            } else if (currentHeight <= midHeight + 20) { // Small buffer around mid
+                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
+                    targetHeight = maxHeight;
                     currentDetent = 'max';
                 } else if (deltaY > 40 || velocity > 60) {
-                    targetHeight = positions.defaultHeight;
+                    targetHeight = defaultHeight;
                     currentDetent = 'default';
                 } else {
-                    targetHeight = positions.midHeight;
+                    targetHeight = midHeight;
                     currentDetent = 'mid';
                 }
             } else {
                 if (deltaY > 40 || velocity > 60) {
-                    targetHeight = positions.midHeight;
+                    targetHeight = midHeight;
                     currentDetent = 'mid';
                 } else {
-                    targetHeight = positions.maxHeight;
+                    targetHeight = maxHeight;
                     currentDetent = 'max';
                 }
             }
@@ -717,7 +688,7 @@
             setSheetPosition(targetHeight);
         }
         
-        // Add event listeners for dragging
+        // Add event listeners for dragging - now on entire sheet
         bottomSheet.addEventListener('mousedown', handleStart);
         bottomSheet.addEventListener('touchstart', handleStart, { passive: false });
         
@@ -782,22 +753,10 @@
             const currentCount = parseInt(ratingCount.textContent);
             ratingCount.textContent = currentCount + 1;
             
-            // Show download banner after delay - with better timing for in-app browsers
+            // Show download banner after delay
             setTimeout(() => {
-                // Double-check positions before showing
-                positions = calculatePositions();
-                showDownloadBanner();
-            }, 1200);
-        }
-        
-        function showDownloadBanner() {
-            // Force a reflow to ensure proper positioning
-            downloadBanner.offsetHeight;
-            
-            // Show banner
-            downloadBanner.style.opacity = '1';
-            downloadBanner.style.visibility = 'visible';
-            downloadBanner.style.pointerEvents = 'auto';
+                downloadBanner.classList.add('visible');
+            }, 1000);
         }
         
         function createRatingItem(username, rating, avatarUrl) {
@@ -819,30 +778,12 @@
         }
         
         function downloadApp() {
-            // Track download attempt
-            if (window.posthog) {
-                posthog.capture('download_app_clicked');
-            }
-            
             // Simulate app download
             window.open('https://apps.apple.com/app/socialstar-app/id6473705189', '_blank');
         }
         
         function dismissBanner() {
-            downloadBanner.style.opacity = '0';
-            downloadBanner.style.visibility = 'hidden';
-            downloadBanner.style.pointerEvents = 'none';
-        }
-        
-        // Event listeners for viewport changes
-        window.addEventListener('resize', handleViewportChange);
-        window.addEventListener('orientationchange', handleViewportChange);
-        
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeSheet);
-        } else {
-            initializeSheet();
+            downloadBanner.classList.remove('visible');
         }
         
         // Prevent scrolling on mobile when dragging
@@ -854,11 +795,6 @@
             if (e.target.closest('.sheet-content')) return;
             e.preventDefault();
         }, { passive: false });
-        
-        // Additional safety for in-app browsers - force recalculation after a delay
-        setTimeout(() => {
-            positions = calculatePositions();
-            if (currentDetent === 'default') {
-                setSheetPosition(positions.defaultHeight);
-            }
-        }, 1000);
+    </script>
+</body>
+</html>
