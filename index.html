@@ -442,7 +442,7 @@
     <nav class="navigation-bar">
         <div class="user-info">
             <img class="profile-picture" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2FIMG_3441.JPG?alt=media&token=f6ccc3ab-6400-4206-9821-1783d4beb3f0" alt="Profile">
-            <span class="username">Ava</span>
+            <span class="username">Elsa</span>
         </div>
     </nav>
 
@@ -470,7 +470,7 @@
                 <div class="rating-item">
                     <div class="rating-user-info">
                         <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F76f9566b1a6c667929d300af2bd1686f.jpg?alt=media&token=11621632-5a38-4dc3-9f10-ff8e1776c603" alt="Mike">
-                        <span class="rating-username">Madison</span>
+                        <span class="rating-username">Astrid</span>
                     </div>
                     <div class="rating-badge">
                         <span>4</span>
@@ -693,25 +693,6 @@
                     targetHeight = minHeight;
                     currentDetent = 'min';
                 } else {
-                    targetHeight = defaultHeight;
-                    currentDetent = 'default';
-                }
-            } else if (currentHeight <= midHeight + 20) { // Small buffer around mid
-                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
-                    targetHeight = maxHeight;
-                    currentDetent = 'max';
-                } else if (deltaY > 40 || velocity > 60) {
-                    targetHeight = defaultHeight;
-                    currentDetent = 'default';
-                } else {
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                }
-            } else {
-                if (deltaY > 40 || velocity > 60) {
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                } else {
                     targetHeight = maxHeight;
                     currentDetent = 'max';
                 }
@@ -841,4 +822,23 @@
         }, { passive: false });
     </script>
 </body>
-</html>
+</html> defaultHeight;
+                    currentDetent = 'default';
+                }
+            } else if (currentHeight <= midHeight + 20) { // Small buffer around mid
+                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
+                    targetHeight = maxHeight;
+                    currentDetent = 'max';
+                } else if (deltaY > 40 || velocity > 60) {
+                    targetHeight = defaultHeight;
+                    currentDetent = 'default';
+                } else {
+                    targetHeight = midHeight;
+                    currentDetent = 'mid';
+                }
+            } else {
+                if (deltaY > 40 || velocity > 60) {
+                    targetHeight = midHeight;
+                    currentDetent = 'mid';
+                } else {
+                    targetHeight =
