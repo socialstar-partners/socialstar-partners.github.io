@@ -225,9 +225,7 @@
             background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
             padding: 12px 20px;
             z-index: 30;
-            transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
+            display: none; /* Changed from transform to display:none for better compatibility */
             align-items: center;
             justify-content: space-between;
             gap: 15px;
@@ -236,7 +234,19 @@
         }
 
         .download-banner.visible {
-            transform: translateY(0);
+            display: flex; /* Show with display:flex instead of transform */
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .banner-content {
@@ -576,6 +586,13 @@
         const ratingCount = document.getElementById('ratingCount');
         const downloadBanner = document.getElementById('downloadBanner');
         
+        // Ensure banner is hidden on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force hide banner on load
+            downloadBanner.style.display = 'none';
+            downloadBanner.classList.remove('visible');
+        });
+        
         // Initialize sheet position
         function setSheetPosition(height) {
             const translateY = window.innerHeight - height;
@@ -755,6 +772,9 @@
             
             // Show download banner after delay
             setTimeout(() => {
+                downloadBanner.style.display = 'flex';
+                // Force reflow to ensure display change is applied
+                downloadBanner.offsetHeight;
                 downloadBanner.classList.add('visible');
             }, 1000);
         }
@@ -784,6 +804,9 @@
         
         function dismissBanner() {
             downloadBanner.classList.remove('visible');
+            setTimeout(() => {
+                downloadBanner.style.display = 'none';
+            }, 400); // Wait for animation to complete
         }
         
         // Prevent scrolling on mobile when dragging
