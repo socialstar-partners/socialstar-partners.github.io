@@ -679,19 +679,57 @@
             const deltaY = endY - startY;
             const velocity = deltaY;
             
-            const currentHeight = window.innerHeight - sheetY;
+            // Get current height from the actual transform position
+            const currentTransform = bottomSheet.style.transform;
+            const currentTransformY = parseFloat(currentTransform.match(/translateY\(([^)]+)px\)/)?.[1]) || sheetY;
+            const currentHeight = window.innerHeight - currentTransformY;
             
             // Determine new position based on current position and gesture
             let targetHeight;
             
-            // More responsive drag thresholds
-            if (currentHeight <= defaultHeight + 20) { // Small buffer around default
-                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                } else if (deltaY > 30 || velocity > 50) {
+            // Define thresholds for smoother transitions
+            const upwardThreshold = -40;
+            const downwardThreshold = 40;
+            const strongVelocityThreshold = 60;
+            
+            if (currentHeight <= minHeight + 30) {
+                // Near minimum height
+                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
+                    targetHeight = defaultHeight;
+                    currentDetent = 'default';
+                } else {
                     targetHeight = minHeight;
                     currentDetent = 'min';
+                }
+            } else if (currentHeight <= defaultHeight + 30) {
+                // Near default height
+                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
+                    targetHeight = midHeight;
+                    currentDetent = 'mid';
+                } else if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
+                    targetHeight = minHeight;
+                    currentDetent = 'min';
+                } else {
+                    targetHeight = defaultHeight;
+                    currentDetent = 'default';
+                }
+            } else if (currentHeight <= midHeight + 30) {
+                // Near mid height
+                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
+                    targetHeight = maxHeight;
+                    currentDetent = 'max';
+                } else if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
+                    targetHeight = defaultHeight;
+                    currentDetent = 'default';
+                } else {
+                    targetHeight = midHeight;
+                    currentDetent = 'mid';
+                }
+            } else {
+                // Near max height or beyond
+                if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
+                    targetHeight = midHeight;
+                    currentDetent = 'mid';
                 } else {
                     targetHeight = maxHeight;
                     currentDetent = 'max';
@@ -822,23 +860,4 @@
         }, { passive: false });
     </script>
 </body>
-</html> defaultHeight;
-                    currentDetent = 'default';
-                }
-            } else if (currentHeight <= midHeight + 20) { // Small buffer around mid
-                if (deltaY < -30 || velocity < -50) { // Less strict upward gesture
-                    targetHeight = maxHeight;
-                    currentDetent = 'max';
-                } else if (deltaY > 40 || velocity > 60) {
-                    targetHeight = defaultHeight;
-                    currentDetent = 'default';
-                } else {
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                }
-            } else {
-                if (deltaY > 40 || velocity > 60) {
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                } else {
-                    targetHeight =
+</html>
