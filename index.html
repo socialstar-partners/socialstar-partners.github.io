@@ -67,6 +67,10 @@
             font-size: 16px;
         }
 
+        .coins-button.insufficient {
+            background: #F85149;
+        }
+
         .coin-icon {
             width: 20px;
             height: 20px;
@@ -1000,6 +1004,14 @@
 
             // Update coin balance
             document.getElementById('coinBalance').textContent = userCoins;
+            
+            // Update balance button background based on insufficient funds
+            const coinsButton = document.querySelector('.coins-button');
+            if (entryCost > 0 && userCoins < entryCost) {
+                coinsButton.classList.add('insufficient');
+            } else {
+                coinsButton.classList.remove('insufficient');
+            }
 
             // Update entry button
             const entryButton = document.getElementById('entryButton');
