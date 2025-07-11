@@ -226,7 +226,11 @@
         .pencil-icon {
             width: 15px;
             height: 15px;
-            opacity: 0.8;
+            margin-right: 4px;
+            color: white;
+            font-size: 20px;
+            transform: rotate(-45deg);
+            display: inline-block;
         }
 
         /* Payout Section */
@@ -575,6 +579,7 @@
                     <button class="coins-button" onclick="showGetCoins()">
                         <div class="coin-icon">C</div>
                         <span id="coinBalance">250</span>
+                        <span class="plus-icon">+</span>
                     </button>
                 </div>
             </div>
@@ -598,7 +603,6 @@
                         <button class="entry-button" id="entryButton" onclick="showStakeEditor()">
                             <div class="coin-icon">C</div>
                             <span id="entryAmount">Set Amount</span>
-                            <span class="pencil-icon">✏️</span>
                         </button>
                     </div>
 
@@ -903,6 +907,7 @@
         // Close stake editor
         function closeStakeEditor() {
             document.getElementById('stakeModal').classList.remove('active');
+            updateUI(); // Update UI with current amount when closing
         }
 
         // Save stake amount
