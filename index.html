@@ -540,10 +540,6 @@
         }
 
         @media (max-width: 640px) {
-            .predictions-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .modal {
                 width: 95%;
                 margin: 20px;
@@ -556,13 +552,12 @@
         <div id="mainView">
             <!-- Header -->
             <div class="header">
-                <button class="back-button">←</button>
+                <div style="width: 27px;"></div>
                 <div class="balance-section">
                     <span class="balance-label">Balance</span>
                     <button class="coins-button" onclick="showGetCoins()">
                         <div class="coin-icon">C</div>
                         <span id="coinBalance">250</span>
-                        <span class="plus-icon">+</span>
                     </button>
                 </div>
             </div>
