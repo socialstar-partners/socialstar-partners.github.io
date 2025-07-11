@@ -367,13 +367,14 @@
             font-size: 18px;
             font-weight: bold;
             color: white;
+            margin-top: 3px;
         }
 
         .close-button {
             background: none;
             border: none;
             color: white;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
         }
 
@@ -512,37 +513,47 @@
         /* Download App Screen */
         .download-screen {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 30px;
             background: #1A2245;
             border-radius: 14px;
             margin: 20px;
+            max-width: 500px;
+            margin: 40px auto;
         }
 
         .download-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: white;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .download-subtitle {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 32px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.4;
         }
 
         .download-button {
-            background: #4169E1;
+            background: linear-gradient(135deg, #4169E1, #6B73FF);
             border: none;
             border-radius: 12px;
-            padding: 16px 32px;
+            padding: 18px 40px;
             color: white;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             display: inline-block;
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(65, 105, 225, 0.4);
         }
 
         .reset-button {
@@ -550,10 +561,16 @@
             border: none;
             border-radius: 8px;
             padding: 12px 24px;
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
             font-size: 16px;
             cursor: pointer;
             margin-left: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .reset-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
         }
 
         .hidden {
@@ -603,6 +620,7 @@
                         <button class="entry-button" id="entryButton" onclick="showStakeEditor()">
                             <div class="coin-icon">C</div>
                             <span id="entryAmount">Set Amount</span>
+                            <span class="plus-icon">+</span>
                         </button>
                     </div>
 
@@ -644,10 +662,10 @@
         <!-- Download App Screen -->
         <div id="downloadScreen" class="hidden">
             <div class="download-screen">
-                <div class="download-title">🎉 Demo Complete!</div>
-                <div class="download-subtitle">Ready to start making real predictions with your friends?</div>
-                <a href="#" class="download-button">Download App</a>
-                <button class="reset-button" onclick="resetDemo()">Try Again</button>
+                <div class="download-title">🎉 Nice Work!</div>
+                <div class="download-subtitle">You just made your first parlay prediction! Ready to compete with your real friends and win actual prizes?</div>
+                <a href="#" class="download-button">Get Started</a>
+                <button class="reset-button" onclick="resetDemo()">Try Demo Again</button>
             </div>
         </div>
     </div>
