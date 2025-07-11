@@ -763,11 +763,11 @@
         // Competition Pricing Calculator
         class CompetitionPricingCalculator {
             getHouseEdge() {
-                return 0.30; // 30% house edge
+                return 0.30;
             }
             
             getAssumedAccuracyRate() {
-                return 0.50; // Assume 50% prediction accuracy per friend
+                return 0.50;
             }
             
             getParlayMultiplier(numberOfPredictions) {
@@ -797,6 +797,7 @@
 
         // Initialize the app
         function init() {
+            console.log('App starting...');
             renderPredictionCards();
             updateUI();
         }
@@ -806,31 +807,30 @@
             const grid = document.getElementById('predictionsGrid');
             grid.innerHTML = '';
             
-            friends.forEach(friend => {
+            friends.forEach(function(friend) {
                 const isSelected = selectedPredictions[friend.id] !== undefined;
                 const selectedRating = selectedPredictions[friend.id];
                 
                 const card = document.createElement('div');
-                card.className = `prediction-card ${isSelected ? 'selected' : ''}`;
-                card.onclick = () => selectFriend(friend.id);
+                card.className = 'prediction-card' + (isSelected ? ' selected' : '');
+                card.setAttribute('onclick', 'selectFriend("' + friend.id + '")');
                 
                 let starsHtml = '';
                 if (selectedRating) {
                     for (let i = 1; i <= 5; i++) {
-                        starsHtml += `<span class="star ${i <= selectedRating ? 'filled' : ''}">★</span>`;
+                        starsHtml += '<span class="star' + (i <= selectedRating ? ' filled' : '') + '">★</span>';
                     }
-                    starsHtml = `<div class="stars">${starsHtml}</div>`;
+                    starsHtml = '<div class="stars">' + starsHtml + '</div>';
                 } else {
                     starsHtml = '<div class="tap-text">Tap to predict</div>';
                 }
                 
-                card.innerHTML = `
-                    <div class="profile-picture" style="background: linear-gradient(135deg, ${friend.color}, #764ba2);">
-                        ${friend.avatar}
-                    </div>
-                    <div class="username">${friend.username}</div>
-                    ${starsHtml}
-                `;
+                card.innerHTML = 
+                    '<div class="profile-picture" style="background: linear-gradient(135deg, ' + friend.color + ', #764ba2);">' +
+                        friend.avatar +
+                    '</div>' +
+                    '<div class="username">' + friend.username + '</div>' +
+                    starsHtml;
                 
                 grid.appendChild(card);
             });
@@ -839,12 +839,10 @@
         // Select a friend for prediction
         function selectFriend(friendId) {
             if (selectedPredictions[friendId]) {
-                // Remove prediction
                 delete selectedPredictions[friendId];
                 updateUI();
                 renderPredictionCards();
             } else {
-                // Show prediction selector
                 selectedMemberId = friendId;
                 showPredictionSelector();
             }
@@ -852,7 +850,7 @@
 
         // Show prediction selector modal
         function showPredictionSelector() {
-            const friend = friends.find(f => f.id === selectedMemberId);
+            const friend = friends.find(function(f) { return f.id === selectedMemberId; });
             if (!friend) return;
             
             const modal = document.getElementById('predictionModal');
@@ -860,8 +858,8 @@
             const question = document.getElementById('predictionQuestion');
             
             avatar.textContent = friend.avatar;
-            avatar.style.background = `linear-gradient(135deg, ${friend.color}, #764ba2)`;
-            question.textContent = `What will ${friend.username} rate your photo?`;
+            avatar.style.background = 'linear-gradient(135deg, ' + friend.color + ', #764ba2)';
+            question.textContent = 'What will ' + friend.username + ' rate your photo?';
             
             modal.classList.add('active');
         }
@@ -874,7 +872,7 @@
         // Select a rating
         function selectRating(rating) {
             selectedPredictions[selectedMemberId] = rating;
-            setTimeout(() => {
+            setTimeout(function() {
                 closePredictionSelector();
                 updateUI();
                 renderPredictionCards();
@@ -987,7 +985,7 @@
             }
 
             // Update multiplier
-            document.getElementById('multiplierDisplay').textContent = `${multiplier.toFixed(1)}x`;
+            document.getElementById('multiplierDisplay').textContent = multiplier.toFixed(1) + 'x';
 
             // Update estimated prize
             document.getElementById('prizeDisplay').textContent = estimatedPayout.toString();
@@ -997,7 +995,7 @@
             const profitDisplay = document.getElementById('profitDisplay');
             if (profit > 0) {
                 profitRow.style.display = 'flex';
-                profitDisplay.textContent = `+${profit}`;
+                profitDisplay.textContent = '+' + profit;
             } else {
                 profitRow.style.display = 'none';
             }
@@ -1024,7 +1022,7 @@
             
             if (entryCost > 0 && userCoins < entryCost) {
                 const needed = entryCost - userCoins;
-                insufficientText.textContent = `Need ${needed} more coins`;
+                insufficientText.textContent = 'Need ' + needed + ' more coins';
                 insufficientCoins.style.display = 'flex';
             } else {
                 insufficientCoins.style.display = 'none';
@@ -1037,11 +1035,9 @@
             const predictionsCount = Object.keys(selectedPredictions).length;
             
             if (userCoins >= entryCost && predictionsCount > 0 && entryCost > 0) {
-                // Deduct coins
                 userCoins -= entryCost;
                 
-                // Show success and transition to download screen
-                setTimeout(() => {
+                setTimeout(function() {
                     document.getElementById('mainView').classList.add('hidden');
                     document.getElementById('downloadScreen').classList.remove('hidden');
                 }, 500);
@@ -1067,18 +1063,21 @@
             updateUI();
         }
 
-        // Add modal click outside to close
-        document.getElementById('stakeModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeStakeEditor();
-            }
-        });
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
 
-        document.getElementById('predictionModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePredictionSelector();
-            }
-        });
+        // Add modal click handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('stakeModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeStakeEditor();
+                }
+            });
 
-        // Initialize the app when page loads
-        window.addEventListener('load', init);
+            document.getElementById('predictionModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closePredictionSelector();
+                }
+            });
+        });
+    </script>
