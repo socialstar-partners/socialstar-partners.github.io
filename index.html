@@ -557,20 +557,19 @@
         }
 
         .reset-button {
-            background: rgba(255, 255, 255, 0.1);
+            background: none;
             border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            color: rgba(255, 255, 255, 0.8);
+            color: white;
             font-size: 16px;
             cursor: pointer;
-            margin-left: 16px;
-            transition: all 0.2s ease;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .reset-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .hidden {
@@ -620,7 +619,6 @@
                         <button class="entry-button" id="entryButton" onclick="showStakeEditor()">
                             <div class="coin-icon">C</div>
                             <span id="entryAmount">Set Amount</span>
-                            <span class="plus-icon">+</span>
                         </button>
                     </div>
 
@@ -1072,10 +1070,8 @@
             if (userCoins >= entryCost && predictionsCount > 0 && entryCost > 0) {
                 userCoins -= entryCost;
                 
-                setTimeout(function() {
-                    document.getElementById('mainView').classList.add('hidden');
-                    document.getElementById('downloadScreen').classList.remove('hidden');
-                }, 500);
+                document.getElementById('mainView').classList.add('hidden');
+                document.getElementById('downloadScreen').classList.remove('hidden');
             }
         }
 
