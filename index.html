@@ -141,12 +141,22 @@
             height: 40px;
             border-radius: 50%;
             margin: 0 auto 12px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             color: white;
+            overflow: hidden;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .username {
@@ -790,10 +800,10 @@
         
         // Demo friends data
         const friends = [
-            { id: 'friend1', username: 'Sarah', avatar: 'S', color: '#667eea' },
-            { id: 'friend2', username: 'Mike', avatar: 'M', color: '#764ba2' },
-            { id: 'friend3', username: 'Emma', avatar: 'E', color: '#f093fb' },
-            { id: 'friend4', username: 'Jake', avatar: 'J', color: '#f5576c' }
+            { id: 'friend1', username: 'Zoe', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b056c5c?w=150&h=150&fit=crop&crop=face', color: '#667eea' },
+            { id: 'friend2', username: 'Madison', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', color: '#764ba2' },
+            { id: 'friend3', username: 'Chloe', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face', color: '#f093fb' },
+            { id: 'friend4', username: 'Olivia', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', color: '#f5576c' }
         ];
 
         // Competition Pricing Calculator
@@ -862,8 +872,8 @@
                 }
                 
                 card.innerHTML = 
-                    '<div class="profile-picture" style="background: linear-gradient(135deg, ' + friend.color + ', #764ba2);">' +
-                        friend.avatar +
+                    '<div class="profile-picture">' +
+                        '<img src="' + friend.avatar + '" alt="' + friend.username + '">' +
                     '</div>' +
                     '<div class="username">' + friend.username + '</div>' +
                     starsHtml;
@@ -893,8 +903,8 @@
             const avatar = document.getElementById('selectedMemberAvatar');
             const question = document.getElementById('predictionQuestion');
             
-            avatar.textContent = friend.avatar;
-            avatar.style.background = 'linear-gradient(135deg, ' + friend.color + ', #764ba2)';
+            avatar.innerHTML = '<img src="' + friend.avatar + '" alt="' + friend.username + '">';
+            avatar.style.background = '';
             question.textContent = 'What will ' + friend.username + ' rate your photo?';
             
             modal.classList.add('active');
