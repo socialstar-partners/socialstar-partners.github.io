@@ -96,7 +96,7 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             display: inline-block;
             position: relative;
             z-index: 1;
@@ -113,6 +113,41 @@
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.02); }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            flex: 1;
+            margin: 0 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
         }
 
         .unlock-section {
@@ -176,41 +211,6 @@
             border-color: #667eea;
             background: linear-gradient(135deg, #f8f9ff, #fff);
             display: flex;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 12px;
-            flex: 1;
-            margin: 0 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #667eea;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 5px;
         }
 
         .loading {
@@ -408,6 +408,21 @@
             <span class="badge-text">🎓 Now at Tulane University!</span>
         </div>
         
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number" id="students-joined">1,247</span>
+                <div class="stat-label">Students Joined</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="online-now">89</span>
+                <div class="stat-label">Online Now</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="joined-today">156</span>
+                <div class="stat-label">Joined Today</div>
+            </div>
+        </div>
+        
         <div class="unlock-section">
             <button class="unlock-btn" onclick="unlockCode()">
                 <span id="btn-text">Get My Access Code</span>
@@ -432,21 +447,6 @@
             </div>
             <div class="code-reminder">
                 <strong>Don't forget:</strong> You'll need your access code <strong id="user-code">XXXX-XXXX</strong> to complete registration in the app!
-            </div>
-        </div>
-        
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-number" id="students-joined">1,247</span>
-                <div class="stat-label">Students Joined</div>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" id="online-now">89</span>
-                <div class="stat-label">Online Now</div>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" id="joined-today">156</span>
-                <div class="stat-label">Joined Today</div>
             </div>
         </div>
     </div>
@@ -522,7 +522,9 @@
                     cooldownActive = false;
                     cooldownEl.classList.remove('show');
                     btn.disabled = false;
-                    document.getElementById('btn-text').textContent = 'Get Another Code';
+                    // Hide the button and cooldown after first use
+                    btn.style.display = 'none';
+                    cooldownEl.style.display = 'none';
                 }
             }, 1000);
         }
@@ -572,8 +574,12 @@
             // Update stats
             updateStats();
 
-            // Reset button and start cooldown
-            btnText.textContent = 'Get Another Code';
+            // Hide button and cooldown immediately after code generation
+            btn.style.display = 'none';
+            document.getElementById('cooldown').style.display = 'none';
+
+            // Reset button state
+            btnText.textContent = 'Get My Access Code';
             btn.disabled = false;
             isGenerating = false;
 
@@ -582,9 +588,6 @@
             setTimeout(() => {
                 document.querySelector('.container').classList.remove('success-animation');
             }, 600);
-
-            // Start cooldown
-            startCooldown();
         }
 
         // Handle download button clicks
