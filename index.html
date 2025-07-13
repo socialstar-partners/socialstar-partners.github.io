@@ -564,12 +564,9 @@
 
         // Handle download button clicks
         function downloadApp(platform) {
-            // You can replace this with actual App Store link
-            const appStoreLink = 'https://apps.apple.com/app/socialstar'; // Replace with actual App Store link
-            
-            // For demo purposes, we'll just show an alert
-            // In production, you'd use: window.open(appStoreLink, '_blank');
-            alert(`Opening App Store to download SocialStar!\n\nRemember to use your access code: ${document.getElementById('user-code').textContent}`);
+            // Open the actual App Store link
+            const appStoreLink = 'https://apps.apple.com/gb/app/socialstar-app/id6473705189';
+            window.open(appStoreLink, '_blank');
         }
 
         // Random stat updates to simulate real-time activity
