@@ -574,9 +574,10 @@
             // Update stats
             updateStats();
 
-            // Hide button and cooldown immediately after code generation
+            // Hide button, cooldown, and social proof immediately after code generation
             btn.style.display = 'none';
             document.getElementById('cooldown').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
 
             // Reset button state
             btnText.textContent = 'Get My Access Code';
