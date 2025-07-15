@@ -70,7 +70,7 @@
         .hero-title {
             font-size: 36px;
             font-weight: 800;
-            margin-bottom: 16px;
+            margin-bottom: 48px;
             line-height: 1.1;
             letter-spacing: -0.02em;
             color: white;
@@ -128,7 +128,7 @@
             color: white;
             padding: 20px 32px;
             border: none;
-            border-radius: 16px;
+            border-radius: 200px;
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
@@ -260,23 +260,6 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.02); }
         }
-
-        .coin-amount::after {
-            content: '';
-            position: absolute;
-            top: -4px;
-            right: -12px;
-            width: 8px;
-            height: 8px;
-            background: #4169E1;
-            border-radius: 50%;
-            animation: coin-sparkle 2s ease-in-out infinite;
-        }
-
-        @keyframes coin-sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
     </style>
 </head>
 <body>
@@ -290,7 +273,7 @@
         </div>
         
         <div class="content">
-            <div class="brand-mark">P</div>
+
             
             <div class="university-tag">
                 <span>🎓</span>
@@ -299,17 +282,15 @@
             
             <h1 class="hero-title">
                 Get <span class="coin-amount">150 Free Coins</span><br>
-                Welcome to the Game
+                Welcome Bonus
             </h1>
             
-            <p class="subtitle">
-                Share photos, predict friend ratings, and stake coins. Your exclusive Tulane welcome bonus is ready.
-            </p>
+
             
             <div class="features">
                 <div class="feature">
                     <span class="feature-icon">📸</span>
-                    <div class="feature-label">Share Photos</div>
+                    <div class="feature-label">Take Photos</div>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">🎯</span>
@@ -321,20 +302,16 @@
                 </div>
                 <div class="feature">
                     <span class="feature-icon">🏆</span>
-                    <div class="feature-label">Win Rewards</div>
+                    <div class="feature-label">Win Coins</div>
                 </div>
             </div>
             
             <button class="download-button" onclick="downloadApp()">
                 <div class="button-content">
-                    <span>📱</span>
-                    <span>Download App</span>
+                    <span>Claim Your 150 Coins</span>
                 </div>
             </button>
-            
-            <div class="download-note">
-                Available on iOS and Android
-            </div>
+
         </div>
     </div>
 
