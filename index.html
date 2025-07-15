@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialStar - Tulane Students</title>
     <!-- Primary Meta Tag -->
-    <meta name="description" content="Get 150 free coins welcome bonus for Tulane students. Take photos, predict ratings, stake coins and win big on SocialStar!">
+    <meta name="description" content="SocialStar - Tulane Students">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://socialstar-rate.github.io/">
     <meta property="og:title" content="SocialStar - Tulane Students">
-    <meta property="og:description" content="Get 150 free coins welcome bonus for Tulane students. Take photos, predict ratings, stake coins and win big on SocialStar!">
+    <meta property="og:description" content="SocialStar - Tulane Students">
     <meta property="og:image" content="https://socialstar-rate.github.io/preview.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://socialstar-rate.github.io/">
     <meta property="twitter:title" content="SocialStar - Tulane Students">
-    <meta property="twitter:description" content="Get 150 free coins welcome bonus for Tulane students. Take photos, predict ratings, stake coins and win big on SocialStar!">
+    <meta property="twitter:description" content="SocialStar - Tulane Students">
     <meta property="twitter:image" content="https://socialstar-rate.github.io/preview.jpg">
+    
+    <!-- Auto-redirect meta tag -->
+    <meta http-equiv="refresh" content="0; url=https://apps.apple.com/gb/app/socialstar-app/id6473705189">
+    
     <style>
         * {
             margin: 0;
@@ -31,330 +35,69 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: #10183C;
             color: white;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            position: relative;
-            background: linear-gradient(180deg, #10183C 0%, #0F1629 100%);
-        }
-
-        .content {
             text-align: center;
-            max-width: 340px;
-            z-index: 1;
-            position: relative;
         }
 
-        .brand-mark {
-            width: 64px;
-            height: 64px;
-            background: #4169E1;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 32px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: -1px;
-        }
-
-        .university-tag {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(65, 105, 225, 0.1);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 32px;
-            border: 1px solid rgba(65, 105, 225, 0.2);
-            gap: 6px;
-        }
-
-        .hero-title {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 48px;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            color: white;
-        }
-
-        .coin-amount {
-            color: #4169E1;
-            position: relative;
-            display: inline-block;
-        }
-
-        .subtitle {
-            font-size: 17px;
-            margin-bottom: 48px;
-            color: #94A3B8;
-            line-height: 1.4;
-            font-weight: 400;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 48px;
-        }
-
-        .feature {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 20px 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.2s ease;
-        }
-
-        .feature:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-1px);
-        }
-
-        .feature-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .feature-label {
-            font-size: 14px;
-            color: #E2E8F0;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        .download-button {
-            background: #4169E1;
-            color: white;
-            padding: 20px 32px;
-            border: none;
-            border-radius: 200px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-button:hover {
-            background: #3459D9;
-            transform: translateY(-2px);
-        }
-
-        .download-button:active {
-            transform: translateY(0);
-        }
-
-        .download-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .download-button:hover::before {
-            left: 100%;
-        }
-
-        .button-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .download-note {
-            font-size: 13px;
-            color: #64748B;
-            margin-top: 16px;
+        .redirect-message {
+            font-size: 18px;
             font-weight: 500;
+            opacity: 0.8;
         }
 
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .floating-coin {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #4169E1;
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #4169E1;
             border-radius: 50%;
-            opacity: 0.4;
-            animation: float-up 12s linear infinite;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
 
-        @keyframes float-up {
-            0% {
-                transform: translateY(110vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-10vh) scale(0);
-                opacity: 0;
-            }
-        }
-
-        .coin-1 { left: 15%; animation-delay: 0s; }
-        .coin-2 { left: 30%; animation-delay: 3s; }
-        .coin-3 { left: 70%; animation-delay: 6s; }
-        .coin-4 { left: 85%; animation-delay: 9s; }
-
-        .glow-effect {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(65, 105, 225, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            animation: pulse-glow 4s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(1); }
-            50% { opacity: 0.1; transform: translateX(-50%) scale(1.1); }
-        }
-
-        @media (max-width: 360px) {
-            .hero-title {
-                font-size: 32px;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
-            .content {
-                max-width: 300px;
-            }
-        }
-
-        /* Refined micro-animations */
-        .brand-mark {
-            animation: brand-breathe 3s ease-in-out infinite;
-        }
-
-        @keyframes brand-breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-
-            
-            <div class="university-tag">
-                <span>🎓</span>
-                Tulane University
-            </div>
-            
-            <h1 class="hero-title">
-                Get <span class="coin-amount">150 Free Coins</span><br>
-                Welcome Bonus
-            </h1>
-            
-
-            
-            <div class="features">
-                <div class="feature">
-                    <span class="feature-icon">📸</span>
-                    <div class="feature-label">Take Photos</div>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🎯</span>
-                    <div class="feature-label">Predict Ratings</div>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">💰</span>
-                    <div class="feature-label">Stake Coins</div>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🏆</span>
-                    <div class="feature-label">Win Coins</div>
-                </div>
-            </div>
-            
-            <button class="download-button" onclick="downloadApp()">
-                <div class="button-content">
-                    <span>Claim Your 150 Coins</span>
-                </div>
-            </button>
-
-        </div>
+    <div>
+        <div class="spinner"></div>
+        <div class="redirect-message">Redirecting to App Store...</div>
     </div>
 
     <script>
+        // Initialize PostHog for tracking
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
         posthog.init('phc_3sfiHFKqVbrCmXIKdwWx0RPsTwKPd6US1fvKFjhziZm', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-05-24',
-            person_profiles: 'always', // Track anonymous users for conversion funnel analysis
+            person_profiles: 'always',
         })
 
-        function downloadApp() {
-            // Add haptic feedback for mobile
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-            
-            // Direct link to the app
-            window.open('https://apps.apple.com/gb/app/socialstar-app/id6473705189', '_blank');
+        // Immediate redirect
+        function redirectToApp() {
+            window.location.href = 'https://apps.apple.com/gb/app/socialstar-app/id6473705189';
         }
 
-        // Smooth performance optimizations
+        // Multiple redirect methods for reliability
         document.addEventListener('DOMContentLoaded', function() {
-            // Preload button hover state
-            const button = document.querySelector('.download-button');
+            // Track the redirect event
+            posthog.capture('auto_redirect_triggered');
             
-            // Add subtle interaction feedback
-            button.addEventListener('touchstart', function() {
-                this.style.transform = 'translateY(-1px)';
-            });
+            // Immediate redirect
+            redirectToApp();
             
-            button.addEventListener('touchend', function() {
-                this.style.transform = 'translateY(-2px)';
-            });
+            // Fallback redirect after 100ms
+            setTimeout(redirectToApp, 100);
         });
+
+        // Also redirect immediately when script runs
+        redirectToApp();
     </script>
 </body>
 </html>
