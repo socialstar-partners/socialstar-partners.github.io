@@ -2,24 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SocialStar - Try Demo</title>
-    <!-- Primary Meta Tag -->
-    <meta name="description" content="Social Competition with Friends - Download SocialStar app">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://socialstar-rate.github.io/">
-    <meta property="og:title" content="SocialStar - Try Demo">
-    <meta property="og:description" content="Social Competition with Friends">
-    <meta property="og:image" content="https://socialstar-rate.github.io/preview.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://socialstar-rate.github.io/">
-    <meta property="twitter:title" content="SocialStar - Try Demo">
-    <meta property="twitter:description" content="Social Competition with Friends">
-    <meta property="twitter:image" content="https://socialstar-rate.github.io/preview.jpg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get 150 Free Coins - Tulane Students</title>
     <style>
         * {
             margin: 0;
@@ -28,1140 +12,365 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: #10183C;
             color: white;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        /* Header */
-        .header {
-            background: #1A2245;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .demo-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .balance-section {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .balance-label {
-            font-size: 15px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .coins-button {
-            background: #2A3255;
-            border: none;
-            border-radius: 100px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .coins-button.insufficient {
-            background: #F85149;
-        }
-
-        .coin-icon {
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 12px;
-            color: #8B4513;
-            font-weight: bold;
+            align-items: center;
+            padding: 24px;
+            position: relative;
+            background: linear-gradient(180deg, #10183C 0%, #0F1629 100%);
         }
 
-        .plus-icon {
-            font-size: 16px;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .parlay-container {
-            background: #1A2245;
-            border-radius: 14px;
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 16px;
-        }
-
-        /* Predictions Grid */
-        .predictions-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .prediction-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 16px 12px;
+        .content {
             text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
+            max-width: 340px;
+            z-index: 1;
+            position: relative;
         }
 
-        .prediction-card.selected {
-            background: rgba(65, 105, 225, 0.2);
-            border-color: #4169E1;
-        }
-
-        .profile-picture {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin: 0 auto 12px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            overflow: hidden;
-        }
-
-        .profile-picture img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .username {
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 12px;
-        }
-
-        .stars {
-            display: flex;
-            justify-content: center;
-            gap: 2px;
-            margin-bottom: 8px;
-        }
-
-        .star {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .star.filled {
-            color: #FFD700;
-        }
-
-        .tap-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Divider */
-        .divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 20px 0;
-        }
-
-        /* Entry Section */
-        .entry-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .entry-label {
-            font-size: 15px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .entry-button {
+        .brand-mark {
+            width: 64px;
+            height: 64px;
             background: #4169E1;
-            border: none;
-            border-radius: 100px;
-            padding: 8px 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -1px;
+        }
+
+        .university-tag {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(65, 105, 225, 0.1);
+            color: #4169E1;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            border: 1px solid rgba(65, 105, 225, 0.2);
             gap: 6px;
+        }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
             color: white;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.2s ease;
         }
 
-        .entry-button.disabled {
-            background: rgba(255, 255, 255, 0.15);
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .entry-button.no-amount {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .entry-button.no-amount.has-predictions {
-            background: #4169E1;
-        }
-
-        .pencil-icon {
-            width: 15px;
-            height: 15px;
-            margin-right: 4px;
-            color: white;
-            font-size: 20px;
-            transform: rotate(-45deg);
+        .coin-amount {
+            color: #4169E1;
+            position: relative;
             display: inline-block;
         }
 
-        /* Payout Section */
-        .payout-section {
-            space-y: 12px;
-        }
-
-        .payout-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .payout-label {
-            font-size: 15px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .payout-value {
-            font-size: 15px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .payout-value.large {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .profit-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: #00FF00;
-        }
-
-        /* Submit Button */
-        .submit-button {
-            background: #4169E1;
-            border: none;
-            border-radius: 100px;
-            padding: 15px;
-            width: 100%;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.2s ease;
-        }
-
-        .submit-button:disabled {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.3);
-            cursor: not-allowed;
-        }
-
-        /* Insufficient Coins Warning */
-        .insufficient-coins {
-            background: rgba(248, 81, 73, 0.1);
-            border-radius: 8px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 16px;
-        }
-
-        .insufficient-text {
-            font-size: 15px;
-            font-weight: 600;
-            color: #F85149;
-        }
-
-        .get-coins-button {
-            background: #4169E1;
-            border: none;
-            border-radius: 100px;
-            padding: 8px 16px;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background: #1A2245;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 400px;
-            max-height: 90vh;
-            overflow: hidden;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            background: #2A3255;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            margin-top: 3px;
-        }
-
-        .close-button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        /* Stake Editor */
-        .amount-display {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .quick-amounts {
-            display: flex;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .quick-amount {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            padding: 12px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .quick-amount:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .number-pad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            height: 240px;
-        }
-
-        .number-button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 28px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .number-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .number-button:active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Prediction Selector */
-        .prediction-selector-content {
-            padding: 20px;
-        }
-
-        .member-info {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .member-info .profile-picture {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 12px;
-        }
-
-        .prediction-question {
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 24px;
-        }
-
-        .rating-options {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .rating-option {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .rating-option .stars {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-            margin-top: 7px;
-        }
-
-        .rating-option .star {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.3);
-            line-height: 1;
-        }
-
-        .rating-option .star.filled {
-            color: #FFD700;
-        }
-
-        .rating-option:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .rating-option.selected {
-            background: rgba(65, 105, 225, 0.2);
-            border-color: #4169E1;
-        }
-
-        .rating-text {
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-        }
-
-        /* Download App Screen */
-        .download-screen {
-            text-align: center;
-            padding: 60px 30px;
-            background: #1A2245;
-            border-radius: 14px;
-            margin: 20px;
-            max-width: 500px;
-            margin: 40px auto;
-        }
-
-        .download-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .download-subtitle {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 40px;
+        .subtitle {
+            font-size: 17px;
+            margin-bottom: 48px;
+            color: #94A3B8;
             line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 20px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        .feature:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .feature-label {
+            font-size: 14px;
+            color: #E2E8F0;
+            font-weight: 600;
+            line-height: 1.3;
         }
 
         .download-button {
-            background: linear-gradient(135deg, #4169E1, #6B73FF);
-            border: none;
-            border-radius: 200px;
-            padding: 18px 40px;
+            background: #4169E1;
             color: white;
-            font-size: 18px;
-            font-weight: bold;
+            padding: 20px 32px;
+            border: none;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
-            margin-bottom: 20px;
-            display: inline-block;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
         .download-button:hover {
+            background: #3459D9;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(65, 105, 225, 0.4);
         }
 
-        .reset-button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 20px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+        .download-button:active {
+            transform: translateY(0);
         }
 
-        .reset-button:hover {
-            color: rgba(255, 255, 255, 0.8);
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
         }
 
-        .hidden {
-            display: none;
+        .download-button:hover::before {
+            left: 100%;
         }
 
-        @media (max-width: 640px) {
-            .modal {
-                width: 95%;
-                margin: 20px;
+        .button-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-note {
+            font-size: 13px;
+            color: #64748B;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-coin {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #4169E1;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float-up 12s linear infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(110vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-10vh) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .coin-1 { left: 15%; animation-delay: 0s; }
+        .coin-2 { left: 30%; animation-delay: 3s; }
+        .coin-3 { left: 70%; animation-delay: 6s; }
+        .coin-4 { left: 85%; animation-delay: 9s; }
+
+        .glow-effect {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(65, 105, 225, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: pulse-glow 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.1; transform: translateX(-50%) scale(1.1); }
+        }
+
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 32px;
             }
             
-            .header {
-                padding: 15px 20px;
+            .features {
+                grid-template-columns: 1fr;
             }
             
-            .demo-title {
-                font-size: 16px;
+            .content {
+                max-width: 300px;
             }
+        }
+
+        /* Refined micro-animations */
+        .brand-mark {
+            animation: brand-breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes brand-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .coin-amount::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: -12px;
+            width: 8px;
+            height: 8px;
+            background: #4169E1;
+            border-radius: 50%;
+            animation: coin-sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes coin-sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
         }
     </style>
-    <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_3sfiHFKqVbrCmXIKdwWx0RPsTwKPd6US1fvKFjhziZm', {
-            api_host: 'https://eu.i.posthog.com',
-            defaults: '2025-05-24',
-            person_profiles: 'always', // Track anonymous users for conversion funnel analysis
-        })
-    </script>
 </head>
 <body>
     <div class="container">
-        <div id="mainView">
-            <!-- Header -->
-            <div class="header">
-                <div class="demo-title">Demo</div>
-                <div class="balance-section">
-                    <span class="balance-label">Balance</span>
-                    <button class="coins-button" onclick="showGetCoins()">
-                        <div class="coin-icon">C</div>
-                        <span id="coinBalance">250</span>
-                        <span id="coinBalance"> </span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="main-content">
-                <div class="parlay-container">
-                    <!-- Predictions Section -->
-                    <div>
-                        <div class="section-title">Make Your Predictions</div>
-                        <div class="predictions-grid" id="predictionsGrid">
-                            <!-- Will be populated by JavaScript -->
-                        </div>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- Entry Section -->
-                    <div class="entry-section">
-                        <span class="entry-label">Entry</span>
-                        <button class="entry-button" id="entryButton" onclick="showStakeEditor()">
-                            <div class="coin-icon">C</div>
-                            <span id="entryAmount">Set Amount</span>
-                        </button>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- Payout Section -->
-                    <div class="payout-section">
-                        <div class="payout-row">
-                            <span class="payout-label">Multiplier</span>
-                            <span class="payout-value" id="multiplierDisplay">0.0x</span>
-                        </div>
-                        <div class="payout-row">
-                            <span class="payout-label">Est. Prize</span>
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <span class="payout-value large" id="prizeDisplay">0</span>
-                                <div class="coin-icon">C</div>
-                            </div>
-                        </div>
-                        <div class="payout-row" id="profitRow" style="display: none;">
-                            <span class="payout-label">Profit</span>
-                            <span class="profit-value" id="profitDisplay">+0</span>
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button class="submit-button" id="submitButton" onclick="placeBet()" disabled>
-                        Make Predictions to Continue
-                    </button>
-
-                    <!-- Insufficient Coins Warning -->
-                    <div class="insufficient-coins" id="insufficientCoins" style="display: none;">
-                        <span class="insufficient-text" id="insufficientText">Need 0 more coins</span>
-                        <button class="get-coins-button" onclick="showGetCoins()">Get Coins</button>
-                    </div>
-                </div>
-            </div>
+        <div class="floating-elements">
+            <div class="glow-effect"></div>
+            <div class="floating-coin coin-1"></div>
+            <div class="floating-coin coin-2"></div>
+            <div class="floating-coin coin-3"></div>
+            <div class="floating-coin coin-4"></div>
         </div>
-
-        <!-- Download App Screen -->
-        <div id="downloadScreen" class="hidden">
-            <div class="download-screen">
-                <div class="download-title">🎉 Nice Work!</div>
-                <div class="download-subtitle">You just made your first prediction! Ready to play with your real friends and win coins?</div>
-                <a href="https://apps.apple.com/gb/app/socialstar-app/id6473705189" class="download-button">Get Started</a>
-                <button class="reset-button" onclick="resetDemo()">Try Demo Again</button>
+        
+        <div class="content">
+            <div class="brand-mark">P</div>
+            
+            <div class="university-tag">
+                <span>🎓</span>
+                Tulane University
             </div>
-        </div>
-    </div>
-
-    <!-- Stake Editor Modal -->
-    <div class="modal-overlay" id="stakeModal">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="close-button" onclick="closeStakeEditor()">×</button>
-                <div class="modal-title">Set Entry Amount</div>
-                <button class="close-button" onclick="saveStakeAmount()" id="saveStakeButton" style="opacity: 0.5;">✓</button>
-            </div>
-            <div class="amount-display" id="stakeAmountDisplay">0</div>
-            <div class="quick-amounts">
-                <button class="quick-amount" onclick="setQuickAmount(5)">
-                    <div class="coin-icon">C</div>
-                    <span>+5</span>
-                </button>
-                <button class="quick-amount" onclick="setQuickAmount(20)">
-                    <div class="coin-icon">C</div>
-                    <span>+20</span>
-                </button>
-                <button class="quick-amount" onclick="setQuickAmount(50)">
-                    <div class="coin-icon">C</div>
-                    <span>+50</span>
-                </button>
-            </div>
-            <div class="number-pad">
-                <button class="number-button" onclick="appendNumber('1')">1</button>
-                <button class="number-button" onclick="appendNumber('2')">2</button>
-                <button class="number-button" onclick="appendNumber('3')">3</button>
-                <button class="number-button" onclick="appendNumber('4')">4</button>
-                <button class="number-button" onclick="appendNumber('5')">5</button>
-                <button class="number-button" onclick="appendNumber('6')">6</button>
-                <button class="number-button" onclick="appendNumber('7')">7</button>
-                <button class="number-button" onclick="appendNumber('8')">8</button>
-                <button class="number-button" onclick="appendNumber('9')">9</button>
-                <button class="number-button" onclick="clearAmount()">C</button>
-                <button class="number-button" onclick="appendNumber('0')">0</button>
-                <button class="number-button" onclick="deleteLastDigit()">⌫</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Prediction Selector Modal -->
-    <div class="modal-overlay" id="predictionModal">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="close-button" onclick="closePredictionSelector()">×</button>
-                <div class="modal-title">Predict Rating</div>
-                <div style="width: 30px;"></div>
-            </div>
-            <div class="prediction-selector-content">
-                <div class="member-info">
-                    <div class="profile-picture" id="selectedMemberAvatar"></div>
-                    <div class="prediction-question" id="predictionQuestion">What will this person rate your photo?</div>
+            
+            <h1 class="hero-title">
+                Get <span class="coin-amount">150 Free Coins</span><br>
+                Welcome to the Game
+            </h1>
+            
+            <p class="subtitle">
+                Share photos, predict friend ratings, and stake coins. Your exclusive Tulane welcome bonus is ready.
+            </p>
+            
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">📸</span>
+                    <div class="feature-label">Share Photos</div>
                 </div>
-                <div class="rating-options">
-                    <div class="rating-option" onclick="selectRating(5)">
-                        <div class="stars">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                        </div>
-                        <span class="rating-text">5 Stars</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(4)">
-                        <div class="stars">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star">★</span>
-                        </div>
-                        <span class="rating-text">4 Stars</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3)">
-                        <div class="stars">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                        </div>
-                        <span class="rating-text">3 Stars</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2)">
-                        <div class="stars">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                        </div>
-                        <span class="rating-text">2 Stars</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1)">
-                        <div class="stars">
-                            <span class="star filled">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                        </div>
-                        <span class="rating-text">1 Star</span>
-                    </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <div class="feature-label">Predict Ratings</div>
                 </div>
+                <div class="feature">
+                    <span class="feature-icon">💰</span>
+                    <div class="feature-label">Stake Coins</div>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🏆</span>
+                    <div class="feature-label">Win Rewards</div>
+                </div>
+            </div>
+            
+            <button class="download-button" onclick="downloadApp()">
+                <div class="button-content">
+                    <span>📱</span>
+                    <span>Download App</span>
+                </div>
+            </button>
+            
+            <div class="download-note">
+                Available on iOS and Android
             </div>
         </div>
     </div>
 
     <script>
-        // Global state
-        let userCoins = 250;
-        let customStakeAmount = '';
-        let selectedPredictions = {};
-        let selectedMemberId = '';
-        
-        // Demo friends data
-        const friends = [
-            { id: 'friend1', username: 'Zoe', avatar: 'https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2Fadffff9d5b2b81e935c6d0f601bc7cd1.jpg?alt=media&token=d95d5326-dc11-4d99-84f7-c9404ad48bc4', color: '#667eea' },
-            { id: 'friend2', username: 'Madison', avatar: 'https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F760021cb5694f81ebcc6755ab82458ed.jpg?alt=media&token=3cbeeb12-3493-4848-9e6b-d0a2481237d2', color: '#764ba2' },
-            { id: 'friend3', username: 'Chloe', avatar: 'https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F17b9d70ab76bd8e2daabb99b8e77ad31.jpg?alt=media&token=bd3ea9d3-210c-420f-bf5d-029771faaade', color: '#f093fb' },
-            { id: 'friend4', username: 'Olivia', avatar: 'https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F5b797f1008cdbd4489a372000d5f6954.jpg?alt=media&token=d792f429-a9be-4021-a3dd-124b4ca45d6c', color: '#f5576c' }
-        ];
-
-        // Competition Pricing Calculator
-        class CompetitionPricingCalculator {
-            getHouseEdge() {
-                return 0.30;
+        function downloadApp() {
+            // Add haptic feedback for mobile
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
             }
             
-            getAssumedAccuracyRate() {
-                return 0.50;
-            }
+            const userAgent = navigator.userAgent.toLowerCase();
             
-            getParlayMultiplier(numberOfPredictions) {
-                if (numberOfPredictions <= 0) return 1.0;
-                
-                const accuracyRate = this.getAssumedAccuracyRate();
-                const winProbability = Math.pow(accuracyRate, numberOfPredictions);
-                const fairMultiplier = 1.0 / winProbability;
-                
-                const houseEdge = this.getHouseEdge();
-                const calculatedMultiplier = fairMultiplier * (1.0 - houseEdge);
-                
-                return Math.min(calculatedMultiplier, 100.0);
-            }
-            
-            calculateParlayPayout(entryCost, predictions) {
-                if (Object.keys(predictions).length === 0) return 0;
-                
-                const multiplier = this.getParlayMultiplier(Object.keys(predictions).length);
-                const finalPayout = entryCost * multiplier;
-                
-                return Math.round(finalPayout);
-            }
-        }
-
-        const calculator = new CompetitionPricingCalculator();
-
-        // Initialize the app
-        function init() {
-            console.log('App starting...');
-            renderPredictionCards();
-            updateUI();
-        }
-
-        // Render prediction cards
-        function renderPredictionCards() {
-            const grid = document.getElementById('predictionsGrid');
-            grid.innerHTML = '';
-            
-            friends.forEach(function(friend) {
-                const isSelected = selectedPredictions[friend.id] !== undefined;
-                const selectedRating = selectedPredictions[friend.id];
-                
-                const card = document.createElement('div');
-                card.className = 'prediction-card' + (isSelected ? ' selected' : '');
-                card.setAttribute('onclick', 'selectFriend("' + friend.id + '")');
-                
-                let starsHtml = '';
-                if (selectedRating) {
-                    for (let i = 1; i <= 5; i++) {
-                        starsHtml += '<span class="star' + (i <= selectedRating ? ' filled' : '') + '">★</span>';
-                    }
-                    starsHtml = '<div class="stars">' + starsHtml + '</div>';
-                } else {
-                    starsHtml = '<div class="tap-text">Tap to predict</div>';
-                }
-                
-                card.innerHTML = 
-                    '<div class="profile-picture">' +
-                        '<img src="' + friend.avatar + '" alt="' + friend.username + '">' +
-                    '</div>' +
-                    '<div class="username">' + friend.username + '</div>' +
-                    starsHtml;
-                
-                grid.appendChild(card);
-            });
-        }
-
-        // Select a friend for prediction
-        function selectFriend(friendId) {
-            if (selectedPredictions[friendId]) {
-                delete selectedPredictions[friendId];
-                updateUI();
-                renderPredictionCards();
+            if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+                // Replace with your iOS App Store link
+                window.open('https://apps.apple.com/app/your-app', '_blank');
+            } else if (userAgent.includes('android')) {
+                // Replace with your Google Play Store link
+                window.open('https://play.google.com/store/apps/details?id=your.app', '_blank');
             } else {
-                selectedMemberId = friendId;
-                showPredictionSelector();
+                // Fallback for desktop users
+                alert('Visit the App Store or Google Play to download');
             }
         }
 
-        // Show prediction selector modal
-        function showPredictionSelector() {
-            const friend = friends.find(function(f) { return f.id === selectedMemberId; });
-            if (!friend) return;
-            
-            const modal = document.getElementById('predictionModal');
-            const avatar = document.getElementById('selectedMemberAvatar');
-            const question = document.getElementById('predictionQuestion');
-            
-            avatar.innerHTML = '<img src="' + friend.avatar + '" alt="' + friend.username + '">';
-            avatar.style.background = '';
-            question.textContent = 'What will ' + friend.username + ' rate your photo?';
-            
-            modal.classList.add('active');
-        }
-
-        // Close prediction selector
-        function closePredictionSelector() {
-            document.getElementById('predictionModal').classList.remove('active');
-        }
-
-        // Select a rating
-        function selectRating(rating) {
-            selectedPredictions[selectedMemberId] = rating;
-            setTimeout(function() {
-                closePredictionSelector();
-                updateUI();
-                renderPredictionCards();
-            }, 200);
-        }
-
-        // Show stake editor
-        function showStakeEditor() {
-            const modal = document.getElementById('stakeModal');
-            const display = document.getElementById('stakeAmountDisplay');
-            display.textContent = customStakeAmount || '0';
-            modal.classList.add('active');
-            updateSaveButton();
-        }
-
-        // Close stake editor
-        function closeStakeEditor() {
-            document.getElementById('stakeModal').classList.remove('active');
-            updateUI(); // Update UI with current amount when closing
-        }
-
-        // Save stake amount
-        function saveStakeAmount() {
-            if (parseInt(customStakeAmount) > 0) {
-                closeStakeEditor();
-                updateUI();
-            }
-        }
-
-        // Set quick amount
-        function setQuickAmount(amount) {
-            customStakeAmount = amount.toString();
-            document.getElementById('stakeAmountDisplay').textContent = customStakeAmount;
-            updateSaveButton();
-        }
-
-        // Number pad functions
-        function appendNumber(digit) {
-            if (customStakeAmount === '0') {
-                customStakeAmount = digit;
-            } else if (customStakeAmount.length < 8) {
-                customStakeAmount += digit;
-            }
-            document.getElementById('stakeAmountDisplay').textContent = customStakeAmount;
-            updateSaveButton();
-        }
-
-        function deleteLastDigit() {
-            if (customStakeAmount.length > 0) {
-                customStakeAmount = customStakeAmount.slice(0, -1);
-                document.getElementById('stakeAmountDisplay').textContent = customStakeAmount || '0';
-                updateSaveButton();
-            }
-        }
-
-        function clearAmount() {
-            customStakeAmount = '';
-            document.getElementById('stakeAmountDisplay').textContent = '0';
-            updateSaveButton();
-        }
-
-        // Update save button state
-        function updateSaveButton() {
-            const saveButton = document.getElementById('saveStakeButton');
-            const amount = parseInt(customStakeAmount);
-            saveButton.style.opacity = amount > 0 ? '1.0' : '0.5';
-        }
-
-        // Get computed values
-        function getEntryCost() {
-            const amount = parseInt(customStakeAmount);
-            return amount > 0 ? amount : 0;
-        }
-
-        function getEstimatedPayout() {
-            const entryCost = getEntryCost();
-            if (Object.keys(selectedPredictions).length === 0 || entryCost === 0) return 0;
-            return calculator.calculateParlayPayout(entryCost, selectedPredictions);
-        }
-
-        function getParlayMultiplier() {
-            if (Object.keys(selectedPredictions).length === 0) return 0;
-            return calculator.getParlayMultiplier(Object.keys(selectedPredictions).length);
-        }
-
-        // Update UI elements
-        function updateUI() {
-            const entryCost = getEntryCost();
-            const estimatedPayout = getEstimatedPayout();
-            const multiplier = getParlayMultiplier();
-            const predictionsCount = Object.keys(selectedPredictions).length;
-            const profit = estimatedPayout - entryCost;
-
-            // Update coin balance
-            document.getElementById('coinBalance').textContent = userCoins;
-            
-            // Update balance button background based on insufficient funds
-            const coinsButton = document.querySelector('.coins-button');
-            if (entryCost > 0 && userCoins < entryCost) {
-                coinsButton.classList.add('insufficient');
-            } else {
-                coinsButton.classList.remove('insufficient');
-            }
-
-            // Update entry button
-            const entryButton = document.getElementById('entryButton');
-            const entryAmount = document.getElementById('entryAmount');
-            
-            if (entryCost > 0) {
-                entryAmount.textContent = entryCost.toString();
-                entryButton.className = 'entry-button';
-            } else {
-                entryAmount.textContent = 'Set Amount';
-                if (predictionsCount > 0) {
-                    entryButton.className = 'entry-button no-amount has-predictions';
-                } else {
-                    entryButton.className = 'entry-button no-amount';
-                }
-            }
-
-            // Update multiplier
-            document.getElementById('multiplierDisplay').textContent = multiplier.toFixed(1) + 'x';
-
-            // Update estimated prize
-            document.getElementById('prizeDisplay').textContent = estimatedPayout.toString();
-
-            // Update profit
-            const profitRow = document.getElementById('profitRow');
-            const profitDisplay = document.getElementById('profitDisplay');
-            if (profit > 0) {
-                profitRow.style.display = 'flex';
-                profitDisplay.textContent = '+' + profit;
-            } else {
-                profitRow.style.display = 'none';
-            }
-
-            // Update submit button
-            const submitButton = document.getElementById('submitButton');
-            const canSubmit = userCoins >= entryCost && predictionsCount > 0 && entryCost > 0;
-            
-            let buttonText;
-            if (predictionsCount === 0) {
-                buttonText = 'Make Predictions to Continue';
-            } else if (entryCost === 0) {
-                buttonText = 'Set Entry Amount';
-            } else {
-                buttonText = 'Place Prediction';
-            }
-            
-            submitButton.textContent = buttonText;
-            submitButton.disabled = !canSubmit;
-
-            // Update insufficient coins warning
-            const insufficientCoins = document.getElementById('insufficientCoins');
-            const insufficientText = document.getElementById('insufficientText');
-            
-            if (entryCost > 0 && userCoins < entryCost) {
-                const needed = entryCost - userCoins;
-                insufficientText.textContent = 'Need ' + needed + ' more coins';
-                insufficientCoins.style.display = 'flex';
-            } else {
-                insufficientCoins.style.display = 'none';
-            }
-        }
-
-        // Place bet and show download screen
-        function placeBet() {
-            const entryCost = getEntryCost();
-            const predictionsCount = Object.keys(selectedPredictions).length;
-            
-            if (userCoins >= entryCost && predictionsCount > 0 && entryCost > 0) {
-                userCoins -= entryCost;
-                
-                document.getElementById('mainView').classList.add('hidden');
-                document.getElementById('downloadScreen').classList.remove('hidden');
-            }
-        }
-
-        // Show get coins message
-        function showGetCoins() {
-            alert('In the real app, you can purchase coins here! This is just a demo.');
-        }
-
-        // Reset demo
-        function resetDemo() {
-            userCoins = 250;
-            customStakeAmount = '';
-            selectedPredictions = {};
-            selectedMemberId = '';
-            
-            document.getElementById('mainView').classList.remove('hidden');
-            document.getElementById('downloadScreen').classList.add('hidden');
-            
-            renderPredictionCards();
-            updateUI();
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', init);
-
-        // Add modal click handlers
+        // Smooth performance optimizations
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('stakeModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeStakeEditor();
-                }
+            // Preload button hover state
+            const button = document.querySelector('.download-button');
+            
+            // Add subtle interaction feedback
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-1px)';
             });
-
-            document.getElementById('predictionModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closePredictionSelector();
-                }
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = 'translateY(-2px)';
             });
         });
     </script>
