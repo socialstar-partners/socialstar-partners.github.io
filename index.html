@@ -49,12 +49,12 @@
             align-items: center;
         }
 
-        .back-button {
-            background: none;
-            border: none;
+        .demo-title {
+            font-size: 18px;
+            font-weight: bold;
             color: white;
-            font-size: 27px;
-            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .balance-section {
@@ -612,6 +612,14 @@
                 width: 95%;
                 margin: 20px;
             }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .demo-title {
+                font-size: 16px;
+            }
         }
     </style>
     <script>
@@ -628,7 +636,7 @@
         <div id="mainView">
             <!-- Header -->
             <div class="header">
-                <div style="width: 27px;"></div>
+                <div class="demo-title">Try Demo</div>
                 <div class="balance-section">
                     <span class="balance-label">Balance</span>
                     <button class="coins-button" onclick="showGetCoins()">
