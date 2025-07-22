@@ -62,107 +62,26 @@
             font-weight: bold;
         }
 
-        /* Bottom Sheet */
-        .bottom-sheet {
+        /* Fixed Rating Info Bar */
+        .rating-info-bar {
             position: fixed;
-            bottom: 0;
+            bottom: 100px; /* Height of star footer */
             left: 0;
             right: 0;
             background: #1A2245;
-            border-radius: 20px 20px 0 0;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 25;
-            transition: none;
-            will-change: transform;
-            height: 100vh;
-            height: 100dvh;
-            cursor: grab;
             /* Add safe area padding for notched devices */
-            padding-bottom: env(safe-area-inset-bottom, 0);
+            margin-bottom: env(safe-area-inset-bottom, 0);
         }
 
-        .bottom-sheet.dragging {
-            cursor: grabbing;
-        }
-
-        .sheet-handle {
-            padding: 15px;
-            cursor: grab;
-        }
-
-        .sheet-handle:active {
-            cursor: grabbing;
-        }
-
-        .handle-bar {
-            width: 40px;
-            height: 5px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 100px;
-            margin: 0 auto;
-        }
-
-        .sheet-content {
-            padding: 0 20px 20px;
-            height: calc(100vh - 80px);
-            height: calc(100dvh - 80px);
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255,255,255,0.2) transparent;
-            /* Account for star footer, banner, and safe area */
-            padding-bottom: calc(180px + env(safe-area-inset-bottom, 0));
-        }
-        
-        .sheet-content::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .sheet-content::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        
-        .sheet-content::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 3px;
-        }
-
-        .ratings-header {
-            font-size: 16px;
+        .rating-info-text {
+            font-size: 18px;
             font-weight: bold;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 15px;
-        }
-
-        /* Rating Items */
-        .rating-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .rating-item:last-child {
-            border-bottom: none;
-        }
-
-        .rating-user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .rating-profile-pic {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #4A5568;
-            object-fit: cover;
-        }
-
-        .rating-username {
-            font-size: 16px;
-            font-weight: bold;
+            color: white;
         }
 
         .rating-badge {
@@ -170,7 +89,7 @@
             align-items: center;
             gap: 6px;
             background: #DAA520;
-            padding: 5px 10px;
+            padding: 8px 12px;
             border-radius: 20px;
         }
 
@@ -181,6 +100,7 @@
 
         .rating-badge span {
             font-weight: bold;
+            font-size: 16px;
         }
 
         /* Star Rating Footer */
@@ -233,8 +153,8 @@
                 padding-bottom: 35px; /* Extra padding for older devices */
             }
             
-            .sheet-content {
-                padding-bottom: 240px; /* Extra padding for older devices (180 + 60) */
+            .rating-info-bar {
+                margin-bottom: 60px; /* Extra margin for older devices */
             }
         }
 
@@ -248,8 +168,12 @@
             .star-button {
                 font-size: 32px;
             }
-            .sheet-content {
-                padding-bottom: calc(160px + 50px + env(safe-area-inset-bottom, 0));
+            .rating-info-bar {
+                bottom: 80px;
+                padding: 12px 20px;
+            }
+            .rating-info-text {
+                font-size: 16px;
             }
         }
 
@@ -263,13 +187,23 @@
             .star-button {
                 font-size: 28px;
             }
-            .sheet-content {
-                padding-bottom: calc(150px + 40px + env(safe-area-inset-bottom, 20px));
+            .rating-info-bar {
+                bottom: 70px;
+                padding: 10px 20px;
+            }
+            .rating-info-text {
+                font-size: 15px;
+            }
+            .rating-badge {
+                padding: 6px 10px;
+            }
+            .rating-badge span {
+                font-size: 14px;
             }
         }
     </style>
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveyLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
         posthog.init('phc_3sfiHFKqVbrCmXIKdwWx0RPsTwKPd6US1fvKFjhziZm', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-05-24',
@@ -291,89 +225,14 @@
         </div>
     </nav>
 
-    <!-- Bottom Sheet -->
-    <div class="bottom-sheet" id="bottomSheet">
-        <div class="sheet-handle" id="sheetHandle">
-            <div class="handle-bar"></div>
-        </div>
-        <div class="sheet-content">
-            <div class="ratings-header">Ratings (<span id="ratingCount">6</span>)</div>
-            <div id="ratingsList">
-                <!-- Initial ratings -->
-                <div class="rating-item">
-                    <div class="rating-user-info">
-                        <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2Fadffff9d5b2b81e935c6d0f601bc7cd1.jpg?alt=media&token=d95d5326-dc11-4d99-84f7-c9404ad48bc4" alt="Sarah">
-                        <span class="rating-username">Alice</span>
-                    </div>
-                    <div class="rating-badge">
-                        <span>5</span>
-                        <svg class="star" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="rating-item">
-                    <div class="rating-user-info">
-                        <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F76f9566b1a6c667929d300af2bd1686f.jpg?alt=media&token=11621632-5a38-4dc3-9f10-ff8e1776c603" alt="Mike">
-                        <span class="rating-username">Madison</span>
-                    </div>
-                    <div class="rating-badge">
-                        <span>4</span>
-                        <svg class="star" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="rating-item">
-                    <div class="rating-user-info">
-                        <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F760021cb5694f81ebcc6755ab82458ed.jpg?alt=media&token=3cbeeb12-3493-4848-9e6b-d0a2481237d2" alt="Emma">
-                        <span class="rating-username">Sophia</span>
-                    </div>
-                    <div class="rating-badge">
-                        <span>5</span>
-                        <svg class="star" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="rating-item">
-                    <div class="rating-user-info">
-                        <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F5b797f1008cdbd4489a372000d5f6954.jpg?alt=media&token=d792f429-a9be-4021-a3dd-124b4ca45d6c" alt="David">
-                        <span class="rating-username">Emma</span>
-                    </div>
-                    <div class="rating-badge">
-                        <span>3</span>
-                        <svg class="star" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Add more ratings to show scrolling -->
-                <div class="rating-item">
-                    <div class="rating-user-info">
-                        <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F52c1d2168c708e20d41fa8538fde2307.jpg?alt=media&token=588c51d3-1b05-4ffb-9295-dd7c79433324" alt="Lisa">
-                        <span class="rating-username">Chloe</span>
-                    </div>
-                    <div class="rating-badge">
-                        <span>4</span>
-                        <svg class="star" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="rating-item">
-                    <div class="rating-user-info">
-                        <img class="rating-profile-pic" src="https://firebasestorage.googleapis.com/v0/b/pingbear-96b4c.appspot.com/o/demo%2F17b9d70ab76bd8e2daabb99b8e77ad31.jpg?alt=media&token=bd3ea9d3-210c-420f-bf5d-029771faaade" alt="John">
-                        <span class="rating-username">Zoe</span>
-                    </div>
-                    <div class="rating-badge">
-                        <span>5</span>
-                        <svg class="star" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+    <!-- Fixed Rating Info Bar -->
+    <div class="rating-info-bar">
+        <span class="rating-info-text">Rate Photo</span>
+        <div class="rating-badge" id="starBadge">
+            <span id="starCount">20</span>
+            <svg class="star" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
         </div>
     </div>
 
@@ -390,188 +249,13 @@
         // State management
         let currentRating = 0;
         let hasVoted = false;
-        let isDragging = false;
-        let startY = 0;
-        let currentY = 0;
-        let sheetY = 0;
-        
-        // Get safe area inset for dynamic calculations
-        const safeAreaBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0;
-        
-        // Sheet positions - Updated for more flexible minimum height
-        const basePadding = 20; // Base padding from safe area
-        const starFooterHeight = 100 + safeAreaBottom; // Height of star footer + safe area
-        const bannerHeight = 0; // Banner height (now using top banner, so 0 for bottom)
-        
-        // More flexible minimum height - allows sheet to go lower while staying above rating bar
-        const absoluteMinHeight = starFooterHeight + 40; // Just 40px above star footer
-        const minHeight = starFooterHeight + 80; // Comfortable minimum with some spacing
-        const defaultHeight = 290 + safeAreaBottom; // Default height (adjusted to show 2 rating rows)
-        const midHeight = Math.max(window.innerHeight * 0.45, defaultHeight + 80); // Ensure midHeight > defaultHeight
-        const maxHeight = window.innerHeight - 120;
-        let currentDetent = 'default';
+        let starCount = 20; // Initial star count
         
         // Elements
-        const bottomSheet = document.getElementById('bottomSheet');
-        const sheetHandle = document.getElementById('sheetHandle');
         const starFooter = document.getElementById('starFooter');
         const starButtons = document.querySelectorAll('.star-button');
-        const ratingsList = document.getElementById('ratingsList');
-        const ratingCount = document.getElementById('ratingCount');
-        
-        // Initialize sheet position
-        function setSheetPosition(height) {
-            const translateY = window.innerHeight - height;
-            bottomSheet.style.transform = `translateY(${translateY}px)`;
-            sheetY = translateY;
-        }
-        
-        // Set initial position to default height
-        setSheetPosition(defaultHeight);
-        
-        // Add visual indicator for drag state
-        function updateDragVisual(isDragging) {
-            if (isDragging) {
-                bottomSheet.classList.add('dragging');
-            } else {
-                bottomSheet.classList.remove('dragging');
-            }
-        }
-        
-        // Check if touch/click is on scrollable content
-        function isScrollableContent(target) {
-            return target.closest('.sheet-content') && !target.closest('.sheet-handle');
-        }
-        
-        // Touch/Mouse event handlers for bottom sheet
-        function handleStart(e) {
-            // Don't start dragging if touching scrollable content (unless it's the handle)
-            if (isScrollableContent(e.target)) {
-                const sheetContent = e.target.closest('.sheet-content');
-                if (sheetContent.scrollTop > 0) {
-                    return; // Allow scrolling if content is scrolled
-                }
-            }
-            
-            isDragging = true;
-            startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-            bottomSheet.style.transition = 'none';
-            updateDragVisual(true);
-        }
-        
-        function handleMove(e) {
-            if (!isDragging) return;
-            
-            e.preventDefault();
-            currentY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-            const deltaY = currentY - startY;
-            
-            let newY = sheetY + deltaY;
-            const currentHeight = window.innerHeight - newY;
-            
-            // Updated constraint - allow dragging down to absolute minimum (closer to star footer)
-            if (currentHeight < absoluteMinHeight) {
-                newY = window.innerHeight - absoluteMinHeight;
-            } else if (currentHeight > maxHeight) {
-                newY = window.innerHeight - maxHeight;
-            }
-            
-            bottomSheet.style.transform = `translateY(${newY}px)`;
-        }
-        
-        function handleEnd(e) {
-            if (!isDragging) return;
-            
-            isDragging = false;
-            updateDragVisual(false);
-            bottomSheet.style.transition = 'transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            
-            const endY = e.type.includes('mouse') ? e.clientY : e.changedTouches[0].clientY;
-            const deltaY = endY - startY;
-            const velocity = deltaY;
-            
-            // Get current height from the actual transform position
-            const currentTransform = bottomSheet.style.transform;
-            const currentTransformY = parseFloat(currentTransform.match(/translateY\(([^)]+)px\)/)?.[1]) || sheetY;
-            const currentHeight = window.innerHeight - currentTransformY;
-            
-            // Determine new position based on current position and gesture
-            let targetHeight;
-            
-            // Define thresholds for smoother transitions
-            const upwardThreshold = -40;
-            const downwardThreshold = 40;
-            const strongVelocityThreshold = 60;
-            
-            // Updated logic to include the new lower position
-            if (currentHeight <= absoluteMinHeight + 20) {
-                // Very close to absolute minimum
-                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
-                    targetHeight = minHeight;
-                    currentDetent = 'min';
-                } else {
-                    targetHeight = absoluteMinHeight;
-                    currentDetent = 'absolute-min';
-                }
-            } else if (currentHeight <= minHeight + 30) {
-                // Near comfortable minimum height
-                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
-                    targetHeight = defaultHeight;
-                    currentDetent = 'default';
-                } else if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
-                    targetHeight = absoluteMinHeight;
-                    currentDetent = 'absolute-min';
-                } else {
-                    targetHeight = minHeight;
-                    currentDetent = 'min';
-                }
-            } else if (currentHeight <= defaultHeight + 30) {
-                // Near default height
-                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                } else if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
-                    targetHeight = minHeight;
-                    currentDetent = 'min';
-                } else {
-                    targetHeight = defaultHeight;
-                    currentDetent = 'default';
-                }
-            } else if (currentHeight <= midHeight + 30) {
-                // Near mid height
-                if (deltaY < upwardThreshold || velocity < -strongVelocityThreshold) {
-                    targetHeight = maxHeight;
-                    currentDetent = 'max';
-                } else if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
-                    targetHeight = defaultHeight;
-                    currentDetent = 'default';
-                } else {
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                }
-            } else {
-                // Near max height or beyond
-                if (deltaY > downwardThreshold || velocity > strongVelocityThreshold) {
-                    targetHeight = midHeight;
-                    currentDetent = 'mid';
-                } else {
-                    targetHeight = maxHeight;
-                    currentDetent = 'max';
-                }
-            }
-            
-            setSheetPosition(targetHeight);
-        }
-        
-        // Add event listeners for dragging - now on entire sheet
-        bottomSheet.addEventListener('mousedown', handleStart);
-        bottomSheet.addEventListener('touchstart', handleStart, { passive: false });
-        
-        document.addEventListener('mousemove', handleMove);
-        document.addEventListener('touchmove', handleMove, { passive: false });
-        
-        document.addEventListener('mouseup', handleEnd);
-        document.addEventListener('touchend', handleEnd);
+        const starBadge = document.getElementById('starBadge');
+        const starCountElement = document.getElementById('starCount');
         
         // Star rating functionality
         starButtons.forEach((button, index) => {
@@ -611,49 +295,27 @@
             starFooter.classList.add('voted');
             starButtons.forEach(btn => btn.classList.add('voted'));
             
-            // Add new rating to list with animation
-            const newRating = createRatingItem('You', rating, 'https://static.vecteezy.com/system/resources/previews/013/360/247/non_2x/default-avatar-photo-icon-social-media-profile-sign-symbol-vector.jpg');
-            newRating.style.opacity = '0';
-            newRating.style.transform = 'translateY(20px)';
-            ratingsList.insertBefore(newRating, ratingsList.firstChild);
+            // Increment star count with animation
+            starCount += rating;
             
-            // Animate in
+            // Add bounce animation to the badge
+            starBadge.style.transform = 'scale(1.2)';
+            starBadge.style.transition = 'transform 0.3s ease';
+            
+            // Update the count
+            starCountElement.textContent = starCount;
+            
+            // Reset the animation
             setTimeout(() => {
-                newRating.style.transition = 'all 0.3s ease';
-                newRating.style.opacity = '1';
-                newRating.style.transform = 'translateY(0)';
-            }, 10);
+                starBadge.style.transform = 'scale(1)';
+            }, 300);
             
-            // Update count
-            const currentCount = parseInt(ratingCount.textContent);
-            ratingCount.textContent = currentCount + 1;
+            // Optional: Show a success message or feedback
+            console.log(`Rating submitted: ${rating} stars. Total stars: ${starCount}`);
         }
         
-        function createRatingItem(username, rating, avatarUrl) {
-            const item = document.createElement('div');
-            item.className = 'rating-item';
-            item.innerHTML = `
-                <div class="rating-user-info">
-                    <img class="rating-profile-pic" src="${avatarUrl}" alt="${username}">
-                    <span class="rating-username">${username}</span>
-                </div>
-                <div class="rating-badge">
-                    <span>${rating}</span>
-                    <svg class="star" viewBox="0 0 24 24" fill="white">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                </div>
-            `;
-            return item;
-        }
-        
-        // Prevent scrolling on mobile when dragging
+        // Prevent scrolling on mobile
         document.addEventListener('touchmove', function(e) {
-            if (isDragging) {
-                e.preventDefault();
-                return;
-            }
-            if (e.target.closest('.sheet-content')) return;
             e.preventDefault();
         }, { passive: false });
     </script>
