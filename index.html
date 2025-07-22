@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SocialStar - Rate Photo</title>
+    <title>SocialStar - Rate Story</title>
     <!-- Primary Meta Tags -->
     <meta name="description" content="Social Competition with Friends - Download SocialStar app">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://socialstar-rate.github.io/">
-    <meta property="og:title" content="SocialStar - Rate Photo">
+    <meta property="og:title" content="SocialStar - Rate Story">
     <meta property="og:description" content="Social Competition with Friends">
     <meta property="og:image" content="https://socialstar-rate.github.io/preview.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://socialstar-rate.github.io/">
-    <meta property="twitter:title" content="SocialStar - Rate Photo">
+    <meta property="twitter:title" content="SocialStar - Rate Story">
     <meta property="twitter:description" content="Social Competition with Friends">
     <meta property="twitter:image" content="https://socialstar-rate.github.io/preview.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -221,16 +221,22 @@
     <!-- Main Photo -->
     <div class="photo-container">
         <img class="photo-image" src="https://i.pinimg.com/1200x/f1/7e/8b/f17e8b0cddef056fd4d5d897b52f15c9.jpg">
+        <div class="photo-overlay-text" style="top: 30%;"> </div>
     </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <div class="user-info">
+            <span class="username"> </span>
+        </div>
+    </nav>
 
     <!-- Fixed Rating Info Bar -->
     <div class="rating-info-bar">
-        <span class="rating-info-text">Rate Photo</span>
+        <span class="rating-info-text">Rate Story</span>
         <div class="rating-badge" id="starBadge">
             <span id="averageRating">4.5</span>
-            <svg class="star" viewBox="0 0 24 24" fill="white">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+            <span style="color: white; font-size: 16px; margin: 0 2px;">★</span>
             <span id="ratingCount">(6)</span>
         </div>
     </div>
