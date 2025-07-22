@@ -251,7 +251,7 @@
         <span class="rating-info-text">Rate Story</span>
         <div class="rating-badge" id="starBadge">
             <span id="averageRating">4.5</span>
-            <span style="color: white; font-size: 17px; margin: 0 2px;">★</span>
+            <span style="color: white; font-size: 16px; margin: 0 2px;">★</span>
             <span id="ratingCount">(6)</span>
         </div>
     </div>
@@ -269,6 +269,7 @@
         // State management
         let currentRating = 0;
         let hasVoted = false;
+        let isSubmitting = false; // Prevent multiple rapid taps
         let totalRatings = 27; // Total of all ratings to achieve 4.5 average (27/6 = 4.5)
         let ratingCount = 6; // Number of people who rated
         let averageRating = 4.5; // Current average rating
@@ -283,7 +284,9 @@
         // Star rating functionality
         starButtons.forEach((button, index) => {
             button.addEventListener('click', function() {
-                if (hasVoted) return;
+                if (hasVoted || isSubmitting) return; // Prevent multiple taps
+                
+                isSubmitting = true; // Lock further interactions immediately
                 
                 const rating = parseInt(button.dataset.rating);
                 currentRating = rating;
