@@ -35,117 +35,131 @@
             background: #10183C;
             color: white;
             height: 100vh;
-            height: 100dvh; /* Dynamic viewport height for mobile */
+            height: 100dvh;
             overflow: hidden;
-            position: relative;
-        }
-
-        /* Main Photo Container */
-        .photo-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #10183C;
-        }
-
-        .photo-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .username {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        /* Fixed Rating Info Bar */
-        .rating-info-bar {
-            position: fixed;
-            bottom: 100px; /* Height of star footer */
-            left: 0;
-            right: 0;
-            background: #1A2245;
-            padding: 16px 20px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            z-index: 25;
-            /* Add safe area padding for notched devices */
-            margin-bottom: env(safe-area-inset-bottom, 0);
         }
 
-        .rating-info-text {
-            font-size: 18px;
-            font-weight: bold;
+        /* Main Rating Container */
+        .rating-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        /* Header Section */
+        .rating-header {
+            text-align: center;
+        }
+
+        .rating-title {
+            font-size: 28px;
+            font-weight: 700;
             color: white;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .rating-subtitle {
+            font-size: 18px;
+            color: #8B92B5;
+            font-weight: 400;
+        }
+
+        /* Current Rating Display */
+        .current-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+            display: none;
+        }
+
+        .current-rating.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .rating-badge {
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: #DAA520;
-            padding: 8px 12px;
-            border-radius: 20px;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .rating-badge.show {
-            opacity: 1;
-            transform: scale(1);
+            gap: 8px;
+            background: #1A2245;
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid #2A3458;
         }
 
         .rating-badge .star {
-            width: 20px;
-            height: 20px;
+            color: #FFD700;
+            font-size: 24px;
         }
 
-        .rating-badge span {
-            font-weight: bold;
-            font-size: 16px;
+        .rating-average {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
         }
 
-        .rating-badge #ratingCount {
+        .rating-count {
             font-size: 14px;
-            opacity: 0.8;
-            margin-left: 2px;
+            color: #8B92B5;
+            margin-left: 4px;
         }
 
-        /* Star Rating Footer */
-        .star-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #10183C;
-            padding: 18px 0;
+        /* Star Rating Section */
+        .star-rating-section {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            z-index: 30;
-            height: 100px;
-            /* Add safe area padding for home indicator */
-            padding-bottom: calc(18px + env(safe-area-inset-bottom, 0));
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
         }
 
-        .star-footer.voted {
-            background: #A9A9A9;
+        .star-rating-label {
+            font-size: 18px;
+            color: #8B92B5;
+            font-weight: 500;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            background: #1A2245;
+            border-radius: 200px;
+            border: 1px solid #2A3458;
+        }
+
+        .star-rating.voted {
+            background: #2A3458;
+            border-color: #3A4468;
         }
 
         .star-button {
             background: none;
             border: none;
-            font-size: 38px;
+            font-size: 44px;
             color: white;
             cursor: pointer;
             padding: 8px;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .star-button:hover:not(.voted) {
+            color: #FFD700;
+            transform: scale(1.1);
         }
 
         .star-button.filled {
@@ -153,81 +167,95 @@
         }
 
         .star-button.voted {
-            color: #c2c2c2;
+            color: #6B7280;
             cursor: not-allowed;
-            outline: none !important;
-            -webkit-tap-highlight-color: transparent !important;
-            -webkit-touch-callout: none !important;
-            -webkit-user-select: none !important;
-            user-select: none !important;
-            pointer-events: none !important;
-        }
-
-        .star-button.voted:focus,
-        .star-button.voted:active,
-        .star-button.voted:hover {
-            outline: none !important;
-            box-shadow: none !important;
-            border: none !important;
-            -webkit-tap-highlight-color: transparent !important;
+            pointer-events: none;
         }
 
         .star-button.animate {
-            transform: scale(1.3);
+            transform: scale(1.2);
         }
 
-        /* Additional safe area support for older devices */
-        @supports not (padding: env(safe-area-inset-bottom)) {
-            .star-footer {
-                padding-bottom: 35px; /* Extra padding for older devices */
+        /* Success State */
+        .success-message {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: #10B981;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-height: 700px) {
+            .rating-container {
+                gap: 30px;
+                padding: 20px;
             }
             
-            .rating-info-bar {
-                margin-bottom: 60px; /* Extra margin for older devices */
+            .rating-title {
+                font-size: 24px;
+            }
+            
+            .star-button {
+                font-size: 36px;
+                padding: 6px;
+            }
+            
+            .star-rating {
+                gap: 8px;
+                padding: 16px;
             }
         }
 
-        /* Responsive adjustments */
-        @media (max-height: 700px) {
-            .star-footer {
-                padding: 20px 0;
-                height: 80px;
-                padding-bottom: calc(15px + env(safe-area-inset-bottom, 0));
+        @media (max-height: 600px) {
+            .rating-container {
+                gap: 24px;
+                padding: 16px;
             }
+            
+            .rating-title {
+                font-size: 22px;
+            }
+            
             .star-button {
                 font-size: 32px;
+                padding: 4px;
             }
-            .rating-info-bar {
-                bottom: 80px;
-                padding: 12px 20px;
-            }
-            .rating-info-text {
-                font-size: 16px;
+            
+            .star-rating {
+                gap: 6px;
+                padding: 12px;
             }
         }
 
-        /* Specific adjustments for in-app browsers */
-        @media (max-height: 600px) {
-            .star-footer {
-                padding: 15px 0;
-                height: 70px;
-                padding-bottom: calc(10px + env(safe-area-inset-bottom, 20px));
+        @media (max-width: 480px) {
+            .rating-container {
+                padding: 20px 16px;
             }
+            
+            .rating-title {
+                font-size: 24px;
+            }
+            
             .star-button {
-                font-size: 28px;
+                font-size: 38px;
             }
-            .rating-info-bar {
-                bottom: 70px;
-                padding: 10px 20px;
-            }
-            .rating-info-text {
-                font-size: 15px;
-            }
-            .rating-badge {
-                padding: 6px 10px;
-            }
-            .rating-badge #ratingCount {
-                font-size: 12px;
+        }
+
+        /* Safe area support */
+        @supports (padding: env(safe-area-inset-bottom)) {
+            .rating-container {
+                padding-bottom: calc(40px + env(safe-area-inset-bottom));
             }
         }
     </style>
@@ -236,98 +264,121 @@
         posthog.init('phc_3sfiHFKqVbrCmXIKdwWx0RPsTwKPd6US1fvKFjhziZm', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-05-24',
-            person_profiles: 'always', // Track anonymous users for conversion funnel analysis
+            person_profiles: 'always',
         })
     </script>
 </head>
 <body>
-    <!-- Main Photo -->
-    <div class="photo-container">
-        <img class="photo-image" src="https://i.pinimg.com/1200x/f1/7e/8b/f17e8b0cddef056fd4d5d897b52f15c9.jpg">
-        <div class="photo-overlay-text" style="top: 30%;"> </div>
-    </div>
-
-    <!-- Navigation Bar -->
-    <nav class="navigation-bar">
-        <div class="user-info">
-            <span class="username"> </span>
+    <div class="rating-container">
+        <!-- Header -->
+        <div class="rating-header">
+            <h1 class="rating-title">Rate Story</h1>
+            <p class="rating-subtitle">What would you rate this story?</p>
         </div>
-    </nav>
 
-    <!-- Fixed Rating Info Bar -->
-    <div class="rating-info-bar">
-        <span class="rating-info-text">Rate Story</span>
-        <div class="rating-badge" id="starBadge">
-            <span>avg</span>
-            <span id="averageRating">4.5</span>
-            <span style="color: white; font-size: 16px; margin: 0px;">★</span>
-            <span id="ratingCount">(7)</span>
+        <!-- Current Rating Display -->
+        <div class="current-rating" id="currentRating">
+            <div class="rating-badge">
+                <span style="font-weight: 600;">avg</span>
+                <span class="star">★</span>
+                <span class="rating-average" id="averageRating">4.5</span>
+                <span class="rating-count" id="ratingCount">(6 ratings)</span>
+            </div>
         </div>
-    </div>
 
-    <!-- Star Rating Footer -->
-    <div class="star-footer" id="starFooter">
-        <button class="star-button" data-rating="1">★</button>
-        <button class="star-button" data-rating="2">★</button>
-        <button class="star-button" data-rating="3">★</button>
-        <button class="star-button" data-rating="4">★</button>
-        <button class="star-button" data-rating="5">★</button>
+        <!-- Star Rating -->
+        <div class="star-rating-section">
+            <div class="star-rating" id="starRating">
+                <button class="star-button" data-rating="1">★</button>
+                <button class="star-button" data-rating="2">★</button>
+                <button class="star-button" data-rating="3">★</button>
+                <button class="star-button" data-rating="4">★</button>
+                <button class="star-button" data-rating="5">★</button>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <p class="success-text">Thank you for your rating!</p>
+        </div>
     </div>
 
     <script>
         // State management
         let currentRating = 0;
         let hasVoted = false;
-        let isSubmitting = false; // Prevent multiple rapid taps
-        let totalRatings = 27; // Total of all ratings to achieve 4.5 average (27/6 = 4.5)
+        let isSubmitting = false;
+        let totalRatings = 27; // Total of all ratings to achieve 4.5 average
         let ratingCount = 6; // Number of people who rated
         let averageRating = 4.5; // Current average rating
         
         // Elements
-        const starFooter = document.getElementById('starFooter');
+        const starRating = document.getElementById('starRating');
         const starButtons = document.querySelectorAll('.star-button');
-        const starBadge = document.getElementById('starBadge');
+        const currentRatingEl = document.getElementById('currentRating');
         const averageRatingElement = document.getElementById('averageRating');
         const ratingCountElement = document.getElementById('ratingCount');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Don't show current rating on load - only after they rate
         
         // Star rating functionality
         starButtons.forEach((button, index) => {
+            // Hover effect for desktop
+            button.addEventListener('mouseenter', function() {
+                if (hasVoted) return;
+                const rating = parseInt(button.dataset.rating);
+                highlightStars(rating);
+            });
+            
+            // Reset on mouse leave
+            starRating.addEventListener('mouseleave', function() {
+                if (hasVoted) return;
+                highlightStars(currentRating);
+            });
+            
+            // Click handler
             button.addEventListener('click', function() {
-                if (hasVoted || isSubmitting) return; // Prevent multiple taps
+                if (hasVoted || isSubmitting) return;
                 
-                isSubmitting = true; // Lock further interactions immediately
-                
+                isSubmitting = true;
                 const rating = parseInt(button.dataset.rating);
                 currentRating = rating;
                 
-                // Update star colors
-                starButtons.forEach((btn, i) => {
-                    if (i < rating) {
-                        btn.classList.add('filled');
-                        btn.classList.add('animate');
-                        setTimeout(() => btn.classList.remove('animate'), 300);
-                    } else {
-                        btn.classList.remove('filled');
-                    }
-                });
+                // Animate clicked star
+                button.classList.add('animate');
+                setTimeout(() => button.classList.remove('animate'), 300);
                 
-                // Haptic feedback simulation (vibration if supported)
+                // Highlight stars
+                highlightStars(rating);
+                
+                // Haptic feedback
                 if (navigator.vibrate) {
                     navigator.vibrate([50, 100, 50]);
                 }
                 
-                // Submit rating after animation
+                // Submit rating
                 setTimeout(() => {
                     submitRating(rating);
-                }, 500);
+                }, 600);
             });
         });
+        
+        function highlightStars(rating) {
+            starButtons.forEach((btn, i) => {
+                if (i < rating) {
+                    btn.classList.add('filled');
+                } else {
+                    btn.classList.remove('filled');
+                }
+            });
+        }
         
         function submitRating(rating) {
             hasVoted = true;
             
             // Update UI to show voted state
-            starFooter.classList.add('voted');
+            starRating.classList.add('voted');
             starButtons.forEach(btn => btn.classList.add('voted'));
             
             // Update rating calculations
@@ -335,16 +386,14 @@
             ratingCount += 1;
             averageRating = totalRatings / ratingCount;
             
-            // Update the display
-            averageRatingElement.textContent = averageRating.toFixed(1);
-            ratingCountElement.textContent = `(${ratingCount})`;
-            
-            // Show the rating badge with animation after a brief delay
+            // Show the current rating section after voting
             setTimeout(() => {
-                starBadge.classList.add('show');
-            }, 600);
+                currentRatingEl.classList.add('show');
+                averageRatingElement.textContent = averageRating.toFixed(1);
+                ratingCountElement.textContent = `(${ratingCount} ratings)`;
+                successMessage.classList.add('show');
+            }, 200);
             
-            // Optional: Show a success message or feedback
             console.log(`Rating submitted: ${rating} stars. New average: ${averageRating.toFixed(1)} (${ratingCount} ratings)`);
         }
         
