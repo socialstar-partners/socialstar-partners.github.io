@@ -235,7 +235,7 @@
     <div class="rating-info-bar">
         <span class="rating-info-text">Rate Photo</span>
         <div class="rating-badge" id="starBadge">
-            <span id="averageRating">4.2</span>
+            <span id="averageRating">4.5</span>
             <svg class="star" viewBox="0 0 24 24" fill="white">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
@@ -256,9 +256,9 @@
         // State management
         let currentRating = 0;
         let hasVoted = false;
-        let totalRatings = 25; // Total of all ratings (5+4+5+3+4+5 = 26, but we'll start with 25 to get 4.2 average)
+        let totalRatings = 27; // Total of all ratings to achieve 4.5 average (27/6 = 4.5)
         let ratingCount = 6; // Number of people who rated
-        let averageRating = totalRatings / ratingCount; // 25/6 ≈ 4.17, we'll display as 4.2
+        let averageRating = 4.5; // Current average rating
         
         // Elements
         const starFooter = document.getElementById('starFooter');
