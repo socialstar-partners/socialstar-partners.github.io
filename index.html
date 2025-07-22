@@ -57,140 +57,9 @@
             display: block;
         }
 
-        .photo-overlay-text {
-            position: absolute;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            width: 80%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Navigation Bar */
-        .navigation-bar {
-            position: absolute;
-            top: 0;
-            top: env(safe-area-inset-top, 0);
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 10;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: 250px;
-        }
-
-        .profile-picture {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: #FFF;
-            object-fit: cover;
-        }
-
         .username {
             font-size: 20px;
             font-weight: bold;
-        }
-
-        .theme-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-
-        /* Top Banner */
-        .top-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
-            padding: 12px 20px;
-            z-index: 30;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            top: env(safe-area-inset-top, 0);
-        }
-
-        .banner-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-        }
-
-        .banner-icon {
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .banner-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .banner-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 2px;
-        }
-
-        .banner-subtitle {
-            font-size: 12px;
-            color: rgba(255,255,255,0.9);
-            line-height: 1.3;
-        }
-
-        .banner-button {
-            background: white;
-            color: black;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: transform 0.2s ease;
-        }
-
-        .banner-button:hover {
-            transform: scale(1.05);
-        }
-
-        .banner-button:active {
-            transform: scale(0.95);
-        }
-
-        .banner-close {
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.7);
-            font-size: 18px;
-            cursor: pointer;
-            padding: 4px;
-            flex-shrink: 0;
-            transition: color 0.2s ease;
-        }
-
-        .banner-close:hover {
-            color: white;
         }
 
         /* Bottom Sheet */
@@ -314,23 +183,6 @@
             font-weight: bold;
         }
 
-        /* Download Banner - Modified for persistent display */
-        .download-banner {
-            position: fixed;
-            bottom: 100px; /* Positioned above star footer */
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
-            padding: 12px 20px;
-            z-index: 30;
-            display: none; /* Hidden since we have the top banner now */
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            transform: none !important;
-            opacity: 1 !important;
-        }
-
         /* Star Rating Footer */
         .star-footer {
             position: fixed;
@@ -399,16 +251,6 @@
             .sheet-content {
                 padding-bottom: calc(160px + 50px + env(safe-area-inset-bottom, 0));
             }
-            .download-banner {
-                bottom: 80px; /* Match reduced star footer height */
-                padding: 10px 20px;
-            }
-            .banner-title {
-                font-size: 13px;
-            }
-            .banner-subtitle {
-                font-size: 11px;
-            }
         }
 
         /* Specific adjustments for in-app browsers */
@@ -424,16 +266,6 @@
             .sheet-content {
                 padding-bottom: calc(150px + 40px + env(safe-area-inset-bottom, 20px));
             }
-            .download-banner {
-                bottom: 70px; /* Match reduced star footer height */
-                padding: 8px 16px;
-            }
-            .banner-title {
-                font-size: 12px;
-            }
-            .banner-subtitle {
-                font-size: 10px;
-            }
         }
     </style>
     <script>
@@ -446,18 +278,6 @@
     </script>
 </head>
 <body>
-    <!-- Top Banner -->
-    <div class="top-banner" id="topBanner">
-        <div class="banner-content">
-            <div class="banner-icon">🤔</div>
-            <div class="banner-text">
-                <div class="banner-title">Want to play with your friends instead?</div>
-            </div>
-        </div>
-        <button class="banner-button" onclick="downloadApp()">Get Started</button>
-        <button class="banner-close" onclick="dismissBanner()">×</button>
-    </div>
-
     <!-- Main Photo -->
     <div class="photo-container">
         <img class="photo-image" src="https://i.pinimg.com/736x/f9/72/58/f97258bcf7ba7776501612d8a5d99e35.jpg">
@@ -557,18 +377,6 @@
         </div>
     </div>
 
-    <!-- Download Banner - Now hidden since we have the top banner -->
-    <div class="download-banner" id="downloadBanner">
-        <div class="banner-content">
-            <div class="banner-icon">🎉</div>
-            <div class="banner-text">
-                <div class="banner-title">Want to play with your friends?</div>
-            </div>
-        </div>
-        <button class="banner-button" onclick="downloadApp()">Get Started</button>
-        <button class="banner-close" onclick="dismissBanner()">×</button>
-    </div>
-
     <!-- Star Rating Footer -->
     <div class="star-footer" id="starFooter">
         <button class="star-button" data-rating="1">★</button>
@@ -610,31 +418,6 @@
         const starButtons = document.querySelectorAll('.star-button');
         const ratingsList = document.getElementById('ratingsList');
         const ratingCount = document.getElementById('ratingCount');
-        const downloadBanner = document.getElementById('downloadBanner');
-        const topBanner = document.getElementById('topBanner');
-        
-        // Initialize banner position on load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show top banner immediately
-            topBanner.style.display = 'flex';
-            
-            // Hide the bottom download banner since we're using the top one
-            downloadBanner.style.display = 'none';
-            
-            // Calculate and set proper banner position based on star footer
-            function updateBannerPosition() {
-                const starFooterRect = starFooter.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                const distanceFromBottom = viewportHeight - starFooterRect.top;
-                downloadBanner.style.bottom = distanceFromBottom + 'px';
-            }
-            
-            // Set initial position
-            updateBannerPosition();
-            
-            // Update position on resize (for orientation changes)
-            window.addEventListener('resize', updateBannerPosition);
-        });
         
         // Initialize sheet position
         function setSheetPosition(height) {
@@ -862,15 +645,6 @@
                 </div>
             `;
             return item;
-        }
-        
-        function downloadApp() {
-            // Simulate app download
-            window.open('https://apps.apple.com/app/socialstar-app/id6473705189', '_blank');
-        }
-        
-        function dismissBanner() {
-            topBanner.style.display = 'none';
         }
         
         // Prevent scrolling on mobile when dragging
