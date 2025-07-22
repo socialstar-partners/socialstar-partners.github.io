@@ -13,136 +13,170 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #10183C;
             min-height: 100vh;
-            color: #333;
+            color: #fff;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            max-width: 500px;
+            max-width: 430px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: #1A2245;
+            border-radius: 16px;
+            margin: 20px;
+            padding: 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             text-align: center;
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 30px;
+            background: #1A2245;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content {
+            padding: 30px;
         }
 
         .logo {
-            font-size: 2.5em;
-            font-weight: bold;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
         .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0;
+            font-size: 1em;
+            font-weight: 500;
         }
 
         .rating-container {
-            margin: 30px 0;
+            margin: 40px 0;
         }
 
         .stars {
             display: flex;
             justify-content: center;
-            gap: 5px;
-            margin: 20px 0;
+            gap: 8px;
+            margin: 30px 0;
         }
 
         .star {
-            font-size: 2.5em;
-            color: #ddd;
+            font-size: 3em;
+            color: rgba(255, 255, 255, 0.2);
             cursor: pointer;
             transition: all 0.2s ease;
             user-select: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .star:hover,
         .star.active {
-            color: #ffd700;
-            transform: scale(1.1);
+            color: #DAA520;
+            transform: scale(1.05);
+            background: rgba(218, 165, 32, 0.1);
         }
 
         .average-display {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #667eea;
-            margin: 20px 0;
+            font-size: 3em;
+            font-weight: 700;
+            color: #DAA520;
+            margin: 30px 0 15px 0;
+            letter-spacing: -1px;
         }
 
         .rating-count {
-            color: #888;
-            font-size: 1.1em;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1em;
+            font-weight: 500;
+            margin-bottom: 30px;
         }
 
         .btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: #4169E1;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
+            padding: 16px 32px;
+            border-radius: 25px;
             font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             margin: 10px;
             min-width: 200px;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 4px 16px rgba(65, 105, 225, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(65, 105, 225, 0.4);
+            background: #365BCF;
         }
 
         .btn:disabled {
-            opacity: 0.6;
+            opacity: 0.4;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .btn-secondary {
-            background: linear-gradient(45deg, #28a745, #20c997);
+            background: #DAA520;
+            box-shadow: 0 4px 16px rgba(218, 165, 32, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: #B8941B;
+            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
         }
 
         .btn-large {
-            font-size: 1.3em;
+            font-size: 1.2em;
             padding: 20px 40px;
-            margin: 20px 0;
+            margin: 30px 0;
+            font-weight: 700;
         }
 
         .link-container {
-            background: #f8f9fa;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             padding: 25px;
-            margin: 20px 0;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .generated-link {
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 10px;
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 16px;
             margin: 15px 0;
             word-break: break-all;
-            font-family: monospace;
+            font-family: 'SF Mono', Monaco, monospace;
             font-size: 0.9em;
-            font-weight: bold;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .hidden {
@@ -166,50 +200,56 @@
         }
 
         .success-message {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            border-radius: 10px;
-            padding: 15px;
+            background: rgba(52, 199, 89, 0.15);
+            color: #34C759;
+            border: 1px solid rgba(52, 199, 89, 0.3);
+            border-radius: 12px;
+            padding: 16px;
             margin: 20px 0;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            border-radius: 10px;
-            padding: 15px;
+            background: rgba(255, 69, 58, 0.15);
+            color: #FF453A;
+            border: 1px solid rgba(255, 69, 58, 0.3);
+            border-radius: 12px;
+            padding: 16px;
             margin: 20px 0;
+            font-weight: 600;
         }
 
         .instructions {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 20px;
-            margin: 20px 0;
+            background: rgba(64, 156, 255, 0.1);
+            border-left: 4px solid #409CFF;
+            padding: 24px;
+            margin: 30px 0;
             border-radius: 8px;
             text-align: left;
         }
 
         .instructions h4 {
-            color: #1976d2;
-            margin-bottom: 10px;
+            color: #409CFF;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 1.1em;
         }
 
         .instructions ol {
             padding-left: 20px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .instructions li {
-            margin: 8px 0;
+            margin: 10px 0;
+            line-height: 1.5;
         }
 
         .rating-prompt {
             font-size: 1.2em;
-            color: #333;
-            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 30px 0;
+            font-weight: 500;
         }
 
         @media (max-width: 600px) {
@@ -239,79 +279,91 @@
 <body>
     <div class="container">
         <div class="card">
-            <h1 class="logo">⭐ SocialStar</h1>
-            <p class="subtitle">Get your photos rated by friends!</p>
+            <div class="header">
+                <h1 class="logo">⭐ SocialStar</h1>
+                <p class="subtitle">Get your photos rated by friends!</p>
+            </div>
             
             <!-- Generate Link Section -->
             <div id="generateSection">
-                <p style="margin: 30px 0; font-size: 1.1em; color: #555;">
-                    Create a rating link to add to your Instagram story or post
-                </p>
-                <button class="btn btn-large" id="generateBtn">🔗 Generate My Rating Link</button>
-                
-                <div class="instructions">
-                    <h4>How it works:</h4>
-                    <ol>
-                        <li>Click "Generate My Rating Link" above</li>
-                        <li>Copy the link and add it to your Instagram story/post</li>
-                        <li>Friends click the link and rate your photo 1-5 stars</li>
-                        <li>Come back here to see your average rating!</li>
-                    </ol>
+                <div class="content">
+                    <p style="margin: 30px 0; font-size: 1.1em; color: rgba(255, 255, 255, 0.8); font-weight: 500;">
+                        Create a rating link to add to your Instagram story or post
+                    </p>
+                    <button class="btn btn-large" id="generateBtn">🔗 Generate My Rating Link</button>
+                    
+                    <div class="instructions">
+                        <h4>How it works:</h4>
+                        <ol>
+                            <li>Click "Generate My Rating Link" above</li>
+                            <li>Copy the link and add it to your Instagram story/post</li>
+                            <li>Friends click the link and rate your photo 1-5 stars</li>
+                            <li>Come back here to see your average rating!</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
 
             <!-- Link Generated Section -->
             <div id="linkSection" class="hidden">
-                <div class="success-message">
-                    🎉 Your rating link is ready!
+                <div class="content">
+                    <div class="success-message">
+                        🎉 Your rating link is ready!
+                    </div>
+                    <div class="link-container">
+                        <p style="font-weight: 600; color: rgba(255, 255, 255, 0.9); margin-bottom: 15px;"><strong>Add this link to your Instagram story/post:</strong></p>
+                        <div class="generated-link" id="generatedLink"></div>
+                        <button class="btn btn-secondary" id="copyBtn">📋 Copy Link</button>
+                        <button class="btn" id="viewResultsBtn">📊 View Results</button>
+                    </div>
+                    <button class="btn" id="newLinkBtn">🆕 Generate New Link</button>
                 </div>
-                <div class="link-container">
-                    <p><strong>Add this link to your Instagram story/post:</strong></p>
-                    <div class="generated-link" id="generatedLink"></div>
-                    <button class="btn btn-secondary" id="copyBtn">📋 Copy Link</button>
-                    <button class="btn" id="viewResultsBtn">📊 View Results</button>
-                </div>
-                <button class="btn" id="newLinkBtn">🆕 Generate New Link</button>
             </div>
 
             <!-- Rating Section (for when friends click the link) -->
             <div id="ratingSection" class="hidden">
-                <h2>Rate this photo! 📸</h2>
-                <p class="rating-prompt">How many stars do you give this photo?</p>
-                <div class="rating-container">
-                    <div class="stars" id="starRating">
-                        <span class="star" data-rating="1">⭐</span>
-                        <span class="star" data-rating="2">⭐</span>
-                        <span class="star" data-rating="3">⭐</span>
-                        <span class="star" data-rating="4">⭐</span>
-                        <span class="star" data-rating="5">⭐</span>
+                <div class="content">
+                    <h2 style="color: #fff; font-weight: 700; font-size: 1.8em; margin-bottom: 10px;">Rate this photo! 📸</h2>
+                    <p class="rating-prompt">How many stars do you give this photo?</p>
+                    <div class="rating-container">
+                        <div class="stars" id="starRating">
+                            <span class="star" data-rating="1">⭐</span>
+                            <span class="star" data-rating="2">⭐</span>
+                            <span class="star" data-rating="3">⭐</span>
+                            <span class="star" data-rating="4">⭐</span>
+                            <span class="star" data-rating="5">⭐</span>
+                        </div>
+                        <button class="btn btn-large" id="submitRatingBtn" disabled>Submit Rating</button>
                     </div>
-                    <button class="btn btn-large" id="submitRatingBtn" disabled>Submit Rating</button>
                 </div>
             </div>
 
             <!-- Results Section -->
             <div id="resultsSection" class="hidden">
-                <h2>📊 Rating Results</h2>
-                <div class="average-display" id="averageDisplay">0.0 ⭐</div>
-                <div class="rating-count" id="ratingCount">0 ratings</div>
-                <button class="btn" id="refreshBtn">🔄 Refresh Results</button>
-                <button class="btn btn-secondary" id="shareAgainBtn">📱 Share Link Again</button>
+                <div class="content">
+                    <h2 style="color: #fff; font-weight: 700; font-size: 1.8em; margin-bottom: 30px;">📊 Rating Results</h2>
+                    <div class="average-display" id="averageDisplay">0.0 ⭐</div>
+                    <div class="rating-count" id="ratingCount">0 ratings</div>
+                    <button class="btn" id="refreshBtn">🔄 Refresh Results</button>
+                    <button class="btn btn-secondary" id="shareAgainBtn">📱 Share Link Again</button>
+                </div>
             </div>
 
             <!-- Thank You Section -->
             <div id="thankYouSection" class="hidden">
-                <h2>🌟 Thank you for rating!</h2>
-                <p style="margin: 20px 0; font-size: 1.1em;">Your rating has been submitted successfully.</p>
-                
-                <!-- Show results after rating -->
-                <div style="margin: 30px 0; padding: 20px; background: #f8f9fa; border-radius: 15px;">
-                    <h3 style="margin-bottom: 15px; color: #333;">📊 Rating Results</h3>
-                    <div class="average-display" id="thankYouAverage">0.0 ⭐</div>
-                    <div class="rating-count" id="thankYouCount">0 ratings</div>
+                <div class="content">
+                    <h2 style="color: #fff; font-weight: 700; font-size: 1.8em; margin-bottom: 15px;">🌟 Thank you for rating!</h2>
+                    <p style="margin: 20px 0; font-size: 1.1em; color: rgba(255, 255, 255, 0.8);">Your rating has been submitted successfully.</p>
+                    
+                    <!-- Show results after rating -->
+                    <div class="results-box">
+                        <h3>📊 Rating Results</h3>
+                        <div class="average-display" id="thankYouAverage">0.0 ⭐</div>
+                        <div class="rating-count" id="thankYouCount">0 ratings</div>
+                    </div>
+                    
+                    <a href="/" class="btn">Create Your Own Rating Link</a>
                 </div>
-                
-                <a href="/" class="btn">Create Your Own Rating Link</a>
             </div>
 
             <!-- Messages -->
