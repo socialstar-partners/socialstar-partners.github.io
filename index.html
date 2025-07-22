@@ -2,405 +2,629 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SocialStar - Rate Story</title>
-    <!-- Primary Meta Tags -->
-    <meta name="description" content="Social Competition with Friends - Download SocialStar app">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://socialstar-rate.github.io/">
-    <meta property="og:title" content="SocialStar - Rate Story">
-    <meta property="og:description" content="Social Competition with Friends">
-    <meta property="og:image" content="https://socialstar-rate.github.io/preview.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://socialstar-rate.github.io/">
-    <meta property="twitter:title" content="SocialStar - Rate Story">
-    <meta property="twitter:description" content="Social Competition with Friends">
-    <meta property="twitter:image" content="https://socialstar-rate.github.io/preview.jpg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialStar - Get Ratings</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #10183C;
-            color: white;
-            height: 100vh;
-            height: 100dvh;
-            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
         }
 
-        /* Main Rating Container */
-        .rating-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            padding: 40px 20px;
-            width: 100%;
-            max-width: 480px;
-        }
-
-        /* Header Section */
-        .rating-header {
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        .rating-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
-        .rating-subtitle {
-            font-size: 18px;
-            color: #8B92B5;
-            font-weight: 400;
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
         }
 
-        /* Current Rating Display */
-        .current-rating {
+        .rating-container {
+            margin: 30px 0;
+        }
+
+        .stars {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-            display: none;
+            justify-content: center;
+            gap: 5px;
+            margin: 20px 0;
         }
 
-        .current-rating.show {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .rating-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #1A2245;
-            padding: 16px 24px;
-            border-radius: 12px;
-            border: 1px solid #2A3458;
-        }
-
-        .rating-badge .star {
-            color: #FFD700;
-            font-size: 24px;
-        }
-
-        .rating-average {
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .rating-count {
-            font-size: 14px;
-            color: #8B92B5;
-            margin-left: 4px;
-        }
-
-        /* Star Rating Section */
-        .star-rating-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .star-rating-label {
-            font-size: 18px;
-            color: #8B92B5;
-            font-weight: 500;
-        }
-
-        .star-rating {
-            display: flex;
-            gap: 12px;
-            padding: 20px;
-            background: #1A2245;
-            border-radius: 200px;
-            border: 1px solid #2A3458;
-        }
-
-        .star-rating.voted {
-            background: #2A3458;
-            border-color: #3A4468;
-        }
-
-        .star-button {
-            background: none;
-            border: none;
-            font-size: 44px;
-            color: white;
+        .star {
+            font-size: 2.5em;
+            color: #ddd;
             cursor: pointer;
-            padding: 8px;
             transition: all 0.2s ease;
-            border-radius: 8px;
+            user-select: none;
         }
 
-        .star-button:hover:not(.voted) {
-            color: #FFD700;
+        .star:hover,
+        .star.active {
+            color: #ffd700;
             transform: scale(1.1);
         }
 
-        .star-button.filled {
-            color: #FFD700;
+        .average-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
         }
 
-        .star-button.voted {
-            color: #6B7280;
+        .rating-count {
+            color: #888;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            min-width: 200px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
-            pointer-events: none;
+            transform: none;
         }
 
-        .star-button.animate {
-            transform: scale(1.2);
+        .btn-secondary {
+            background: linear-gradient(45deg, #28a745, #20c997);
         }
 
-        /* Success State */
+        .btn-large {
+            font-size: 1.3em;
+            padding: 20px 40px;
+            margin: 20px 0;
+        }
+
+        .link-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .generated-link {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .success-message {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-weight: bold;
         }
 
-        .success-message.show {
-            opacity: 1;
-            transform: translateY(0);
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
         }
 
-        .success-text {
-            font-size: 16px;
-            color: #10B981;
-            font-weight: 500;
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: left;
         }
 
-        /* Responsive Design */
-        @media (max-height: 700px) {
-            .rating-container {
-                gap: 30px;
+        .instructions h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin: 8px 0;
+        }
+
+        .rating-prompt {
+            font-size: 1.2em;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
                 padding: 20px;
             }
             
-            .rating-title {
-                font-size: 24px;
+            .stars {
+                gap: 2px;
             }
             
-            .star-button {
-                font-size: 36px;
-                padding: 6px;
+            .star {
+                font-size: 2em;
             }
             
-            .star-rating {
-                gap: 8px;
-                padding: 16px;
-            }
-        }
-
-        @media (max-height: 600px) {
-            .rating-container {
-                gap: 24px;
-                padding: 16px;
-            }
-            
-            .rating-title {
-                font-size: 22px;
-            }
-            
-            .star-button {
-                font-size: 32px;
-                padding: 4px;
-            }
-            
-            .star-rating {
-                gap: 6px;
-                padding: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .rating-container {
-                padding: 20px 16px;
-            }
-            
-            .rating-title {
-                font-size: 24px;
-            }
-            
-            .star-button {
-                font-size: 38px;
-            }
-        }
-
-        /* Safe area support */
-        @supports (padding: env(safe-area-inset-bottom)) {
-            .rating-container {
-                padding-bottom: calc(40px + env(safe-area-inset-bottom));
+            .btn {
+                min-width: 150px;
+                font-size: 1em;
             }
         }
     </style>
-    <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveyLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_3sfiHFKqVbrCmXIKdwWx0RPsTwKPd6US1fvKFjhziZm', {
-            api_host: 'https://eu.i.posthog.com',
-            defaults: '2025-05-24',
-            person_profiles: 'always',
-        })
-    </script>
 </head>
 <body>
-    <div class="rating-container">
-        <!-- Header -->
-        <div class="rating-header">
-            <h1 class="rating-title">Rate Story</h1>
-            <p class="rating-subtitle">What would you rate this story?</p>
-        </div>
-
-        <!-- Current Rating Display -->
-        <div class="current-rating" id="currentRating">
-            <div class="rating-badge">
-                <span style="font-weight: 600;">avg</span>
-                <span class="star">★</span>
-                <span class="rating-average" id="averageRating">4.5</span>
-                <span class="rating-count" id="ratingCount">(6 ratings)</span>
+    <div class="container">
+        <div class="card">
+            <h1 class="logo">⭐ SocialStar</h1>
+            <p class="subtitle">Get your photos rated by friends!</p>
+            
+            <!-- Generate Link Section -->
+            <div id="generateSection">
+                <p style="margin: 30px 0; font-size: 1.1em; color: #555;">
+                    Create a rating link to add to your Instagram story or post
+                </p>
+                <button class="btn btn-large" id="generateBtn">🔗 Generate My Rating Link</button>
+                
+                <div class="instructions">
+                    <h4>How it works:</h4>
+                    <ol>
+                        <li>Click "Generate My Rating Link" above</li>
+                        <li>Copy the link and add it to your Instagram story/post</li>
+                        <li>Friends click the link and rate your photo 1-5 stars</li>
+                        <li>Come back here to see your average rating!</li>
+                    </ol>
+                </div>
             </div>
-        </div>
 
-        <!-- Star Rating -->
-        <div class="star-rating-section">
-            <div class="star-rating" id="starRating">
-                <button class="star-button" data-rating="1">★</button>
-                <button class="star-button" data-rating="2">★</button>
-                <button class="star-button" data-rating="3">★</button>
-                <button class="star-button" data-rating="4">★</button>
-                <button class="star-button" data-rating="5">★</button>
+            <!-- Link Generated Section -->
+            <div id="linkSection" class="hidden">
+                <div class="success-message">
+                    🎉 Your rating link is ready!
+                </div>
+                <div class="link-container">
+                    <p><strong>Add this link to your Instagram story/post:</strong></p>
+                    <div class="generated-link" id="generatedLink"></div>
+                    <button class="btn btn-secondary" id="copyBtn">📋 Copy Link</button>
+                    <button class="btn" id="viewResultsBtn">📊 View Results</button>
+                </div>
+                <button class="btn" id="newLinkBtn">🆕 Generate New Link</button>
             </div>
-        </div>
 
-        <!-- Success Message -->
-        <div class="success-message" id="successMessage">
-            <p class="success-text">Thank you for your rating!</p>
+            <!-- Rating Section (for when friends click the link) -->
+            <div id="ratingSection" class="hidden">
+                <h2>Rate this photo! 📸</h2>
+                <p class="rating-prompt">How many stars do you give this photo?</p>
+                <div class="rating-container">
+                    <div class="stars" id="starRating">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <button class="btn btn-large" id="submitRatingBtn" disabled>Submit Rating</button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                <h2>📊 Rating Results</h2>
+                <div class="average-display" id="averageDisplay">0.0 ⭐</div>
+                <div class="rating-count" id="ratingCount">0 ratings</div>
+                <button class="btn" id="refreshBtn">🔄 Refresh Results</button>
+                <button class="btn btn-secondary" id="shareAgainBtn">📱 Share Link Again</button>
+            </div>
+
+            <!-- Thank You Section -->
+            <div id="thankYouSection" class="hidden">
+                <h2>🌟 Thank you for rating!</h2>
+                <p style="margin: 20px 0; font-size: 1.1em;">Your rating has been submitted successfully.</p>
+                <a href="/" class="btn">Create Your Own Rating Link</a>
+            </div>
+
+            <!-- Messages -->
+            <div id="messageArea"></div>
         </div>
     </div>
 
-    <script>
-        // State management
-        let currentRating = 0;
-        let hasVoted = false;
-        let isSubmitting = false;
-        let totalRatings = 27; // Total of all ratings to achieve 4.5 average
-        let ratingCount = 6; // Number of people who rated
-        let averageRating = 4.5; // Current average rating
-        
-        // Elements
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js';
+        import { getFirestore, collection, doc, addDoc, getDoc, updateDoc, onSnapshot, setDoc, increment } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js';
+
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBOi9UCGqF9Ex1VPvzEP7c8nlB3IVrMv5w",
+            authDomain: "pingbear-96b4c.firebaseapp.com",
+            projectId: "pingbear-96b4c",
+            storageBucket: "pingbear-96b4c.appspot.com",
+            messagingSenderId: "958676880670",
+            appId: "1:958676880670:web:f7648204a59157904a0d0f",
+            measurementId: "G-LEYPX2NNWT"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Global variables
+        let currentLinkId = null;
+        let selectedRating = 0;
+
+        // DOM elements
+        const generateSection = document.getElementById('generateSection');
+        const linkSection = document.getElementById('linkSection');
+        const ratingSection = document.getElementById('ratingSection');
+        const resultsSection = document.getElementById('resultsSection');
+        const thankYouSection = document.getElementById('thankYouSection');
+        const generateBtn = document.getElementById('generateBtn');
+        const generatedLink = document.getElementById('generatedLink');
+        const copyBtn = document.getElementById('copyBtn');
+        const viewResultsBtn = document.getElementById('viewResultsBtn');
+        const newLinkBtn = document.getElementById('newLinkBtn');
         const starRating = document.getElementById('starRating');
-        const starButtons = document.querySelectorAll('.star-button');
-        const currentRatingEl = document.getElementById('currentRating');
-        const averageRatingElement = document.getElementById('averageRating');
-        const ratingCountElement = document.getElementById('ratingCount');
-        const successMessage = document.getElementById('successMessage');
+        const submitRatingBtn = document.getElementById('submitRatingBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const shareAgainBtn = document.getElementById('shareAgainBtn');
+        const messageArea = document.getElementById('messageArea');
+
+        // Check URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const ratingId = urlParams.get('rate');
+        const resultsId = urlParams.get('results');
         
-        // Don't show current rating on load - only after they rate
-        
-        // Star rating functionality
-        starButtons.forEach((button, index) => {
-            // Hover effect for desktop
-            button.addEventListener('mouseenter', function() {
-                if (hasVoted) return;
-                const rating = parseInt(button.dataset.rating);
-                highlightStars(rating);
-            });
-            
-            // Reset on mouse leave
-            starRating.addEventListener('mouseleave', function() {
-                if (hasVoted) return;
-                highlightStars(currentRating);
-            });
-            
-            // Click handler
-            button.addEventListener('click', function() {
-                if (hasVoted || isSubmitting) return;
+        if (ratingId) {
+            loadRatingPage(ratingId);
+        } else if (resultsId) {
+            loadResultsPage(resultsId);
+        } else {
+            showGenerateSection();
+        }
+
+        // Button handlers
+        generateBtn.addEventListener('click', generateRatingLink);
+        copyBtn.addEventListener('click', copyLink);
+        viewResultsBtn.addEventListener('click', viewResults);
+        newLinkBtn.addEventListener('click', resetApp);
+        submitRatingBtn.addEventListener('click', submitRating);
+        refreshBtn.addEventListener('click', () => loadResultsPage(currentLinkId));
+        shareAgainBtn.addEventListener('click', shareAgain);
+
+        // Star rating handlers
+        if (starRating) {
+            starRating.addEventListener('click', handleStarClick);
+            starRating.addEventListener('mouseover', handleStarHover);
+            starRating.addEventListener('mouseleave', handleStarLeave);
+        }
+
+        async function generateRatingLink() {
+            try {
+                showLoading('Creating your link...');
                 
-                isSubmitting = true;
-                const rating = parseInt(button.dataset.rating);
-                currentRating = rating;
+                // Create new rating entry in Firestore
+                const webRatingsRef = collection(db, 'web-ratings');
+                const newRatingDoc = await addDoc(webRatingsRef, {
+                    createdAt: new Date(),
+                    totalRating: 0,
+                    ratingCount: 0,
+                    averageRating: 0
+                });
+
+                currentLinkId = newRatingDoc.id;
+                const ratingUrl = `${window.location.origin}${window.location.pathname}?rate=${currentLinkId}`;
                 
-                // Animate clicked star
-                button.classList.add('animate');
-                setTimeout(() => button.classList.remove('animate'), 300);
+                generatedLink.textContent = ratingUrl;
                 
-                // Highlight stars
-                highlightStars(rating);
+                hideLoading();
+                showLinkSection();
+                showMessage('Your rating link is ready! 🎉', 'success');
                 
-                // Haptic feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate([50, 100, 50]);
-                }
+            } catch (error) {
+                hideLoading();
+                showMessage('Error creating link. Please check your Firebase configuration.', 'error');
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadRatingPage(ratingId) {
+            try {
+                const ratingDocRef = doc(db, 'web-ratings', ratingId);
+                const snapshot = await getDoc(ratingDocRef);
                 
-                // Submit rating
-                setTimeout(() => {
-                    submitRating(rating);
-                }, 600);
-            });
-        });
-        
-        function highlightStars(rating) {
-            starButtons.forEach((btn, i) => {
-                if (i < rating) {
-                    btn.classList.add('filled');
+                if (snapshot.exists()) {
+                    currentLinkId = ratingId;
+                    showRatingSection();
                 } else {
-                    btn.classList.remove('filled');
+                    showMessage('Rating link not found!', 'error');
+                    showGenerateSection();
+                }
+            } catch (error) {
+                showMessage('Error loading rating page.', 'error');
+                showGenerateSection();
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadResultsPage(resultsId) {
+            try {
+                const ratingDocRef = doc(db, 'web-ratings', resultsId);
+                currentLinkId = resultsId;
+                
+                // Listen for real-time updates
+                onSnapshot(ratingDocRef, (snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.data();
+                        updateResultsDisplay(data);
+                        showResultsSection();
+                    } else {
+                        showMessage('Results not found!', 'error');
+                        showGenerateSection();
+                    }
+                });
+                
+            } catch (error) {
+                showMessage('Error loading results.', 'error');
+                console.error('Error:', error);
+            }
+        }
+
+        function handleStarClick(e) {
+            if (e.target.classList.contains('star')) {
+                selectedRating = parseInt(e.target.dataset.rating);
+                updateStarDisplay(selectedRating);
+                submitRatingBtn.disabled = false;
+            }
+        }
+
+        function handleStarHover(e) {
+            if (e.target.classList.contains('star')) {
+                const rating = parseInt(e.target.dataset.rating);
+                updateStarDisplay(rating);
+            }
+        }
+
+        function handleStarLeave() {
+            updateStarDisplay(selectedRating);
+        }
+
+        function updateStarDisplay(rating) {
+            const stars = starRating.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
                 }
             });
         }
-        
-        function submitRating(rating) {
-            hasVoted = true;
-            
-            // Update UI to show voted state
-            starRating.classList.add('voted');
-            starButtons.forEach(btn => btn.classList.add('voted'));
-            
-            // Update rating calculations
-            totalRatings += rating;
-            ratingCount += 1;
-            averageRating = totalRatings / ratingCount;
-            
-            // Show the current rating section after voting
-            setTimeout(() => {
-                currentRatingEl.classList.add('show');
-                averageRatingElement.textContent = averageRating.toFixed(1);
-                ratingCountElement.textContent = `(${ratingCount} ratings)`;
-                successMessage.classList.add('show');
-            }, 200);
-            
-            console.log(`Rating submitted: ${rating} stars. New average: ${averageRating.toFixed(1)} (${ratingCount} ratings)`);
+
+        async function submitRating() {
+            if (selectedRating === 0 || !currentLinkId) return;
+
+            try {
+                const ratingDocRef = doc(db, 'web-ratings', currentLinkId);
+                const ratingsCollectionRef = collection(ratingDocRef, 'ratings');
+                
+                // Generate a unique user ID for this rating
+                const userId = 'user_' + Math.random().toString(36).substr(2, 9);
+                
+                // Add the individual rating to the ratings subcollection
+                await addDoc(ratingsCollectionRef, {
+                    rating: selectedRating,
+                    timestamp: new Date(),
+                    userId: userId
+                });
+                
+                // Update the main document with incremented totals
+                await updateDoc(ratingDocRef, {
+                    totalRating: increment(selectedRating),
+                    ratingCount: increment(1)
+                });
+                
+                // Calculate new average
+                const updatedDoc = await getDoc(ratingDocRef);
+                const data = updatedDoc.data();
+                const newAverage = data.totalRating / data.ratingCount;
+                
+                await updateDoc(ratingDocRef, {
+                    averageRating: newAverage
+                });
+                
+                showThankYouSection();
+                showMessage('Thank you for your rating! 🌟', 'success');
+                
+            } catch (error) {
+                showMessage('Error submitting rating. Please try again.', 'error');
+                console.error('Error:', error);
+            }
         }
-        
-        // Prevent scrolling on mobile
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
+
+        function updateResultsDisplay(data) {
+            document.getElementById('averageDisplay').textContent = `${(data.averageRating || 0).toFixed(1)} ⭐`;
+            document.getElementById('ratingCount').textContent = `${data.ratingCount || 0} ratings`;
+        }
+
+        function copyLink() {
+            const link = generatedLink.textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                showMessage('Link copied! Now paste it in your Instagram story 📋', 'success');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = link;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showMessage('Link copied! Now paste it in your Instagram story 📋', 'success');
+            });
+        }
+
+        function viewResults() {
+            const resultsUrl = `${window.location.origin}${window.location.pathname}?results=${currentLinkId}`;
+            window.location.href = resultsUrl;
+        }
+
+        function shareAgain() {
+            const ratingUrl = `${window.location.origin}${window.location.pathname}?rate=${currentLinkId}`;
+            navigator.clipboard.writeText(ratingUrl).then(() => {
+                showMessage('Rating link copied again! 📋', 'success');
+            });
+        }
+
+        function resetApp() {
+            currentLinkId = null;
+            selectedRating = 0;
+            showGenerateSection();
+            window.history.pushState({}, '', window.location.pathname);
+        }
+
+        function showGenerateSection() {
+            generateSection.classList.remove('hidden');
+            linkSection.classList.add('hidden');
+            ratingSection.classList.add('hidden');
+            resultsSection.classList.add('hidden');
+            thankYouSection.classList.add('hidden');
+        }
+
+        function showLinkSection() {
+            generateSection.classList.add('hidden');
+            linkSection.classList.remove('hidden');
+            ratingSection.classList.add('hidden');
+            resultsSection.classList.add('hidden');
+            thankYouSection.classList.add('hidden');
+        }
+
+        function showRatingSection() {
+            generateSection.classList.add('hidden');
+            linkSection.classList.add('hidden');
+            ratingSection.classList.remove('hidden');
+            resultsSection.classList.add('hidden');
+            thankYouSection.classList.add('hidden');
+        }
+
+        function showResultsSection() {
+            generateSection.classList.add('hidden');
+            linkSection.classList.add('hidden');
+            ratingSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+            thankYouSection.classList.add('hidden');
+        }
+
+        function showThankYouSection() {
+            generateSection.classList.add('hidden');
+            linkSection.classList.add('hidden');
+            ratingSection.classList.add('hidden');
+            resultsSection.classList.add('hidden');
+            thankYouSection.classList.remove('hidden');
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'error' ? 'error-message' : 'success-message';
+            messageDiv.textContent = message;
+            messageArea.innerHTML = '';
+            messageArea.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageArea.innerHTML = '';
+            }, 5000);
+        }
+
+        function showLoading(message) {
+            generateBtn.innerHTML = message + '<span class="loading"></span>';
+            generateBtn.disabled = true;
+        }
+
+        function hideLoading() {
+            generateBtn.innerHTML = '🔗 Generate My Rating Link';
+            generateBtn.disabled = false;
+        }
     </script>
 </body>
 </html>
