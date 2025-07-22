@@ -91,6 +91,14 @@
             background: #DAA520;
             padding: 8px 12px;
             border-radius: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .rating-badge.show {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .rating-badge .star {
@@ -250,9 +258,10 @@
     <div class="rating-info-bar">
         <span class="rating-info-text">Rate Story</span>
         <div class="rating-badge" id="starBadge">
+            <span>avg</span>
             <span id="averageRating">4.5</span>
             <span style="color: white; font-size: 16px; margin: 0px;">★</span>
-            <span id="ratingCount">(6)</span>
+            <span id="ratingCount">(7)</span>
         </div>
     </div>
 
@@ -326,18 +335,14 @@
             ratingCount += 1;
             averageRating = totalRatings / ratingCount;
             
-            // Add bounce animation to the badge
-            starBadge.style.transform = 'scale(1.2)';
-            starBadge.style.transition = 'transform 0.3s ease';
-            
             // Update the display
             averageRatingElement.textContent = averageRating.toFixed(1);
             ratingCountElement.textContent = `(${ratingCount})`;
             
-            // Reset the animation
+            // Show the rating badge with animation after a brief delay
             setTimeout(() => {
-                starBadge.style.transform = 'scale(1)';
-            }, 300);
+                starBadge.classList.add('show');
+            }, 600);
             
             // Optional: Show a success message or feedback
             console.log(`Rating submitted: ${rating} stars. New average: ${averageRating.toFixed(1)} (${ratingCount} ratings)`);
