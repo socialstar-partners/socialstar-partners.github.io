@@ -303,6 +303,14 @@
             <div id="thankYouSection" class="hidden">
                 <h2>🌟 Thank you for rating!</h2>
                 <p style="margin: 20px 0; font-size: 1.1em;">Your rating has been submitted successfully.</p>
+                
+                <!-- Show results after rating -->
+                <div style="margin: 30px 0; padding: 20px; background: #f8f9fa; border-radius: 15px;">
+                    <h3 style="margin-bottom: 15px; color: #333;">📊 Rating Results</h3>
+                    <div class="average-display" id="thankYouAverage">0.0 ⭐</div>
+                    <div class="rating-count" id="thankYouCount">0 ratings</div>
+                </div>
+                
                 <a href="/" class="btn">Create Your Own Rating Link</a>
             </div>
 
@@ -506,7 +514,7 @@
                     ratingCount: increment(1)
                 });
                 
-                // Calculate new average
+                // Get updated data to calculate new average and show results
                 const updatedDoc = await getDoc(ratingDocRef);
                 const data = updatedDoc.data();
                 const newAverage = data.totalRating / data.ratingCount;
@@ -514,6 +522,10 @@
                 await updateDoc(ratingDocRef, {
                     averageRating: newAverage
                 });
+                
+                // Show results in thank you section
+                document.getElementById('thankYouAverage').textContent = `${newAverage.toFixed(1)} ⭐`;
+                document.getElementById('thankYouCount').textContent = `${data.ratingCount} ratings`;
                 
                 showThankYouSection();
                 showMessage('Thank you for your rating! 🌟', 'success');
